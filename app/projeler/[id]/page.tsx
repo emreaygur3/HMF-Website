@@ -141,8 +141,9 @@ const projectsData = {
   },
 }
 
-export default function ProjectDetail({ params }) {
-  const project = projectsData[params.id]
+export default async function ProjectDetail({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const project = projectsData[parseInt(id) as keyof typeof projectsData]
 
   if (!project) {
     return (
@@ -251,21 +252,23 @@ export default function ProjectDetail({ params }) {
             {project.status === "Tamamlandı" && (
               <>
                 <h3 className="text-xl font-bold text-primary mb-3">Sonuçlar</h3>
-                <p className="text-foreground/80 leading-relaxed">{project.results}</p>
+                <p className="text-foreground/80 leading-relaxed">{"results" in project ? project.results : ""}</p>
               </>
             )}
 
             {project.status === "Devam Ediyor" && (
               <>
                 <h3 className="text-xl font-bold text-primary mb-3">Beklenen Sonuçlar</h3>
-                <p className="text-foreground/80 leading-relaxed mb-6">{project.expectedResults}</p>
+                <p className="text-foreground/80 leading-relaxed mb-6">
+                  {"expectedResults" in project ? project.expectedResults : ""}
+                </p>
                 <h3 className="text-xl font-bold text-primary mb-3">İlerleme</h3>
                 <div className="mb-2">
                   <div className="w-full bg-slate-200 rounded-full h-2">
                     <div className="bg-primary h-2 rounded-full" style={{ width: "75%" }}></div>
                   </div>
                 </div>
-                <p className="text-foreground/80">{project.progress}</p>
+                <p className="text-foreground/80">{"progress" in project ? project.progress : ""}</p>
               </>
             )}
           </div>

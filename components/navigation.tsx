@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useState } from "react"
-import { Menu, X, MessageCircle } from "lucide-react"
+import { Menu, X, Phone } from "lucide-react"
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
@@ -63,20 +63,23 @@ export function Navigation() {
             ))}
           </div>
 
-          <a
-            href="https://wa.me/905011863529"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary hover:text-primary/80 transition-colors"
-            aria-label="WhatsApp ile iletişime geç"
-          >
-            <MessageCircle size={24} />
-          </a>
+          {/* WhatsApp/Phone Button - Desktop & Mobile */}
+          <div className="flex items-center gap-2">
+            <a
+              href="https://wa.me/905011863529"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:text-primary/80 transition-colors"
+              aria-label="WhatsApp ile iletişime geç"
+            >
+              <Phone size={24} className="fill-current" />
+            </a>
 
-          {/* Mobile Menu Button */}
-          <button className="md:hidden ml-2" onClick={() => setIsOpen(!isOpen)} aria-label="Menüyü aç/kapat">
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+            {/* Mobile Menu Button */}
+            <button className="md:hidden ml-2" onClick={() => setIsOpen(!isOpen)} aria-label="Menüyü aç/kapat">
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
@@ -84,30 +87,40 @@ export function Navigation() {
           <div className="md:hidden pb-4 space-y-2">
             {navItems.map((item) => (
               <div key={item.href}>
-                <button
-                  onClick={() => setDropdownOpen(dropdownOpen === item.href ? null : item.href)}
-                  className="w-full text-left px-4 py-2 text-foreground hover:bg-muted rounded flex justify-between items-center"
-                >
-                  <span>{item.label}</span>
-                  {item.submenu && (
-                    <span className={`transition-transform ${dropdownOpen === item.href ? "rotate-180" : ""}`}>▼</span>
-                  )}
-                </button>
+                {item.submenu ? (
+                  <>
+                    <button
+                      onClick={() => setDropdownOpen(dropdownOpen === item.href ? null : item.href)}
+                      className="w-full text-left px-4 py-2 text-foreground hover:bg-muted rounded flex justify-between items-center"
+                    >
+                      <span>{item.label}</span>
+                      <span className={`transition-transform ${dropdownOpen === item.href ? "rotate-180" : ""}`}>▼</span>
+                    </button>
 
-                {/* Mobile Dropdown */}
-                {item.submenu && dropdownOpen === item.href && (
-                  <div className="bg-slate-50 space-y-1 ml-2">
-                    {item.submenu.map((sub) => (
-                      <Link
-                        key={sub.href}
-                        href={sub.href}
-                        className="block px-4 py-2 text-sm text-foreground hover:text-primary rounded"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        {sub.label}
-                      </Link>
-                    ))}
-                  </div>
+                    {/* Mobile Dropdown */}
+                    {dropdownOpen === item.href && (
+                      <div className="bg-slate-50 space-y-1 ml-2">
+                        {item.submenu.map((sub) => (
+                          <Link
+                            key={sub.href}
+                            href={sub.href}
+                            className="block px-4 py-2 text-sm text-foreground hover:text-primary rounded"
+                            onClick={() => setIsOpen(false)}
+                          >
+                            {sub.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <Link
+                    href={item.href}
+                    className="block w-full text-left px-4 py-2 text-foreground hover:bg-muted rounded"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
                 )}
               </div>
             ))}
