@@ -112,7 +112,7 @@ export default function Home() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/hero-background-construction.jpg"
+            src="/background.jpg"
             alt="İnşaat alanı ve taş yapısı"
             fill
             className="object-cover"
