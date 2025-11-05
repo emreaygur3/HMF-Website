@@ -1,5 +1,6 @@
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
+import { ServiceImage } from "@/components/service-image"
 import { ArrowRight, Building2, Mountain, Layers, Sparkles, Leaf, Palette } from "lucide-react"
 import Link from "next/link"
 
@@ -13,7 +14,7 @@ export default function Services() {
     {
       title: "Derzli ve Derzsiz Taş Duvar",
       icon: Building2,
-      image: "/derzli-taş-duvar.jpg",
+      image: "/stone-wall-with-joints-residential.jpg",
       description: "Profesyonel taş duvar uygulamaları",
       slug: "derzli-ve-derzsiz-tas-duvar",
       details: [
@@ -26,7 +27,7 @@ export default function Services() {
     {
       title: "Şev Taşı Yapımı",
       icon: Mountain,
-      image: "/şev-taşı-yapımı.jpg",
+      image: "/slope-stone-construction-hillside.jpg",
       description: "Eğimli yüzeyler için taş kaplama",
       slug: "sev-tasi-yapimi",
       details: [
@@ -39,7 +40,7 @@ export default function Services() {
     {
       title: "Kayrak Taş Kaplama",
       icon: Layers,
-      image: "/kayrak-taş-kaplama.jpg",
+      image: "/slate-stone-entrance-detail.jpg",
       description: "Doğal kayrak taş ile kaplamalar",
       slug: "kayrak-tas-kaplama",
       details: [
@@ -52,7 +53,7 @@ export default function Services() {
     {
       title: "Granürlü Taşlar",
       icon: Sparkles,
-      image: "/granürlü-taşlar.jpg",
+      image: "/colorful-decorative-stone-pattern.jpg",
       description: "Dekoratif granürlü taş uygulamaları",
       slug: "granurlu-taslar",
       details: [
@@ -65,7 +66,7 @@ export default function Services() {
     {
       title: "Parke ve Bordür",
       icon: Leaf,
-      image: "/parke-bordür.jpg",
+      image: "/garden-landscape-stone-border.jpg",
       description: "Peyzaj tasarımı ve bordür işleri",
       slug: "parke-ve-bordur",
       details: [
@@ -78,7 +79,7 @@ export default function Services() {
     {
       title: "Renkli ve Desenli Taş",
       icon: Palette,
-      image: "/renkli-desenli-taş.jpg",
+      image: "/colorful-stone-pattern-design-office.jpg",
       description: "Özel tasarım ve desen uygulamaları",
       slug: "renkli-ve-desenli-tas",
       details: [
@@ -118,13 +119,11 @@ export default function Services() {
                   className="bg-white rounded-lg border border-slate-200 overflow-hidden hover:shadow-xl hover:border-blue-300 transition-all group"
                 >
                   <div className="relative overflow-hidden h-48 bg-slate-200">
-                    <img
+                    <ServiceImage
                       src={service.image || "/placeholder.svg"}
                       alt={service.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      onError={(e) => {
-                        e.currentTarget.src = `/placeholder.svg?height=192&width=400&query=${encodeURIComponent(service.title)}`
-                      }}
+                      fallbackText={service.title}
                     />
                   </div>
 

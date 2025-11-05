@@ -111,22 +111,22 @@ export default function Projects() {
 
       <section className="py-12 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
-          {/* Search Bar */}
-          <div className="mb-8 flex gap-2 max-w-lg">
-            <div className="relative flex-1">
+          {/* Search Bar - Centered */}
+          <div className="mb-8 flex justify-center">
+            <div className="relative w-full max-w-lg">
               <Search className="absolute left-3 top-3.5 text-muted-foreground" size={20} />
               <input
                 type="text"
                 placeholder="Proje ara..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full pl-10 pr-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
           </div>
 
-          {/* Status Filter Buttons */}
-          <div className="flex flex-wrap gap-3">
+          {/* Status Filter Buttons - Centered */}
+          <div className="flex flex-wrap gap-3 justify-center">
             {statuses.map((status) => (
               <button
                 key={status}

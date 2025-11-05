@@ -204,16 +204,18 @@ const servicesData = {
   },
 }
 
-export function generateMetadata({ params }) {
-  const service = servicesData[params.slug]
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const service = servicesData[slug as keyof typeof servicesData]
   return {
     title: `${service?.title || "Hizmet"} | HMF Desen Yapı`,
     description: service?.fullDescription || "",
   }
 }
 
-export default function ServiceDetail({ params }) {
-  const service = servicesData[params.slug]
+export default async function ServiceDetail({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const service = servicesData[slug as keyof typeof servicesData]
 
   if (!service) {
     return (
