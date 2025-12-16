@@ -21,6 +21,11 @@ export function Navigation() {
         { href: "/hizmetler/granurlu-taslar", label: "Granürlü Taşlar" },
         { href: "/hizmetler/parke-ve-bordur", label: "Parke ve Bordür" },
         { href: "/hizmetler/renkli-ve-desenli-tas", label: "Renkli ve Desenli Taş" },
+        { href: "/hizmetler/begonit-tasi", label: "Begonit Taşı" },
+        { href: "/hizmetler/kup-tasi", label: "Küp Taşı" },
+        { href: "/hizmetler/beton", label: "Beton Uygulamaları" },
+        { href: "/hizmetler/asfalt", label: "Asfalt Kaplama" },
+        { href: "/hizmetler/tadilatlar-ve-tamiratlar", label: "Tadilatlar ve Tamiratlar" },
       ],
     },
     { href: "/projeler", label: "Projeler" },
@@ -28,31 +33,39 @@ export function Navigation() {
   ]
 
   return (
-    <nav className="fixed w-full bg-white border-b border-border z-50 shadow-sm">
+    <nav className="fixed w-full bg-white border-b border-border z-50 shadow-sm" role="navigation" aria-label="Ana navigasyon">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <Link href="/" className="text-xl sm:text-2xl font-bold text-primary">
+          <Link href="/" className="text-xl sm:text-2xl font-bold text-primary" aria-label="Ana sayfaya git">
             HMF
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex gap-8 items-center">
+          <div className="hidden md:flex gap-8 items-center" role="menubar">
             {navItems.map((item) => (
-              <div key={item.href} className="relative group">
+              <div key={item.href} className="relative group" role="none">
                 <Link
                   href={item.href}
                   className="text-foreground hover:text-primary transition-colors text-sm font-medium py-2"
+                  role="menuitem"
+                  aria-haspopup={item.submenu ? "true" : "false"}
+                  aria-expanded={item.submenu ? "false" : undefined}
                 >
                   {item.label}
                 </Link>
                 {/* Desktop Dropdown */}
                 {item.submenu && (
-                  <div className="absolute left-0 mt-0 w-48 bg-white border border-border rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                  <div 
+                    className="absolute left-0 mt-0 w-48 bg-white border border-border rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50"
+                    role="menu"
+                    aria-label={`${item.label} alt menüsü`}
+                  >
                     {item.submenu.map((sub) => (
                       <Link
                         key={sub.href}
                         href={sub.href}
                         className="block px-4 py-3 text-sm text-foreground hover:bg-slate-50 hover:text-primary first:rounded-t-md last:rounded-b-md transition-colors"
+                        role="menuitem"
                       >
                         {sub.label}
                       </Link>
@@ -71,12 +84,19 @@ export function Navigation() {
               rel="noopener noreferrer"
               className="text-primary hover:text-primary/80 transition-colors"
               aria-label="WhatsApp ile iletişime geç"
+              title="WhatsApp"
             >
               <Phone size={24} className="fill-current" />
             </a>
 
             {/* Mobile Menu Button */}
-            <button className="md:hidden ml-2" onClick={() => setIsOpen(!isOpen)} aria-label="Menüyü aç/kapat">
+            <button 
+              className="md:hidden ml-2" 
+              onClick={() => setIsOpen(!isOpen)} 
+              aria-label={isOpen ? "Menüyü kapat" : "Menüyü aç"}
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
+            >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
@@ -84,28 +104,38 @@ export function Navigation() {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden pb-4 space-y-2">
+          <div 
+            id="mobile-menu" 
+            className="md:hidden pb-4 space-y-2" 
+            role="menu"
+            aria-label="Mobil navigasyon menüsü"
+          >
             {navItems.map((item) => (
-              <div key={item.href}>
+              <div key={item.href} role="none">
                 {item.submenu ? (
                   <>
                     <button
                       onClick={() => setDropdownOpen(dropdownOpen === item.href ? null : item.href)}
                       className="w-full text-left px-4 py-2 text-foreground hover:bg-muted rounded flex justify-between items-center"
+                      aria-expanded={dropdownOpen === item.href}
+                      aria-haspopup="true"
+                      aria-label={`${item.label} menüsünü ${dropdownOpen === item.href ? 'kapat' : 'aç'}`}
+                      role="menuitem"
                     >
                       <span>{item.label}</span>
-                      <span className={`transition-transform ${dropdownOpen === item.href ? "rotate-180" : ""}`}>▼</span>
+                      <span className={`transition-transform ${dropdownOpen === item.href ? "rotate-180" : ""}`} aria-hidden="true">▼</span>
                     </button>
 
                     {/* Mobile Dropdown */}
                     {dropdownOpen === item.href && (
-                      <div className="bg-slate-50 space-y-1 ml-2">
+                      <div className="bg-slate-50 space-y-1 ml-2" role="menu" aria-label={`${item.label} alt menüsü`}>
                         {item.submenu.map((sub) => (
                           <Link
                             key={sub.href}
                             href={sub.href}
                             className="block px-4 py-2 text-sm text-foreground hover:text-primary rounded"
                             onClick={() => setIsOpen(false)}
+                            role="menuitem"
                           >
                             {sub.label}
                           </Link>
@@ -118,6 +148,7 @@ export function Navigation() {
                     href={item.href}
                     className="block w-full text-left px-4 py-2 text-foreground hover:bg-muted rounded"
                     onClick={() => setIsOpen(false)}
+                    role="menuitem"
                   >
                     {item.label}
                   </Link>
