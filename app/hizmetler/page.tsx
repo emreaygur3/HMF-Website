@@ -1,6 +1,9 @@
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { ServiceImage } from "@/components/service-image"
+import { AnimatedText } from "@/components/animated-text"
+import { AnimatedCard } from "@/components/animated-card"
+import { AnimatedSection } from "@/components/animated-section"
 import { ArrowRight, Building2, Mountain, Layers, Sparkles, Leaf, Palette } from "lucide-react"
 import Link from "next/link"
 
@@ -89,6 +92,71 @@ export default function Services() {
         "Yaratıcı ve benzersiz çözümler",
       ],
     },
+    {
+      title: "Begonit Taşı",
+      icon: Layers,
+      image: "/placeholder-begonit-tasi.jpg",
+      description: "Dayanıklı ve estetik begonit taşı uygulamaları",
+      slug: "begonit-tasi",
+      details: [
+        "Yüksek dayanıklılık ve uzun ömür",
+        "Dış cephe ve zemin kaplamalarında kullanım",
+        "Modern ve klasik mimariye uyum",
+        "Kolay bakım ve temizlik",
+      ],
+    },
+    {
+      title: "Küp Taşı",
+      icon: Building2,
+      image: "/placeholder-kup-tasi.jpg",
+      description: "Klasik ve modern küp taşı döşemeleri",
+      slug: "kup-tasi",
+      details: [
+        "Geleneksel ve modern tasarımlara uygun",
+        "Yol, meydan ve bahçe döşemeleri",
+        "Yüksek trafik dayanımı",
+        "Çeşitli renk ve boyut seçenekleri",
+      ],
+    },
+    {
+      title: "Beton Uygulamaları",
+      icon: Sparkles,
+      image: "/placeholder-beton.jpg",
+      description: "Profesyonel beton döküm ve kaplama işleri",
+      slug: "beton",
+      details: [
+        "Zemin betonları ve döşeme uygulamaları",
+        "Dekoratif beton kaplamalar",
+        "Yüksek mukavemet ve dayanıklılık",
+        "Hızlı ve kaliteli işçilik",
+      ],
+    },
+    {
+      title: "Asfalt Kaplama",
+      icon: Mountain,
+      image: "/placeholder-asfalt.jpg",
+      description: "Yol ve alan asfaltlama hizmetleri",
+      slug: "asfalt",
+      details: [
+        "Yol ve otopark asfaltlama",
+        "Sıcak ve soğuk asfalt uygulamaları",
+        "Profesyonel tesviye ve düzleme",
+        "Uzun ömürlü ve ekonomik çözümler",
+      ],
+    },
+    {
+      title: "Tadilatlar ve Tamiratlar",
+      icon: Palette,
+      image: "/placeholder-tadilatlar.jpg",
+      description: "Her türlü tadilat ve tamirat işleri",
+      slug: "tadilatlar-ve-tamiratlar",
+      details: [
+        "Bina içi ve dışı tadilat işleri",
+        "Taş, beton ve asfalt tamiratları",
+        "Restorasyon ve yenileme çalışmaları",
+        "Profesyonel ekip ve kaliteli malzeme",
+      ],
+    },
   ]
 
   return (
@@ -98,10 +166,12 @@ export default function Services() {
       {/* Hero Section */}
       <section className="pt-32 pb-16 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
         <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-balance">Hizmetlerimiz</h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <AnimatedText as="h1" className="text-5xl md:text-6xl font-bold mb-6 text-balance">
+            Hizmetlerimiz
+          </AnimatedText>
+          <AnimatedText as="p" delay={200} className="text-xl text-gray-300 max-w-3xl mx-auto">
             Doğal taş ve dekoratif kaplama konusunda sunduğumuz kapsamlı hizmetleri keşfedin
-          </p>
+          </AnimatedText>
         </div>
       </section>
 
@@ -109,15 +179,15 @@ export default function Services() {
       <section className="py-20 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service) => {
+            {services.map((service, index) => {
               const Icon = service.icon
 
               return (
-                <Link
-                  href={`/hizmetler/${service.slug}`}
-                  key={service.title}
-                  className="bg-white rounded-lg border border-slate-200 overflow-hidden hover:shadow-xl hover:border-blue-300 transition-all group"
-                >
+                <AnimatedCard key={service.title} index={index} delay={100}>
+                  <Link
+                    href={`/hizmetler/${service.slug}`}
+                    className="block bg-white rounded-lg border border-slate-200 overflow-hidden hover:shadow-xl hover:border-blue-300 transition-all group h-full"
+                  >
                   <div className="relative overflow-hidden h-48 bg-slate-200">
                     <ServiceImage
                       src={service.image || "/placeholder.svg"}
@@ -144,12 +214,13 @@ export default function Services() {
                       ))}
                     </ul>
 
-                    <div className="inline-flex items-center gap-2 text-blue-600 font-semibold group-hover:gap-3 transition-all text-sm">
-                      Detaylarını Gör
-                      <ArrowRight size={16} />
+                      <div className="inline-flex items-center gap-2 text-blue-600 font-semibold group-hover:gap-3 transition-all text-sm">
+                        Detaylarını Gör
+                        <ArrowRight size={16} />
+                      </div>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                </AnimatedCard>
               )
             })}
           </div>
@@ -159,7 +230,9 @@ export default function Services() {
       {/* Process Section */}
       <section className="py-20 px-4 bg-slate-50">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-slate-900 mb-12 text-center">İş Sürecimiz</h2>
+          <AnimatedText as="h2" className="text-4xl font-bold text-slate-900 mb-12 text-center">
+            İş Sürecimiz
+          </AnimatedText>
 
           <div className="grid md:grid-cols-4 gap-6">
             {[

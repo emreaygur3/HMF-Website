@@ -4,6 +4,8 @@ import type React from "react"
 
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
+import { AnimatedText } from "@/components/animated-text"
+import { AnimatedSection } from "@/components/animated-section"
 import { useState } from "react"
 import { Mail, Phone, MapPin, Clock, Facebook, Instagram, MessageCircle } from "lucide-react"
 
@@ -47,7 +49,9 @@ export default function Contact() {
       {/* Hero Section */}
       <section className="pt-32 pb-16 px-4 bg-gradient-to-b from-slate-50 to-white">
         <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary mb-6">İletişime Geçin</h1>
+          <AnimatedText as="h1" className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary mb-6">
+            İletişime Geçin
+          </AnimatedText>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto">
             Projeleriniz hakkında bilgi almak veya teklif almak için bize ulaşın
           </p>
@@ -58,8 +62,9 @@ export default function Contact() {
       <section className="py-16 sm:py-20 px-4 bg-white">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
           {/* Contact Info */}
-          <div>
-            <h2 className="text-3xl font-bold text-primary mb-8">Bize Ulaşın</h2>
+          <AnimatedSection animation="slide-right">
+            <div>
+              <h2 className="text-3xl font-bold text-primary mb-8">Bize Ulaşın</h2>
 
             {/* Contact Items */}
             <div className="space-y-8">
@@ -153,11 +158,13 @@ export default function Contact() {
                 </div>
               </div>
             </div>
-          </div>
+            </div>
+          </AnimatedSection>
 
           {/* Contact Form */}
-          <div>
-            <h2 className="text-3xl font-bold text-primary mb-8">Mesaj Gönderin</h2>
+          <AnimatedSection animation="slide-left">
+            <div>
+              <h2 className="text-3xl font-bold text-primary mb-8">Mesaj Gönderin</h2>
 
             {submitted && (
               <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-800 text-sm">
@@ -259,7 +266,8 @@ export default function Contact() {
                 Mesaj Gönder
               </button>
             </form>
-          </div>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 

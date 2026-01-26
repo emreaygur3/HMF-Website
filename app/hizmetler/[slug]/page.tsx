@@ -202,6 +202,171 @@ const servicesData = {
       "Tekil uygulamalar ve bitiriş",
     ],
   },
+  "begonit-tasi": {
+    title: "Begonit Taşı",
+    description: "Dayanıklı ve estetik begonit taşı uygulamaları",
+    fullDescription:
+      "Begonit taşı, yüksek dayanıklılığı ve estetik görünümüyle öne çıkan doğal bir taş türüdür. Dış cephe kaplamalarından zemin uygulamalarına kadar geniş bir kullanım alanına sahiptir.",
+    details: [
+      "Yüksek dayanıklılık ve uzun ömür",
+      "Dış cephe ve zemin kaplamalarında kullanım",
+      "Modern ve klasik mimariye uyum",
+      "Kolay bakım ve temizlik",
+      "UV ve hava koşullarına dayanıklı",
+      "Çevre dostu doğal malzeme",
+    ],
+    benefits: [
+      { title: "Dayanıklılık", description: "Aşınmaya ve çatlama karşı üstün direnç" },
+      { title: "Estetik", description: "Doğal ve şık görünüm sağlar" },
+      { title: "Uzun Ömür", description: "Yıllar boyunca ilk günkü görünümünü korur" },
+      { title: "Bakım Kolaylığı", description: "Minimal bakım gerektirir" },
+    ],
+    images: [
+      "/placeholder-begonit-tasi.jpg",
+      "/placeholder-begonit-tasi.jpg",
+      "/placeholder-begonit-tasi.jpg",
+      "/placeholder-begonit-tasi.jpg",
+    ],
+    process: [
+      "Yüzey hazırlığı ve ölçümleme",
+      "Begonit taşı seçimi ve kesim",
+      "Zemin veya cephe uygulaması",
+      "Derz ve bitirme işlemleri",
+      "Kalite kontrolü ve teslim",
+    ],
+  },
+  "kup-tasi": {
+    title: "Küp Taşı",
+    description: "Klasik ve modern küp taşı döşemeleri",
+    fullDescription:
+      "Küp taşı, geleneksel ve modern mimaride sıklıkla tercih edilen, yüksek dayanıklılığa sahip doğal taş döşeme malzemesidir. Yollar, meydanlar ve bahçelerde uzun ömürlü çözümler sunar.",
+    details: [
+      "Geleneksel ve modern tasarımlara uygun",
+      "Yol, meydan ve bahçe döşemeleri",
+      "Yüksek trafik dayanımı",
+      "Çeşitli renk ve boyut seçenekleri",
+      "Su geçirgenliği ve drenaj uyumlu",
+      "Bakım gerektirmeyen uzun ömürlü yapı",
+    ],
+    benefits: [
+      { title: "Trafik Dayanımı", description: "Yoğun trafiğe karşı yüksek direnç" },
+      { title: "Estetik Çeşitlilik", description: "Farklı renk ve desen seçenekleri" },
+      { title: "Kolay Tamirat", description: "Tek parça değiştirme imkanı" },
+      { title: "Çevre Dostu", description: "Doğal ve geri dönüştürülebilir" },
+    ],
+    images: [
+      "/placeholder-kup-tasi.jpg",
+      "/placeholder-kup-tasi.jpg",
+      "/placeholder-kup-tasi.jpg",
+      "/placeholder-kup-tasi.jpg",
+    ],
+    process: [
+      "Zemin analizi ve hazırlık",
+      "Temel oluşturma ve kum serimi",
+      "Küp taşlarının yerleştirilmesi",
+      "Derz kumu uygulaması",
+      "Sıkıştırma ve son kontrol",
+    ],
+  },
+  "beton": {
+    title: "Beton Uygulamaları",
+    description: "Profesyonel beton döküm ve kaplama işleri",
+    fullDescription:
+      "Modern inşaat teknikleriyle yapılan beton uygulamaları, zemin döşemelerinden dekoratif kaplamalara kadar geniş bir yelpazede hizmet sunar. Yüksek mukavemet ve uzun ömürlülük garantisi verir.",
+    details: [
+      "Zemin betonları ve döşeme uygulamaları",
+      "Dekoratif beton kaplamalar",
+      "Yüksek mukavemet ve dayanıklılık",
+      "Hızlı ve kaliteli işçilik",
+      "Renkli ve desenli beton seçenekleri",
+      "Endüstriyel ve konut projelerine uygun",
+    ],
+    benefits: [
+      { title: "Mukavemet", description: "Yüksek basınç ve yük taşıma kapasitesi" },
+      { title: "Hızlı Uygulama", description: "Kısa sürede geniş alanlar kaplanır" },
+      { title: "Ekonomik", description: "Maliyet etkin ve uzun ömürlü çözüm" },
+      { title: "Çeşitlilik", description: "Dekoratif ve endüstriyel seçenekler" },
+    ],
+    images: [
+      "/placeholder-beton.jpg",
+      "/placeholder-beton.jpg",
+      "/placeholder-beton.jpg",
+      "/placeholder-beton.jpg",
+    ],
+    process: [
+      "Zemin hazırlığı ve kalıp yapımı",
+      "Beton karışımının hazırlanması",
+      "Profesyonel döküm ve yayma",
+      "Tesviye ve düzleme işlemleri",
+      "Kürlenme ve bitirme",
+    ],
+  },
+  "asfalt": {
+    title: "Asfalt Kaplama",
+    description: "Yol ve alan asfaltlama hizmetleri",
+    fullDescription:
+      "Profesyonel ekipman ve deneyimli kadromuzla sıcak ve soğuk asfalt uygulamaları yapıyoruz. Yollar, otoparklar ve geniş alanlarda kaliteli ve uzun ömürlü asfaltlama hizmeti sunuyoruz.",
+    details: [
+      "Yol ve otopark asfaltlama",
+      "Sıcak ve soğuk asfalt uygulamaları",
+      "Profesyonel tesviye ve düzleme",
+      "Uzun ömürlü ve ekonomik çözümler",
+      "Trafik çizgileri ve işaretleme",
+      "Hızlı proje tamamlama",
+    ],
+    benefits: [
+      { title: "Pürüzsüz Yüzey", description: "Düzgün ve konforlu sürüş yüzeyi" },
+      { title: "Dayanıklılık", description: "Yoğun trafiğe karşı uzun ömürlü" },
+      { title: "Hızlı Kuruma", description: "Kısa sürede kullanıma hazır" },
+      { title: "Ekonomik", description: "Maliyet etkin ve bakım kolay" },
+    ],
+    images: [
+      "/placeholder-asfalt.jpg",
+      "/placeholder-asfalt.jpg",
+      "/placeholder-asfalt.jpg",
+      "/placeholder-asfalt.jpg",
+    ],
+    process: [
+      "Zemin analizi ve hazırlık",
+      "Altyapı ve drenaj çalışmaları",
+      "Sıcak asfalt serimi",
+      "Silindirle sıkıştırma",
+      "Çizgi ve işaretleme",
+    ],
+  },
+  "tadilatlar-ve-tamiratlar": {
+    title: "Tadilatlar ve Tamiratlar",
+    description: "Her türlü tadilat ve tamirat işleri",
+    fullDescription:
+      "Mevcut yapılardaki her türlü tadilat ve tamirat ihtiyacınız için kapsamlı hizmet sunuyoruz. Taş, beton, asfalt ve diğer tüm yapı malzemeleriyle ilgili onarım ve yenileme işlerini profesyonel şekilde gerçekleştiriyoruz.",
+    details: [
+      "Bina içi ve dışı tadilat işleri",
+      "Taş, beton ve asfalt tamiratları",
+      "Restorasyon ve yenileme çalışmaları",
+      "Profesyonel ekip ve kaliteli malzeme",
+      "Hızlı ve güvenilir servis",
+      "Bakım ve onarım danışmanlığı",
+    ],
+    benefits: [
+      { title: "Kapsamlı Hizmet", description: "Tüm tadilat ve tamirat ihtiyaçlarınız için tek adres" },
+      { title: "Deneyimli Ekip", description: "Uzman kadro ile kaliteli işçilik" },
+      { title: "Hızlı Çözüm", description: "Kısa sürede sorunlarınızı gideriyoruz" },
+      { title: "Uygun Fiyat", description: "Kaliteli hizmet, makul fiyatlar" },
+    ],
+    images: [
+      "/placeholder-tadilatlar.jpg",
+      "/placeholder-tadilatlar.jpg",
+      "/placeholder-tadilatlar.jpg",
+      "/placeholder-tadilatlar.jpg",
+    ],
+    process: [
+      "Keşif ve hasar tespiti",
+      "Tamirat planı ve maliyet hesabı",
+      "Malzeme temini ve hazırlık",
+      "Profesyonel tamirat uygulaması",
+      "Kalite kontrolü ve teslim",
+    ],
+  },
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {

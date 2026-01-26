@@ -2,6 +2,9 @@
 
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
+import { AnimatedText } from "@/components/animated-text"
+import { AnimatedCard } from "@/components/animated-card"
+import { AnimatedSection } from "@/components/animated-section"
 import { useState } from "react"
 import Link from "next/link"
 import { ArrowRight, Search } from "lucide-react"
@@ -102,10 +105,12 @@ export default function Projects() {
       {/* Hero Section */}
       <section className="pt-32 pb-16 px-4 bg-gradient-to-b from-slate-50 to-white">
         <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-primary mb-6">Projelerimiz</h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <AnimatedText as="h1" className="text-5xl md:text-6xl font-bold text-primary mb-6">
+            Projelerimiz
+          </AnimatedText>
+          <AnimatedText as="p" delay={200} className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Gerçekleştirdiğimiz başarılı projeleri ve tasarımları keşfedin
-          </p>
+          </AnimatedText>
         </div>
       </section>
 
@@ -149,9 +154,10 @@ export default function Projects() {
         <div className="max-w-6xl mx-auto">
           {filteredProjects.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProjects.map((project) => (
-                <Link href={`/projeler/${project.id}`} key={project.id}>
-                  <div className="bg-white rounded-lg border border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer h-full">
+              {filteredProjects.map((project, index) => (
+                <AnimatedCard key={project.id} index={index} delay={100}>
+                  <Link href={`/projeler/${project.id}`} className="block h-full">
+                    <div className="bg-white rounded-lg border border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer h-full">
                     <div className="relative overflow-hidden h-64 bg-slate-200">
                       <img
                         src={project.image || "/placeholder.svg"}
@@ -175,13 +181,14 @@ export default function Projects() {
                       <h3 className="text-xl font-bold text-primary mb-2">{project.title}</h3>
                       <p className="text-foreground/70 mb-2 text-sm">{project.description}</p>
                       <p className="text-foreground/50 text-xs mb-4">Tarih: {project.date}</p>
-                      <div className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all text-sm">
-                        Detayları Gör
-                        <ArrowRight size={16} />
+                        <div className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all text-sm">
+                          Detayları Gör
+                          <ArrowRight size={16} />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                </AnimatedCard>
               ))}
             </div>
           ) : (

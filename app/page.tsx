@@ -1,6 +1,9 @@
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { ServiceImage } from "@/components/service-image"
+import { AnimatedSection } from "@/components/animated-section"
+import { AnimatedText } from "@/components/animated-text"
+import { AnimatedCard } from "@/components/animated-card"
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight, Building2, Mountain, Layers, Sparkles, Leaf, Palette } from "lucide-react"
@@ -131,58 +134,70 @@ export default function Home() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
           <div className="text-center">
             {/* Badge */}
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-600/90 backdrop-blur-sm text-white text-sm font-semibold mb-8 shadow-lg">
-              <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
-              1998'den Beri Güvenilir Hizmet
-            </div>
+            <AnimatedSection animation="fade-in" delay={200}>
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-600/90 backdrop-blur-sm text-white text-sm font-semibold mb-8 shadow-lg">
+                <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+                1998'den Beri Güvenilir Hizmet
+              </div>
+            </AnimatedSection>
 
             {/* Main Heading */}
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 leading-tight text-white">
+            <AnimatedText as="h1" delay={400} className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 leading-tight text-white">
               <span className="block">Taşın Estetiğini</span>
               <span className="block text-blue-400">Yapınıza Getiriyoruz</span>
-            </h1>
+            </AnimatedText>
 
             {/* Description */}
-            <p className="text-lg sm:text-xl lg:text-2xl text-gray-200 mb-12 max-w-3xl mx-auto leading-relaxed">
+            <AnimatedText as="p" delay={600} className="text-lg sm:text-xl lg:text-2xl text-gray-200 mb-12 max-w-3xl mx-auto leading-relaxed">
               Doğal taş uygulamaları, dekoratif kaplamalar ve peyzaj çözümleriyle yapınızın değerini arttırıyoruz. 
               <span className="block mt-2">İzmir ve Türkiye genelinde binlerce başarılı projenin öncüsüyüz.</span>
-            </p>
+            </AnimatedText>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link
-                href="/hizmetler"
-                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-all shadow-xl hover:shadow-2xl hover:scale-105"
-              >
-                Hizmetlerimizi Keşfedin
-                <ArrowRight size={20} />
-              </Link>
-              <Link
-                href="/iletisim"
-                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-lg font-semibold transition-all border-2 border-white/20 hover:border-white/40"
-              >
-                İletişime Geç
-              </Link>
-            </div>
+            <AnimatedSection animation="scale-up" delay={800}>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Link
+                  href="/hizmetler"
+                  className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-all shadow-xl hover:shadow-2xl hover:scale-105"
+                >
+                  Hizmetlerimizi Keşfedin
+                  <ArrowRight size={20} />
+                </Link>
+                <Link
+                  href="/iletisim"
+                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-lg font-semibold transition-all border-2 border-white/20 hover:border-white/40"
+                >
+                  İletişime Geç
+                </Link>
+              </div>
+            </AnimatedSection>
 
             {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 max-w-4xl mx-auto">
-              <div className="text-center">
-                <div className="text-4xl font-bold text-blue-400 mb-2">1000+</div>
-                <div className="text-sm text-gray-300">Tamamlanan Proje</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-blue-400 mb-2">25+</div>
-                <div className="text-sm text-gray-300">Yıl Deneyim</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-blue-400 mb-2">50+</div>
-                <div className="text-sm text-gray-300">Şehirde Hizmet</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-blue-400 mb-2">100%</div>
-                <div className="text-sm text-gray-300">Müşteri Memnuniyeti</div>
-              </div>
+              <AnimatedCard delay={1000} index={0}>
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-blue-400 mb-2">1000+</div>
+                  <div className="text-sm text-gray-300">Tamamlanan Proje</div>
+                </div>
+              </AnimatedCard>
+              <AnimatedCard delay={1000} index={1}>
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-blue-400 mb-2">25+</div>
+                  <div className="text-sm text-gray-300">Yıl Deneyim</div>
+                </div>
+              </AnimatedCard>
+              <AnimatedCard delay={1000} index={2}>
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-blue-400 mb-2">50+</div>
+                  <div className="text-sm text-gray-300">Şehirde Hizmet</div>
+                </div>
+              </AnimatedCard>
+              <AnimatedCard delay={1000} index={3}>
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-blue-400 mb-2">100%</div>
+                  <div className="text-sm text-gray-300">Müşteri Memnuniyeti</div>
+                </div>
+              </AnimatedCard>
             </div>
           </div>
         </div>
@@ -201,43 +216,48 @@ export default function Home() {
       {/* About Section - CHANGE: Expanded and more professional */}
       <section className="py-24 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-slate-900 mb-12 text-center">Hakkımızda</h2>
+          <AnimatedText as="h2" className="text-4xl font-bold text-slate-900 mb-12 text-center">
+            Hakkımızda
+          </AnimatedText>
           <div className="grid md:grid-cols-2 gap-12 items-center mb-12">
-            <div>
-              <p className="text-lg text-slate-700 leading-relaxed mb-6">
-                1998 yılından beri faaliyet gösteren HMF Desen Yapı, doğal taş uygulamaları, dekoratif kaplamalar ve
-                peyzaj çözümleriyle Türkiye'nin en güvenilir isimlerinden biri haline gelmiştir.
-              </p>
-              <p className="text-lg text-slate-700 leading-relaxed mb-6">
-                İzmir merkezli operasyonlarından başlayarak, ülke genelinde yüzlerce konut, ticari mekan ve peyzaj
-                projesini başarıyla tamamladık. Her bir projede kalite, güvenilirlik ve müşteri memnuniyeti
-                ilkelerimizle hareket ediyoruz.
-              </p>
-              <p className="text-lg text-slate-700 leading-relaxed">
-                Uzman ekibimiz, en yeni teknolojiler ve geleneksel ustalık bilgisini birleştirerek, yapınızın mimarisine
-                ve şahsiyetine en uygun çözümleri sunmaktadır.
-              </p>
-            </div>
-            <div className="bg-slate-50 p-8 rounded-lg border border-slate-200">
-              <h3 className="text-2xl font-bold text-slate-900 mb-6">Neden Biz?</h3>
-              <ul className="space-y-4">
-                <li className="flex gap-3 items-start">
-                  <span className="text-blue-600 font-bold text-xl">✓</span>
-                  <span className="text-slate-700">
-                    <strong>25+ Yıl Tecrübe:</strong> Uzun yıllar güvenilir hizmet
-                  </span>
-                </li>
-                <li className="flex gap-3 items-start">
-                  <span className="text-blue-600 font-bold text-xl">✓</span>
-                  <span className="text-slate-700">
-                    <strong>Kaliteli Malzeme:</strong> Doğal taş ve en iyi ürünler
-                  </span>
-                </li>
-                <li className="flex gap-3 items-start">
-                  <span className="text-blue-600 font-bold text-xl">✓</span>
-                  <span className="text-slate-700">
-                    <strong>Profesyonel Ekip:</strong> Deneyimli ve eğitimli ustalar
-                  </span>
+            <AnimatedSection animation="slide-right">
+              <div>
+                <p className="text-lg text-slate-700 leading-relaxed mb-6">
+                  1998 yılından beri faaliyet gösteren HMF Desen Yapı, doğal taş uygulamaları, dekoratif kaplamalar ve
+                  peyzaj çözümleriyle Türkiye'nin en güvenilir isimlerinden biri haline gelmiştir.
+                </p>
+                <p className="text-lg text-slate-700 leading-relaxed mb-6">
+                  İzmir merkezli operasyonlarından başlayarak, ülke genelinde yüzlerce konut, ticari mekan ve peyzaj
+                  projesini başarıyla tamamladık. Her bir projede kalite, güvenilirlik ve müşteri memnuniyeti
+                  ilkelerimizle hareket ediyoruz.
+                </p>
+                <p className="text-lg text-slate-700 leading-relaxed">
+                  Uzman ekibimiz, en yeni teknolojiler ve geleneksel ustalık bilgisini birleştirerek, yapınızın mimarisine
+                  ve şahsiyetine en uygun çözümleri sunmaktadır.
+                </p>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection animation="slide-left">
+              <div className="bg-slate-50 p-8 rounded-lg border border-slate-200">
+                <h3 className="text-2xl font-bold text-slate-900 mb-6">Neden Biz?</h3>
+                <ul className="space-y-4">
+                  <li className="flex gap-3 items-start">
+                    <span className="text-blue-600 font-bold text-xl">✓</span>
+                    <span className="text-slate-700">
+                      <strong>25+ Yıl Tecrübe:</strong> Uzun yıllar güvenilir hizmet
+                    </span>
+                  </li>
+                  <li className="flex gap-3 items-start">
+                    <span className="text-blue-600 font-bold text-xl">✓</span>
+                    <span className="text-slate-700">
+                      <strong>Kaliteli Malzeme:</strong> Doğal taş ve en iyi ürünler
+                    </span>
+                  </li>
+                  <li className="flex gap-3 items-start">
+                    <span className="text-blue-600 font-bold text-xl">✓</span>
+                    <span className="text-slate-700">
+                      <strong>Profesyonel Ekip:</strong> Deneyimli ve eğitimli ustalar
+                    </span>
                 </li>
                 <li className="flex gap-3 items-start">
                   <span className="text-blue-600 font-bold text-xl">✓</span>
@@ -247,35 +267,40 @@ export default function Home() {
                 </li>
               </ul>
             </div>
+            </AnimatedSection>
           </div>
-          <div className="text-center">
-            <Link
-              href="/hakkimizda"
-              className="inline-flex items-center gap-2 text-slate-900 font-semibold hover:gap-3 transition-all hover:text-slate-700"
-            >
-              Şirket Tarihçesi ve Projelerimiz
-              <ArrowRight size={20} />
-            </Link>
-          </div>
+          <AnimatedSection animation="fade-up">
+            <div className="text-center">
+              <Link
+                href="/hakkimizda"
+                className="inline-flex items-center gap-2 text-slate-900 font-semibold hover:gap-3 transition-all hover:text-slate-700"
+              >
+                Şirket Tarihçesi ve Projelerimiz
+                <ArrowRight size={20} />
+              </Link>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* Services Grid - CHANGE: Added images and made clickable with detail links */}
       <section className="py-24 px-4 bg-slate-50">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-slate-900 mb-4 text-center">Uzmanlık Alanlarımız</h2>
-          <p className="text-lg text-slate-600 text-center mb-16 max-w-2xl mx-auto">
+          <AnimatedText as="h2" className="text-4xl font-bold text-slate-900 mb-4 text-center">
+            Uzmanlık Alanlarımız
+          </AnimatedText>
+          <AnimatedText as="p" delay={200} className="text-lg text-slate-600 text-center mb-16 max-w-2xl mx-auto">
             Doğal taş ve dekoratif kaplama çözümlerinde uzmanlaşmış hizmetlerimize göz atın
-          </p>
+          </AnimatedText>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service) => {
+            {services.map((service, index) => {
               const Icon = service.icon
               return (
-                <Link
-                  href={`/hizmetler/${service.slug}`}
-                  key={service.title}
-                  className="bg-white rounded-lg border border-slate-200 overflow-hidden hover:shadow-xl hover:border-blue-300 transition-all group cursor-pointer"
-                >
+                <AnimatedCard key={service.title} index={index} delay={100}>
+                  <Link
+                    href={`/hizmetler/${service.slug}`}
+                    className="block bg-white rounded-lg border border-slate-200 overflow-hidden hover:shadow-xl hover:border-blue-300 transition-all group cursor-pointer h-full"
+                  >
                   {/* CHANGE: Added image container with hover effect */}
                   <div className="relative overflow-hidden h-56 bg-slate-200">
                     <ServiceImage
@@ -287,18 +312,19 @@ export default function Home() {
                     <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
                   </div>
 
-                  <div className="p-6">
-                    <div className="inline-block p-3 bg-blue-600 rounded mb-4">
-                      <Icon size={24} className="text-white" />
+                    <div className="p-6">
+                      <div className="inline-block p-3 bg-blue-600 rounded mb-4">
+                        <Icon size={24} className="text-white" />
+                      </div>
+                      <h3 className="text-xl font-bold text-slate-900 mb-2">{service.title}</h3>
+                      <p className="text-slate-600 mb-4">{service.description}</p>
+                      <div className="inline-flex items-center gap-2 text-blue-600 font-semibold group-hover:gap-3 transition-all">
+                        Detayları Gör
+                        <ArrowRight size={16} />
+                      </div>
                     </div>
-                    <h3 className="text-xl font-bold text-slate-900 mb-2">{service.title}</h3>
-                    <p className="text-slate-600 mb-4">{service.description}</p>
-                    <div className="inline-flex items-center gap-2 text-blue-600 font-semibold group-hover:gap-3 transition-all">
-                      Detayları Gör
-                      <ArrowRight size={16} />
-                    </div>
-                  </div>
-                </Link>
+                  </Link>
+                </AnimatedCard>
               )
             })}
           </div>
@@ -306,21 +332,23 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 bg-slate-900 text-white">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-6">Projeniz İçin Teklif Alın</h2>
-          <p className="text-lg mb-8 text-gray-300">
-            Uzman ekibimizle iletişime geçin ve yapınız için en uygun çözümü bulun.
-          </p>
-          <Link
-            href="/iletisim"
-            className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded font-semibold hover:bg-blue-700 transition-colors"
-          >
-            İletişime Geç
-            <ArrowRight size={20} />
-          </Link>
-        </div>
-      </section>
+      <AnimatedSection animation="fade-up">
+        <section className="py-20 px-4 bg-slate-900 text-white">
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="text-4xl font-bold mb-6">Projeniz İçin Teklif Alın</h2>
+            <p className="text-lg mb-8 text-gray-300">
+              Uzman ekibimizle iletişime geçin ve yapınız için en uygun çözümü bulun.
+            </p>
+            <Link
+              href="/iletisim"
+              className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded font-semibold hover:bg-blue-700 transition-colors"
+            >
+              İletişime Geç
+              <ArrowRight size={20} />
+            </Link>
+          </div>
+        </section>
+      </AnimatedSection>
 
       <Footer />
     </main>

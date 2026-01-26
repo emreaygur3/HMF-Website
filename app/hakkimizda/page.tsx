@@ -1,5 +1,8 @@
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
+import { AnimatedText } from "@/components/animated-text"
+import { AnimatedSection } from "@/components/animated-section"
+import { AnimatedCard } from "@/components/animated-card"
 import { Check } from "lucide-react"
 
 export const metadata = {
