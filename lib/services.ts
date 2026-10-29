@@ -25,7 +25,7 @@ export const services: Service[] = [
     fullDescription:
       "Doğal taşı kullanarak yapılan duvarlar, binaların yapısını güçlendirirken aynı zamanda estetik bir görünüm sağlar. Derzli (harçlı) ve derzsiz (kuru örgü) uygulamalar, projenizin ihtiyacına göre seçilebilir.",
     icon: Building2,
-    image: "/stone-wall-with-joints-residential.jpg",
+    image: "/derzli-tas-duvar-saha-yuksek-duvar.jpg",
     images: [
       "/stone-wall-with-joints-residential.jpg",
       "/derzli-tas-duvar-saha-yuksek-duvar.jpg",
@@ -61,7 +61,7 @@ export const services: Service[] = [
     fullDescription:
       "Yamaçlar ve eğimli arazilerde yapılan taş işçiliği, erozyonu önlerken aynı zamanda doğal bir görünüm sağlar. Stabilite ve estetik birlikte sunulur.",
     icon: Mountain,
-    image: "/slope-stone-construction-hillside.jpg",
+    image: "/sev-tasi-saha-orman-yamaci.jpg",
     images: [
       "/slope-stone-construction-hillside.jpg",
       "/sev-tasi-saha-blok-yerlesimi.jpg",
@@ -97,7 +97,7 @@ export const services: Service[] = [
     fullDescription:
       "Kayrak taş, doğasından gelen şık renk ve dokusunun yanı sıra dayanıklılığı ile ön plandadır. İç ve dış mekanlar için kusursuz kaplamalar sunar.",
     icon: Layers,
-    image: "/slate-stone-entrance-detail.jpg",
+    image: "/kayrak-tas-saha-duvar-kaplama.jpg",
     images: [
       "/kayrak-tas-saha-duvar-kaplama.jpg",
       "/kayrak-tas-saha-zemin-uygulama.jpg",
@@ -107,6 +107,7 @@ export const services: Service[] = [
     imagePositions: {
       // Çalışan usta kadrajda tam görünsün
       "/kayrak-tas-saha-kulube-kaplama.jpg": "center 40%",
+      "/kayrak-tas-saha-duvar-kaplama.jpg": "center 55%",
     },
     details: [
       "Doğal kayrak taşının estetik görünümü",
@@ -137,7 +138,7 @@ export const services: Service[] = [
     fullDescription:
       "Granürlü taşlar, çeşitli renk ve dokularıyla iç ve dış mekanları güzelleştiren dekoratif çözümler sunar. Modern ve klasik tasarımlara uyum sağlar.",
     icon: Sparkles,
-    image: "/colorful-decorative-stone-pattern.jpg",
+    image: "/granurlu-tas-saha-meydan.jpg",
     images: [
       "/granurlu-tas-saha-ekip.jpg",
       "/granurlu-tas-saha-desenli-kaldirim.jpg",
@@ -178,7 +179,7 @@ export const services: Service[] = [
     fullDescription:
       "Bahçe ve dış alanlar için tasarlanan parke ve bordür uygulamaları, mekanı işlevsel ve güzel hale getirir. Peyzaj tasarımında tamamen kişiye özel çözümler sunulur.",
     icon: Leaf,
-    image: "/garden-landscape-stone-border.jpg",
+    image: "/parke-bordur-saha-villa-yolu.jpg",
     images: [
       "/parke-bordur-saha-bordur-adasi.jpg",
       "/parke-bordur-saha-kilitli-parke-yol.jpg",
@@ -218,7 +219,7 @@ export const services: Service[] = [
     fullDescription:
       "Yaratıcı tasarımlar ve renkli taş kombinasyonları kullanılarak tamamen özel ve benzersiz mekanlar yaratılır. Sanat ve işlevsellik bir araya gelir.",
     icon: Palette,
-    image: "/colorful-stone-pattern-design-office.jpg",
+    image: "/renkli-desenli-tas-saha-mozaik-avlu.jpg",
     images: [
       "/renkli-desenli-tas-saha-kusbakisi.jpg",
       "/renkli-desenli-tas-saha-tugla-bordur.jpg",
@@ -268,6 +269,7 @@ export const services: Service[] = [
     imagePositions: {
       // Gökyüzü yerine yol ve kaldırım öne çıksın
       "/asfalt-yol-saha-gun-batimi.jpg": "center 70%",
+      "/asfalt-yol-saha-agacli-bulvar.jpg": "center 75%",
       "/asfalt-yol-saha-kavsak.jpg": "center 75%",
       "/asfalt-yol-saha-cadde-kaldirim.jpg": "center 70%",
     },

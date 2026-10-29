@@ -52,6 +52,7 @@ export default function Services() {
                       fill
                       sizes="(min-width: 1024px) 352px, (min-width: 768px) 50vw, 100vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      style={{ objectPosition: service.imagePositions?.[service.image] }}
                     />
                   </div>
 
