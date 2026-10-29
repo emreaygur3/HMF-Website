@@ -1,81 +1,95 @@
+import Image from "next/image"
+import Link from "next/link"
 import { Facebook, Instagram, Phone } from "lucide-react"
+import { siteConfig, whatsappUrl } from "@/lib/site"
+
+const quickLinks = [
+  { href: "/", label: "Anasayfa" },
+  { href: "/hakkimizda", label: "Hakkımızda" },
+  { href: "/hizmetler", label: "Hizmetler" },
+  { href: "/projeler", label: "Projeler" },
+  { href: "/hizmet-bolgeleri", label: "Hizmet Bölgeleri" },
+  { href: "/iletisim", label: "İletişim" },
+]
 
 export function Footer() {
+  const socialLinks = [
+    { href: siteConfig.social.facebook, label: "Facebook", icon: <Facebook size={20} /> },
+    { href: siteConfig.social.instagram, label: "Instagram", icon: <Instagram size={20} /> },
+    { href: whatsappUrl, label: "WhatsApp", icon: <Phone size={20} className="fill-current" /> },
+  ].filter((link) => link.href)
+
   return (
     <footer className="bg-primary text-primary-foreground mt-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           <div>
-            <h3 className="text-xl font-bold mb-4">HMF Desen Yapı</h3>
-            <p className="text-sm opacity-90">1998'den beri doğal taş çözümleri</p>
+            <h2 className="mb-4">
+              <Image src="/logo-light.svg" alt={siteConfig.name} width={194} height={56} className="h-14 w-auto" />
+            </h2>
+            <p className="text-sm opacity-90">{siteConfig.foundedYear}&apos;den beri doğal taş çözümleri</p>
           </div>
           <div>
-            <h4 className="font-semibold mb-4">Hızlı Linkler</h4>
+            <h3 className="font-semibold mb-4">Hızlı Linkler</h3>
             <ul className="space-y-2 text-sm">
-              <li>
-                <a href="/" className="hover:opacity-80 transition-opacity">
-                  Anasayfa
-                </a>
-              </li>
-              <li>
-                <a href="/hakkimizda" className="hover:opacity-80 transition-opacity">
-                  Hakkımızda
-                </a>
-              </li>
-              <li>
-                <a href="/projeler" className="hover:opacity-80 transition-opacity">
-                  Projeler
-                </a>
-              </li>
+              {quickLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="hover:opacity-80 transition-opacity">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold mb-4">İletişim</h4>
-            <p className="text-sm mb-2">Email: emreaygur13@gmail.com</p>
-            <p className="text-sm mb-4">Tel: +90 (501) 186 3529</p>
-            
+            <h3 className="font-semibold mb-4">İletişim</h3>
+            <p className="text-sm mb-2">
+              Email:{" "}
+              <a href={`mailto:${siteConfig.email}`} className="hover:opacity-80 transition-opacity">
+                {siteConfig.email}
+              </a>
+            </p>
+            <p className="text-sm mb-4">
+              Tel:{" "}
+              {siteConfig.phones.map((phone, index) => (
+                <span key={phone.tel}>
+                  {index > 0 && <br />}
+                  <a href={`tel:${phone.tel}`} className="hover:opacity-80 transition-opacity">
+                    {phone.display}
+                  </a>
+                </span>
+              ))}
+            </p>
+
             {/* Social Media Icons */}
             <div className="flex gap-4 mt-4">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:opacity-75 transition-opacity"
-                aria-label="Facebook"
-              >
-                <Facebook size={20} />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:opacity-75 transition-opacity"
-                aria-label="Instagram"
-              >
-                <Instagram size={20} />
-              </a>
-              <a
-                href="https://wa.me/905011863529"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:opacity-75 transition-opacity"
-                aria-label="WhatsApp"
-              >
-                <Phone size={20} className="fill-current" />
-              </a>
+              {socialLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:opacity-75 transition-opacity"
+                  aria-label={link.label}
+                >
+                  {link.icon}
+                </a>
+              ))}
             </div>
           </div>
           <div>
-            <h4 className="font-semibold mb-4">Adres</h4>
-            <p className="text-sm">
-              İsmet İnönü Mah. 80 Yıl Cad.
+            <h3 className="font-semibold mb-4">Adres</h3>
+            <address className="text-sm not-italic">
+              {siteConfig.address.street}
               <br />
-              Menemen / İzmir
-            </p>
+              {siteConfig.address.district} / {siteConfig.address.city}
+            </address>
           </div>
         </div>
         <div className="border-t border-primary-foreground/20 pt-8 text-center text-sm opacity-75">
-          <p>&copy; 2025 HMF Desen Yapı. Tüm hakları saklıdır.</p>
+          <p>
+            &copy; {new Date().getFullYear()} {siteConfig.name}. Tüm hakları saklıdır.
+          </p>
         </div>
       </div>
     </footer>

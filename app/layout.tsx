@@ -1,47 +1,77 @@
 import type React from "react"
-import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import type { Metadata, Viewport } from "next"
+import { Geist } from "next/font/google"
+import { Navigation } from "@/components/navigation"
+import { Footer } from "@/components/footer"
+import { JsonLd } from "@/components/json-ld"
+import { siteConfig } from "@/lib/site"
+import { services } from "@/lib/services"
+import { areaServed } from "@/lib/seo"
 import "./globals.css"
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const geist = Geist({ subsets: ["latin", "latin-ext"], variable: "--font-geist-sans", display: "swap" })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: "HMF Desen Yapı | Doğal Taş & Dekoratif Kaplamalar",
+    default: "HMF Desen Yapı | İzmir Aliağa Doğal Taş, Taş Duvar ve Kaplama",
     template: "%s | HMF Desen Yapı",
   },
-  description:
-    "1998'den beri İzmir ve Türkiye genelinde kaliteli doğal taş uygulamaları, dekoratif kaplamalar ve peyzaj çözümleri. Derzli taş duvar, şev taşı, kayrak taş kaplama ve daha fazlası.",
+  description: siteConfig.description,
   keywords: [
     "doğal taş",
+    "doğal taş uygulama",
     "taş duvar",
-    "dekoratif kaplama",
+    "taş duvar ustası",
+    "dekoratif taş kaplama",
     "şev taşı",
-    "kayrak taş",
+    "istinat duvarı",
+    "kayrak taş kaplama",
     "granürlü taş",
     "parke bordür",
+    "asfalt yol yapımı",
+    "asfalt serimi",
+    "Aliağa asfalt",
+    "İzmir yol yapımı",
     "peyzaj tasarımı",
-    "İzmir taş ustaları",
+    "İzmir doğal taş",
+    "İzmir taş ustası",
+    "Aliağa taş duvar",
+    "Aliağa doğal taş",
+    "Menemen taş duvar",
+    "Foça taş ustası",
+    "Bergama şev taşı",
+    "Ege doğal taş",
     "HMF Desen Yapı",
   ],
-  authors: [{ name: "HMF Desen Yapı" }],
-  creator: "HMF Desen Yapı",
-  publisher: "HMF Desen Yapı",
+  category: "construction",
+  authors: [{ name: siteConfig.name }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://hmfdesenyapi.com"),
   openGraph: {
-    title: "HMF Desen Yapı | Doğal Taş & Dekoratif Kaplamalar",
+    title: "HMF Desen Yapı | İzmir Aliağa Doğal Taş, Taş Duvar ve Kaplama",
     description:
-      "1998'den beri İzmir ve Türkiye genelinde kaliteli doğal taş uygulamaları, dekoratif kaplamalar ve peyzaj çözümleri.",
-    url: "https://hmfdesenyapi.com",
-    siteName: "HMF Desen Yapı",
+      "1998'den beri Aliağa, Menemen ve tüm İzmir'de; Ege'de ve Türkiye genelinde doğal taş uygulamaları, dekoratif kaplamalar ve peyzaj çözümleri.",
+    url: "/",
+    siteName: siteConfig.name,
     locale: "tr_TR",
     type: "website",
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: siteConfig.name }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og-image.jpg"],
+  },
+  other: {
+    "geo.region": "TR-35",
+    "geo.placename": "Menemen, İzmir",
+    "geo.position": `${siteConfig.geo.latitude};${siteConfig.geo.longitude}`,
+    ICBM: `${siteConfig.geo.latitude}, ${siteConfig.geo.longitude}`,
   },
   robots: {
     index: true,
@@ -54,7 +84,74 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  generator: "Next.js",
+}
+
+export const viewport: Viewport = {
+  themeColor: "#0f172a",
+}
+
+const businessJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  "@id": `${siteConfig.url}/#business`,
+  name: siteConfig.name,
+  description:
+    "İzmir Menemen merkezli; Aliağa, Foça, Bergama ve tüm İzmir'de, Ege Bölgesi'nde ve Türkiye genelinde doğal taş duvar, şev taşı, kayrak taş kaplama, granürlü taş, parke ve bordür uygulamaları.",
+  url: siteConfig.url,
+  image: `${siteConfig.url}/og-image.jpg`,
+  logo: `${siteConfig.url}/logo-512.png`,
+  telephone: siteConfig.phones[0].tel,
+  contactPoint: siteConfig.phones.map((phone) => ({
+    "@type": "ContactPoint",
+    telephone: phone.tel,
+    contactType: "customer service",
+    areaServed: "TR",
+    availableLanguage: "Turkish",
+  })),
+  email: siteConfig.email,
+  foundingDate: String(siteConfig.foundedYear),
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: siteConfig.address.street,
+    addressLocality: siteConfig.address.district,
+    addressRegion: siteConfig.address.city,
+    addressCountry: siteConfig.address.country,
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: siteConfig.geo.latitude,
+    longitude: siteConfig.geo.longitude,
+  },
+  areaServed,
+  knowsAbout: services.map((service) => service.title),
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Doğal Taş ve Peyzaj Hizmetleri",
+    itemListElement: services.map((service) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: service.title,
+        url: `${siteConfig.url}/hizmetler/${service.slug}`,
+      },
+    })),
+  },
+  sameAs: Object.values(siteConfig.social).filter(Boolean),
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "18:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: "Saturday",
+      opens: "10:00",
+      closes: "16:00",
+    },
+  ],
+  priceRange: "$$",
 }
 
 export default function RootLayout({
@@ -63,8 +160,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="tr">
-      <body className={`font-sans antialiased bg-background text-foreground`}>{children}</body>
+    <html lang="tr" className={geist.variable}>
+      <body className="font-sans antialiased bg-background text-foreground">
+        <JsonLd data={businessJsonLd} />
+        <Navigation />
+        <main id="main">{children}</main>
+        <Footer />
+      </body>
     </html>
   )
 }

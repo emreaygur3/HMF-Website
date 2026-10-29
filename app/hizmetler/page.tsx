@@ -1,104 +1,31 @@
-import { Navigation } from "@/components/navigation"
-import { Footer } from "@/components/footer"
-import { ServiceImage } from "@/components/service-image"
-import { ArrowRight, Building2, Mountain, Layers, Sparkles, Leaf, Palette } from "lucide-react"
+import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
+import { ArrowRight } from "lucide-react"
+import { services } from "@/lib/services"
 
-export const metadata = {
-  title: "Hizmetler | HMF Desen Yapı",
-  description: "Doğal taş uygulamaları, dekoratif kaplamalar ve peyzaj çözümleri hakkında detaylı bilgi edinin.",
+export const metadata: Metadata = {
+  title: "Doğal Taş ve Peyzaj Hizmetleri İzmir & Aliağa",
+  description:
+    "Derzli ve derzsiz taş duvar, şev taşı, kayrak taş kaplama, granürlü taş, parke ve bordür, renkli ve desenli taş, asfalt ve yol yapımı. Aliağa, Menemen ve tüm İzmir'de, Ege'de ve Türkiye genelinde hizmet.",
+  alternates: { canonical: "/hizmetler" },
 }
 
-export default function Services() {
-  const services = [
-    {
-      title: "Derzli ve Derzsiz Taş Duvar",
-      icon: Building2,
-      image: "/stone-wall-with-joints-residential.jpg",
-      description: "Profesyonel taş duvar uygulamaları",
-      slug: "derzli-ve-derzsiz-tas-duvar",
-      details: [
-        "Doğal taş kullanarak dayanıklı duvar yapıları",
-        "Derzli ve derzsiz uygulama seçenekleri",
-        "Yapının estetiğini artıran tasarımlar",
-        "Uzun ömürlü ve bakım kolaylığı",
-      ],
-    },
-    {
-      title: "Şev Taşı Yapımı",
-      icon: Mountain,
-      image: "/slope-stone-construction-hillside.jpg",
-      description: "Eğimli yüzeyler için taş kaplama",
-      slug: "sev-tasi-yapimi",
-      details: [
-        "Eğimli arazi ve yamaçlara uygun çözümler",
-        "Erosyon kontrolü ve stabilite sağlama",
-        "Doğal görünüm ve peyzaj uyumu",
-        "Uzun süreli dayanıklılık",
-      ],
-    },
-    {
-      title: "Kayrak Taş Kaplama",
-      icon: Layers,
-      image: "/slate-stone-entrance-detail.jpg",
-      description: "Doğal kayrak taş ile kaplamalar",
-      slug: "kayrak-tas-kaplama",
-      details: [
-        "Doğal kayrak taşının estetik görünümü",
-        "Cephe ve iç mekan uygulamaları",
-        "Göz alıcı tasarımlar ve desenleri",
-        "Yüksek dayanıklılık ve yer değiştirmeme",
-      ],
-    },
-    {
-      title: "Granürlü Taşlar",
-      icon: Sparkles,
-      image: "/colorful-decorative-stone-pattern.jpg",
-      description: "Dekoratif granürlü taş uygulamaları",
-      slug: "granurlu-taslar",
-      details: [
-        "Çeşitli renk ve dokuda granürlü taşlar",
-        "İç ve dış mekan dekorasyonu",
-        "Modern ve klasik tasarımlara uyum",
-        "Kolay temizlenme ve bakım",
-      ],
-    },
-    {
-      title: "Parke ve Bordür",
-      icon: Leaf,
-      image: "/garden-landscape-stone-border.jpg",
-      description: "Peyzaj tasarımı ve bordür işleri",
-      slug: "parke-ve-bordur",
-      details: [
-        "Bahçe ve dış alanlar için tasarımlar",
-        "Dekoratif parke ve bordür uygulaması",
-        "Peyzaj tasarımı danışmanlığı",
-        "Mekan bütünlüğü sağlayan çözümler",
-      ],
-    },
-    {
-      title: "Renkli ve Desenli Taş",
-      icon: Palette,
-      image: "/colorful-stone-pattern-design-office.jpg",
-      description: "Özel tasarım ve desen uygulamaları",
-      slug: "renkli-ve-desenli-tas",
-      details: [
-        "Özel tasarım ve desen uygulamaları",
-        "Renkli taş kombinasyonları",
-        "Müşteri taleplerince özel tasarımlar",
-        "Yaratıcı ve benzersiz çözümler",
-      ],
-    },
-  ]
+const steps = [
+  { step: "1", title: "Danışma", description: "Projenizi dinliyor ve ihtiyaçlarınızı belirliyoruz" },
+  { step: "2", title: "Tasarım", description: "En uygun malzeme ve tasarımı seçiyoruz" },
+  { step: "3", title: "Uygulama", description: "Profesyonel ekibimizle hızlı ve kaliteli işçilik" },
+  { step: "4", title: "Teslim", description: "Sonucu ve bakım talimatlarını sunuyoruz" },
+]
 
+export default function Services() {
   return (
-    <main>
-      <Navigation />
+    <>
 
       {/* Hero Section */}
       <section className="pt-32 pb-16 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
         <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-balance">Hizmetlerimiz</h1>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-balance">Hizmetlerimiz</h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Doğal taş ve dekoratif kaplama konusunda sunduğumuz kapsamlı hizmetleri keşfedin
           </p>
@@ -115,30 +42,31 @@ export default function Services() {
               return (
                 <Link
                   href={`/hizmetler/${service.slug}`}
-                  key={service.title}
+                  key={service.slug}
                   className="bg-white rounded-lg border border-slate-200 overflow-hidden hover:shadow-xl hover:border-blue-300 transition-all group"
                 >
                   <div className="relative overflow-hidden h-48 bg-slate-200">
-                    <ServiceImage
-                      src={service.image || "/placeholder.svg"}
+                    <Image
+                      src={service.image}
                       alt={service.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      fallbackText={service.title}
+                      fill
+                      sizes="(min-width: 1024px) 352px, (min-width: 768px) 50vw, 100vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
 
                   <div className="p-8">
                     <div className="inline-block p-3 bg-blue-600 rounded mb-4">
-                      <Icon size={24} className="text-white" />
+                      <Icon size={24} className="text-white" aria-hidden="true" />
                     </div>
                     <h3 className="text-2xl font-bold text-slate-900 mb-2">{service.title}</h3>
                     <p className="text-slate-600 mb-6">{service.description}</p>
 
                     {/* Service Details */}
                     <ul className="space-y-3 mb-6">
-                      {service.details.map((detail, index) => (
-                        <li key={index} className="flex gap-3 items-start">
-                          <span className="text-slate-900 font-bold mt-1">▸</span>
+                      {service.details.slice(0, 4).map((detail) => (
+                        <li key={detail} className="flex gap-3 items-start">
+                          <span className="text-slate-900 font-bold mt-1" aria-hidden="true">▸</span>
                           <span className="text-sm text-slate-600">{detail}</span>
                         </li>
                       ))}
@@ -146,7 +74,7 @@ export default function Services() {
 
                     <div className="inline-flex items-center gap-2 text-blue-600 font-semibold group-hover:gap-3 transition-all text-sm">
                       Detaylarını Gör
-                      <ArrowRight size={16} />
+                      <ArrowRight size={16} aria-hidden="true" />
                     </div>
                   </div>
                 </Link>
@@ -162,28 +90,7 @@ export default function Services() {
           <h2 className="text-4xl font-bold text-slate-900 mb-12 text-center">İş Sürecimiz</h2>
 
           <div className="grid md:grid-cols-4 gap-6">
-            {[
-              {
-                step: "1",
-                title: "Danışma",
-                description: "Projenizi anlıyoruz ve ihtiyaçlarınızı belirleriz",
-              },
-              {
-                step: "2",
-                title: "Tasarım",
-                description: "En uygun malzeme ve tasarımı seçiyoruz",
-              },
-              {
-                step: "3",
-                title: "Uygulama",
-                description: "Profesyonel ekipçe hızlı ve kaliteli işçilik",
-              },
-              {
-                step: "4",
-                title: "Teslim",
-                description: "Sonuç ve bakım talimatlarını sunuyoruz",
-              },
-            ].map((process) => (
+            {steps.map((process) => (
               <div key={process.step} className="bg-white p-6 rounded-lg border border-slate-200 text-center">
                 <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
                   {process.step}
@@ -208,12 +115,11 @@ export default function Services() {
             className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded font-semibold hover:bg-blue-700 transition-colors"
           >
             İletişim Formu
-            <ArrowRight size={20} />
+            <ArrowRight size={20} aria-hidden="true" />
           </Link>
         </div>
       </section>
 
-      <Footer />
-    </main>
+    </>
   )
 }

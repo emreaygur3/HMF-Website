@@ -25,3 +25,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+# env örneği commitlenebilir
+!.env.example
+
+# Claude Code yerel ayarları ve çalışma kopyaları
+.claude/
