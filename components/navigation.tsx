@@ -4,27 +4,41 @@ import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
-import { Menu, X, Phone } from "lucide-react"
+import {
+  ChevronDown,
+  FolderOpen,
+  HardHat,
+  House,
+  Mail,
+  MapPin,
+  Menu,
+  Phone,
+  Users,
+  X,
+  type LucideIcon,
+} from "lucide-react"
 import { services } from "@/lib/services"
 import { siteConfig, whatsappUrl } from "@/lib/site"
 
-type NavItem = {
-  href: string
-  label: string
-  submenu?: { href: string; label: string }[]
-}
+type NavLink = { href: string; label: string; icon: LucideIcon }
+type NavItem = NavLink & { submenu?: NavLink[] }
 
 const navItems: NavItem[] = [
-  { href: "/", label: "Anasayfa" },
-  { href: "/hakkimizda", label: "Hakkımızda" },
+  { href: "/", label: "Anasayfa", icon: House },
+  { href: "/hakkimizda", label: "Hakkımızda", icon: Users },
   {
     href: "/hizmetler",
     label: "Hizmetler",
-    submenu: services.map((service) => ({ href: `/hizmetler/${service.slug}`, label: service.title })),
+    icon: HardHat,
+    submenu: services.map((service) => ({
+      href: `/hizmetler/${service.slug}`,
+      label: service.title,
+      icon: service.icon,
+    })),
   },
-  { href: "/projeler", label: "Projeler" },
-  { href: "/hizmet-bolgeleri", label: "Hizmet Bölgeleri" },
-  { href: "/iletisim", label: "İletişim" },
+  { href: "/projeler", label: "Projeler", icon: FolderOpen },
+  { href: "/hizmet-bolgeleri", label: "Hizmet Bölgeleri", icon: MapPin },
+  { href: "/iletisim", label: "İletişim", icon: Mail },
 ]
 
 export function Navigation() {
@@ -66,27 +80,33 @@ export function Navigation() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex gap-5 lg:gap-8 items-center">
+          <div className="hidden md:flex gap-3 lg:gap-5 xl:gap-7 items-center">
             {navItems.map((item) => (
               <div key={item.href} className="relative group">
                 <Link
                   href={item.href}
                   aria-current={isActive(item.href) ? "page" : undefined}
                   aria-haspopup={item.submenu ? "true" : undefined}
-                  className="text-foreground hover:text-primary transition-colors text-sm font-medium py-2 whitespace-nowrap"
+                  className={`inline-flex items-center gap-1.5 text-sm font-medium py-2 whitespace-nowrap transition-colors hover:text-primary ${
+                    isActive(item.href) ? "text-primary" : "text-foreground"
+                  }`}
                 >
+                  {/* Dar ekranda (md) menünün sığması için simgeler lg'den itibaren görünür */}
+                  <item.icon size={16} aria-hidden="true" className="hidden lg:block text-slate-500 group-hover:text-primary" />
                   {item.label}
+                  {item.submenu && <ChevronDown size={14} aria-hidden="true" className="text-slate-400" />}
                 </Link>
                 {/* Desktop Dropdown */}
                 {item.submenu && (
-                  <div className="absolute left-0 mt-0 w-48 bg-white border border-border rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 z-50">
+                  <div className="absolute left-0 mt-0 w-64 bg-white border border-border rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 z-50">
                     {item.submenu.map((sub) => (
                       <Link
                         key={sub.href}
                         href={sub.href}
                         aria-current={pathname === sub.href ? "page" : undefined}
-                        className="block px-4 py-3 text-sm text-foreground hover:bg-slate-50 hover:text-primary first:rounded-t-md last:rounded-b-md transition-colors"
+                        className="flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-slate-50 hover:text-primary first:rounded-t-md last:rounded-b-md transition-colors"
                       >
+                        <sub.icon size={16} aria-hidden="true" className="shrink-0 text-slate-500" />
                         {sub.label}
                       </Link>
                     ))}
@@ -135,13 +155,15 @@ export function Navigation() {
                       aria-expanded={dropdownOpen === item.href}
                       className="w-full text-left px-4 py-2 text-foreground hover:bg-muted rounded flex justify-between items-center"
                     >
-                      <span>{item.label}</span>
-                      <span
+                      <span className="flex items-center gap-3">
+                        <item.icon size={18} aria-hidden="true" className="text-slate-500" />
+                        {item.label}
+                      </span>
+                      <ChevronDown
+                        size={18}
                         aria-hidden="true"
                         className={`transition-transform ${dropdownOpen === item.href ? "rotate-180" : ""}`}
-                      >
-                        ▼
-                      </span>
+                      />
                     </button>
 
                     {/* Mobile Dropdown */}
@@ -158,9 +180,10 @@ export function Navigation() {
                           <Link
                             key={sub.href}
                             href={sub.href}
-                            className="block px-4 py-2 text-sm text-foreground hover:text-primary rounded"
+                            className="flex items-center gap-3 px-4 py-2 text-sm text-foreground hover:text-primary rounded"
                             onClick={() => setIsOpen(false)}
                           >
+                            <sub.icon size={16} aria-hidden="true" className="shrink-0 text-slate-500" />
                             {sub.label}
                           </Link>
                         ))}
@@ -171,9 +194,10 @@ export function Navigation() {
                   <Link
                     href={item.href}
                     aria-current={isActive(item.href) ? "page" : undefined}
-                    className="block w-full text-left px-4 py-2 text-foreground hover:bg-muted rounded"
+                    className="flex items-center gap-3 w-full text-left px-4 py-2 text-foreground hover:bg-muted rounded"
                     onClick={() => setIsOpen(false)}
                   >
+                    <item.icon size={18} aria-hidden="true" className="text-slate-500" />
                     {item.label}
                   </Link>
                 )}
