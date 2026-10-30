@@ -4,7 +4,7 @@ import { services } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPages = ["", "/hakkimizda", "/hizmetler", "/hizmet-bolgeleri", "/projeler", "/iletisim"].map((path) => ({
+  const staticPages = ["", "/hakkimizda", "/hizmetler", "/hizmet-bolgeleri", "/projeler", "/galeri", "/iletisim"].map((path) => ({
     url: `${siteConfig.url}${path}`,
     changeFrequency: "monthly" as const,
     priority: path === "" ? 1 : 0.8,

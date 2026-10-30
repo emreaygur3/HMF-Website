@@ -9,6 +9,7 @@ const quickLinks = [
   { href: "/hakkimizda", label: "Hakkımızda" },
   { href: "/hizmetler", label: "Hizmetler" },
   { href: "/projeler", label: "Projeler" },
+  { href: "/galeri", label: "Galeri" },
   { href: "/hizmet-bolgeleri", label: "Hizmet Bölgeleri" },
   { href: "/iletisim", label: "İletişim" },
 ]
