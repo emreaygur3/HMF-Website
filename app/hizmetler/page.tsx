@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
+import { serviceIcons } from "@/lib/service-icons"
 import { services } from "@/lib/services"
 import { pageOpenGraph } from "@/lib/seo"
 import { siteConfig } from "@/lib/site"
@@ -43,7 +44,7 @@ export default function Services() {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service) => {
-              const Icon = service.icon
+              const Icon = serviceIcons[service.icon]
 
               return (
                 <Link

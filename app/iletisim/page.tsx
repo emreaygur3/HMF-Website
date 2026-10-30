@@ -1,10 +1,12 @@
 import type { Metadata } from "next"
 import { Suspense } from "react"
-import { Mail, Phone, MapPin, Clock, Facebook, Instagram, MessageCircle } from "lucide-react"
+import { Mail, Phone, MapPin, Clock, MessageCircle } from "lucide-react"
+import { FacebookIcon, InstagramIcon } from "@/components/social-icons"
 import { ContactForm } from "@/components/contact-form"
 import { JsonLd } from "@/components/json-ld"
 import { mapQuery, siteConfig, whatsappUrl } from "@/lib/site"
 import { pageOpenGraph } from "@/lib/seo"
+import { serviceLinks } from "@/lib/services"
 
 const title = "İletişim"
 const description =
@@ -47,8 +49,8 @@ const faqJsonLd = {
 }
 
 const socialLinks = [
-  { href: siteConfig.social.facebook, label: "Facebook", icon: <Facebook size={28} /> },
-  { href: siteConfig.social.instagram, label: "Instagram", icon: <Instagram size={28} /> },
+  { href: siteConfig.social.facebook, label: "Facebook", icon: <FacebookIcon size={28} /> },
+  { href: siteConfig.social.instagram, label: "Instagram", icon: <InstagramIcon size={28} /> },
   { href: whatsappUrl, label: "WhatsApp", icon: <MessageCircle size={28} /> },
 ].filter((link) => link.href)
 
@@ -178,7 +180,7 @@ export default function Contact() {
                 </p>
               }
             >
-              <ContactForm />
+              <ContactForm services={serviceLinks} />
             </Suspense>
           </div>
         </div>

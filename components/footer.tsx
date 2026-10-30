@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Facebook, Instagram, Phone } from "lucide-react"
+import { Phone } from "lucide-react"
+import { FacebookIcon, InstagramIcon } from "@/components/social-icons"
 import { siteConfig, whatsappUrl } from "@/lib/site"
 
 const quickLinks = [
@@ -14,8 +15,8 @@ const quickLinks = [
 
 export function Footer() {
   const socialLinks = [
-    { href: siteConfig.social.facebook, label: "Facebook", icon: <Facebook size={20} /> },
-    { href: siteConfig.social.instagram, label: "Instagram", icon: <Instagram size={20} /> },
+    { href: siteConfig.social.facebook, label: "Facebook", icon: <FacebookIcon size={20} /> },
+    { href: siteConfig.social.instagram, label: "Instagram", icon: <InstagramIcon size={20} /> },
     { href: whatsappUrl, label: "WhatsApp", icon: <Phone size={20} className="fill-current" /> },
   ].filter((link) => link.href)
 

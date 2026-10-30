@@ -17,31 +17,35 @@ import {
   X,
   type LucideIcon,
 } from "lucide-react"
-import { services } from "@/lib/services"
+import { serviceIcons, type ServiceLink } from "@/lib/service-icons"
 import { siteConfig, whatsappUrl } from "@/lib/site"
 
 type NavLink = { href: string; label: string; icon: LucideIcon }
 type NavItem = NavLink & { submenu?: NavLink[] }
 
-const navItems: NavItem[] = [
-  { href: "/", label: "Anasayfa", icon: House },
-  { href: "/hakkimizda", label: "Hakkımızda", icon: Users },
-  {
-    href: "/hizmetler",
-    label: "Hizmetler",
-    icon: HardHat,
-    submenu: services.map((service) => ({
-      href: `/hizmetler/${service.slug}`,
-      label: service.title,
-      icon: service.icon,
-    })),
-  },
-  { href: "/projeler", label: "Projeler", icon: FolderOpen },
-  { href: "/hizmet-bolgeleri", label: "Hizmet Bölgeleri", icon: MapPin },
-  { href: "/iletisim", label: "İletişim", icon: Mail },
-]
+function buildNavItems(services: ServiceLink[]): NavItem[] {
+  return [
+    { href: "/", label: "Anasayfa", icon: House },
+    { href: "/hakkimizda", label: "Hakkımızda", icon: Users },
+    {
+      href: "/hizmetler",
+      label: "Hizmetler",
+      icon: HardHat,
+      submenu: services.map((service) => ({
+        href: `/hizmetler/${service.slug}`,
+        label: service.title,
+        icon: serviceIcons[service.icon],
+      })),
+    },
+    { href: "/projeler", label: "Projeler", icon: FolderOpen },
+    { href: "/hizmet-bolgeleri", label: "Hizmet Bölgeleri", icon: MapPin },
+    { href: "/iletisim", label: "İletişim", icon: Mail },
+  ]
+}
 
-export function Navigation() {
+/** Hizmet listesi sunucudan prop olarak gelir; böylece hizmet metinleri tarayıcı paketine girmez. */
+export function Navigation({ services }: { services: ServiceLink[] }) {
+  const navItems = buildNavItems(services)
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState<string | null>(null)

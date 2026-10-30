@@ -1,11 +1,11 @@
-import { Boxes, Building2, Grid3x3, Layers, Leaf, Mountain, Palette, Route, Sparkles, type LucideIcon } from "lucide-react"
+import type { ServiceIconName, ServiceLink } from "@/lib/service-icons"
 
 export type Service = {
   slug: string
   title: string
   description: string
   fullDescription: string
-  icon: LucideIcon
+  icon: ServiceIconName
   /** Kartlarda kullanılan kapak görseli */
   image: string
   /** Detay sayfasındaki galeri */
@@ -24,7 +24,7 @@ export const services: Service[] = [
     description: "Profesyonel taş duvar uygulamaları",
     fullDescription:
       "Doğal taşı kullanarak yapılan duvarlar, binaların yapısını güçlendirirken aynı zamanda estetik bir görünüm sağlar. Derzli (harçlı) ve derzsiz (kuru örgü) uygulamalar, projenizin ihtiyacına göre seçilebilir.",
-    icon: Building2,
+    icon: "Building2",
     image: "/derzli-tas-duvar-saha-yuksek-duvar.jpg",
     images: [
       "/stone-wall-with-joints-residential.jpg",
@@ -60,7 +60,7 @@ export const services: Service[] = [
     description: "Eğimli yüzeyler için taş kaplama",
     fullDescription:
       "Yamaçlar ve eğimli arazilerde yapılan taş işçiliği, erozyonu önlerken aynı zamanda doğal bir görünüm sağlar. Stabilite ve estetik birlikte sunulur.",
-    icon: Mountain,
+    icon: "Mountain",
     image: "/sev-tasi-saha-orman-yamaci.jpg",
     images: [
       "/slope-stone-construction-hillside.jpg",
@@ -96,7 +96,7 @@ export const services: Service[] = [
     description: "Doğal kayrak taş ile kaplamalar",
     fullDescription:
       "Kayrak taş, doğasından gelen şık renk ve dokusunun yanı sıra dayanıklılığı ile ön plandadır. İç ve dış mekanlar için kusursuz kaplamalar sunar.",
-    icon: Layers,
+    icon: "Layers",
     image: "/kayrak-tas-saha-duvar-kaplama.jpg",
     images: [
       "/kayrak-tas-saha-duvar-kaplama.jpg",
@@ -137,7 +137,7 @@ export const services: Service[] = [
     description: "Dekoratif granürlü taş uygulamaları",
     fullDescription:
       "Granürlü taşlar, çeşitli renk ve dokularıyla iç ve dış mekanları güzelleştiren dekoratif çözümler sunar. Modern ve klasik tasarımlara uyum sağlar.",
-    icon: Sparkles,
+    icon: "Sparkles",
     image: "/granurlu-tas-saha-meydan.jpg",
     images: [
       "/granurlu-tas-saha-ekip.jpg",
@@ -178,7 +178,7 @@ export const services: Service[] = [
     description: "Peyzaj tasarımı ve bordür işleri",
     fullDescription:
       "Bahçe ve dış alanlar için tasarlanan parke ve bordür uygulamaları, mekanı işlevsel ve güzel hale getirir. Peyzaj tasarımında tamamen kişiye özel çözümler sunulur.",
-    icon: Leaf,
+    icon: "Leaf",
     image: "/parke-bordur-saha-villa-yolu.jpg",
     images: [
       "/parke-bordur-saha-bordur-adasi.jpg",
@@ -218,7 +218,7 @@ export const services: Service[] = [
     description: "Özel tasarım ve desen uygulamaları",
     fullDescription:
       "Yaratıcı tasarımlar ve renkli taş kombinasyonları kullanılarak tamamen özel ve benzersiz mekanlar yaratılır. Sanat ve işlevsellik bir araya gelir.",
-    icon: Palette,
+    icon: "Palette",
     image: "/renkli-desenli-tas-saha-mozaik-avlu.jpg",
     images: [
       "/renkli-desenli-tas-saha-kusbakisi.jpg",
@@ -258,7 +258,7 @@ export const services: Service[] = [
     description: "Asfalt serimi, yol ve kaldırım düzenlemesi",
     fullDescription:
       "Site içi yollardan cadde ve bulvarlara kadar asfalt serimi, yol altyapısı ve çevre düzenlemesini tek elden yürütüyoruz. Asfalt, kaldırım, bordür ve peyzaj işlerini birlikte planlayarak bütünlüklü ve uzun ömürlü yollar teslim ediyoruz.",
-    icon: Route,
+    icon: "Route",
     image: "/asfalt-yol-saha-agacli-bulvar.jpg",
     images: [
       "/asfalt-yol-saha-gun-batimi.jpg",
@@ -301,7 +301,7 @@ export const services: Service[] = [
     description: "Küp taşı döşeme ve begonit plak uygulamaları",
     fullDescription:
       "Granit ve bazalt küp taşı ile begonit plaklar; meydan, kaldırım, avlu, site içi yol ve bahçe yürüyüş yollarında yıllarca formunu koruyan zeminler oluşturur. Kum veya harçlı yatak üzerine düz, yelpaze ve kemer desenlerinde döşeme yapıyoruz.",
-    icon: Boxes,
+    icon: "Boxes",
     image: "/kup-tasi-saha-spiral-desen.jpg",
     images: ["/kup-tasi-saha-spiral-desen.jpg", "/kup-tasi-saha-yelpaze-desen.jpg"],
     imagePositions: {
@@ -337,7 +337,7 @@ export const services: Service[] = [
     description: "Kaldırım, teras ve bahçe için karo döşeme",
     fullDescription:
       "Beton ve doğal taş karolarla kaldırım, teras, bahçe, havuz çevresi ve site içi yürüyüş alanlarında düzgün ve bakımı kolay zeminler oluşturuyoruz. Farklı ebat, renk ve yüzey seçenekleriyle mekanınıza uygun döşeme planını birlikte belirliyoruz.",
-    icon: Grid3x3,
+    icon: "Grid3x3",
     // GEÇİCİ görseller: hizmete ait saha fotoğrafları gelince değiştirilecek
     image: "/granurlu-tas-saha-desenli-kaldirim.jpg",
     images: ["/granurlu-tas-saha-desenli-kaldirim.jpg", "/granurlu-tas-saha-meydan.jpg"],
@@ -367,6 +367,9 @@ export const services: Service[] = [
     ],
   },
 ]
+
+/** İstemci bileşenlerine aktarılacak hafif liste (uzun metinler hariç) */
+export const serviceLinks: ServiceLink[] = services.map(({ slug, title, icon }) => ({ slug, title, icon }))
 
 export function getService(slug: string) {
   return services.find((service) => service.slug === slug)

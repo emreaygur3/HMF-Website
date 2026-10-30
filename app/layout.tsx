@@ -5,7 +5,7 @@ import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { JsonLd } from "@/components/json-ld"
 import { siteConfig } from "@/lib/site"
-import { services } from "@/lib/services"
+import { serviceLinks, services } from "@/lib/services"
 import { areaServed, pageOpenGraph } from "@/lib/seo"
 import "./globals.css"
 
@@ -163,7 +163,7 @@ export default function RootLayout({
     <html lang="tr" className={geist.variable}>
       <body className="font-sans antialiased bg-background text-foreground">
         <JsonLd data={businessJsonLd} />
-        <Navigation />
+        <Navigation services={serviceLinks} />
         <main id="main">{children}</main>
         <Footer />
       </body>
