@@ -302,11 +302,12 @@ export const services: Service[] = [
     fullDescription:
       "Granit ve bazalt küp taşı ile begonit plaklar; meydan, kaldırım, avlu, site içi yol ve bahçe yürüyüş yollarında yıllarca formunu koruyan zeminler oluşturur. Kum veya harçlı yatak üzerine düz, yelpaze ve kemer desenlerinde döşeme yapıyoruz.",
     icon: Boxes,
-    // GEÇİCİ görseller: hizmete ait saha fotoğrafları gelince değiştirilecek
-    image: "/granurlu-tas-saha-kaldirim.jpg",
-    images: ["/granurlu-tas-saha-kaldirim.jpg", "/granurlu-tas-saha-desenli-kaldirim.jpg"],
+    image: "/kup-tasi-saha-spiral-desen.jpg",
+    images: ["/kup-tasi-saha-spiral-desen.jpg", "/kup-tasi-saha-yelpaze-desen.jpg"],
     imagePositions: {
-      "/granurlu-tas-saha-kaldirim.jpg": "center 60%",
+      // Spiral ve yelpaze desenleri kadrajda kalsın
+      "/kup-tasi-saha-spiral-desen.jpg": "center 65%",
+      "/kup-tasi-saha-yelpaze-desen.jpg": "center 55%",
     },
     details: [
       "Granit ve bazalt küp taşı döşeme",
