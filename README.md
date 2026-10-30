@@ -18,7 +18,7 @@ app/                    Sayfalar (App Router)
   hizmetler/[slug]      Hizmet detay sayfaları (statik üretilir)
   hizmet-bolgeleri/     Yerel SEO bölge sayfaları (Aliağa, Menemen, Foça, Bergama, İzmir)
   projeler/[slug]       Proje detay sayfaları
-  iletisim/actions.ts   İletişim formu sunucu aksiyonu (Resend)
+  iletisim/actions.ts   İletişim formu sunucu aksiyonu (Gmail SMTP)
   sitemap.ts, robots.ts SEO dosyaları
 components/             Paylaşılan bileşenler (menü, footer, form, proje filtresi)
 lib/
@@ -39,9 +39,9 @@ public/                 Görseller
 | Değişken | Açıklama |
 | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | Kendi alan adınız (ör. `https://hmfdesenyapi.com`). Boşsa Vercel adresi kullanılır. |
-| `RESEND_API_KEY` | [Resend](https://resend.com) API anahtarı. Tanımlı değilse form, kullanıcıyı telefon/WhatsApp'a yönlendiren bir uyarı gösterir. |
-| `CONTACT_TO_EMAIL` | Form mesajlarının gideceği adres. |
-| `CONTACT_FROM_EMAIL` | Resend'de doğrulanmış gönderen adresi. |
+| `GMAIL_APP_PASSWORD` | Gmail uygulama şifresi (Google Hesabı > Güvenlik > Uygulama şifreleri). Tanımlı değilse form, kullanıcıya WhatsApp ile gönderme seçeneği sunar. |
+| `GMAIL_USER` | (İsteğe bağlı) Gönderen Gmail adresi; varsayılan `lib/site.ts` içindeki e-posta. |
+| `CONTACT_TO_EMAIL` | (İsteğe bağlı) Mesajların gideceği adres; varsayılan gönderen adres. |
 
 ## Sosyal medya
 

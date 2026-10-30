@@ -1,7 +1,9 @@
 "use server"
 
 import { headers } from "next/headers"
+import nodemailer, { type Transporter } from "nodemailer"
 import { services } from "@/lib/services"
+import { siteConfig } from "@/lib/site"
 
 export type ContactState = {
   status: "idle" | "success" | "error"
@@ -29,6 +31,21 @@ function isRateLimited(ip: string) {
 // Yalnızca başarılı gönderimler sayılır; hata sonrası tekrar deneyen kullanıcı kilitlenmez.
 function recordSubmission(ip: string) {
   submissions.set(ip, [...(submissions.get(ip) ?? []), Date.now()])
+}
+
+// Mesajlar Gmail SMTP ile gönderilir; GMAIL_APP_PASSWORD bir Google "uygulama şifresi"dir.
+const gmailUser = process.env.GMAIL_USER || siteConfig.email
+let transporter: Transporter | undefined
+
+function getTransporter(password: string) {
+  transporter ??= nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: { user: gmailUser, pass: password },
+    connectionTimeout: 10_000,
+  })
+  return transporter
 }
 
 const escapeHtml = (value: string) =>
@@ -64,10 +81,9 @@ export async function sendContactMessage(_prev: ContactState, formData: FormData
     return { status: "error", message: "Çok fazla deneme yaptınız. Lütfen daha sonra tekrar deneyin." }
   }
 
-  const apiKey = process.env.RESEND_API_KEY
-  const to = process.env.CONTACT_TO_EMAIL
-  if (!apiKey || !to) {
-    console.error("İletişim formu yapılandırılmamış: RESEND_API_KEY veya CONTACT_TO_EMAIL eksik.")
+  const password = process.env.GMAIL_APP_PASSWORD
+  if (!password) {
+    console.error("İletişim formu yapılandırılmamış: GMAIL_APP_PASSWORD eksik.")
     return {
       status: "error",
       message: "Mesajınız şu anda iletilemedi. Lütfen bize telefon veya WhatsApp üzerinden ulaşın.",
@@ -91,25 +107,17 @@ export async function sendContactMessage(_prev: ContactState, formData: FormData
   const text = `${rows.map(([k, v]) => `${k}: ${v}`).join("\n")}\n\n${message}`
 
   try {
-    const response = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-      body: JSON.stringify({
-        from: process.env.CONTACT_FROM_EMAIL || "HMF Web Sitesi <onboarding@resend.dev>",
-        to: [to],
-        reply_to: email,
-        subject: `Yeni teklif talebi: ${name.slice(0, 60)} (${safeSubject})`,
-        html,
-        text,
-      }),
-      signal: AbortSignal.timeout(10_000),
+    await getTransporter(password).sendMail({
+      from: { name: `${siteConfig.name} Web Sitesi`, address: gmailUser },
+      to: process.env.CONTACT_TO_EMAIL || gmailUser,
+      // "Yanıtla" denince doğrudan müşteriye yazılır
+      replyTo: { name, address: email },
+      subject: `Yeni teklif talebi: ${name.slice(0, 60)} (${safeSubject})`,
+      html,
+      text,
     })
-
-    if (!response.ok) {
-      console.error("Resend hatası:", response.status, await response.text())
-      throw new Error("send failed")
-    }
-  } catch {
+  } catch (error) {
+    console.error("E-posta gönderilemedi:", error)
     return {
       status: "error",
       message: "Mesajınız gönderilirken bir sorun oluştu. Lütfen tekrar deneyin veya bizi arayın.",
