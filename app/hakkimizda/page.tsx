@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import Image from "next/image"
+import { Logo } from "@/components/logo"
 import { Check } from "lucide-react"
 import { siteConfig, stats } from "@/lib/site"
 import { pageOpenGraph } from "@/lib/seo"
@@ -95,14 +95,8 @@ export default function About() {
                 sağlayarak binlerce müşterinin güvenini kazanmıştır.
               </p>
             </div>
-            <div className="relative bg-slate-50 rounded-lg overflow-hidden h-96 border border-border">
-              <Image
-                src="/logo.svg"
-                alt="HMF Desen, Yapı ve İnşaat logosu"
-                fill
-                sizes="(min-width: 768px) 50vw, 100vw"
-                className="object-contain p-10 sm:p-16"
-              />
+            <div className="flex h-96 items-center justify-center rounded-lg border border-border bg-brand-soft">
+              <Logo layout="stacked" className="h-56 sm:h-64 w-auto" />
             </div>
           </div>
         </div>

@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -11,13 +10,13 @@ import {
   Images,
   House,
   Mail,
-  MapPin,
   Menu,
   Phone,
   Users,
   X,
   type LucideIcon,
 } from "lucide-react"
+import { Logo } from "@/components/logo"
 import { serviceIcons, type ServiceLink } from "@/lib/service-icons"
 import { siteConfig, whatsappUrl } from "@/lib/site"
 
@@ -40,7 +39,6 @@ function buildNavItems(services: ServiceLink[]): NavItem[] {
     },
     { href: "/projeler", label: "Projeler", icon: FolderOpen },
     { href: "/galeri", label: "Galeri", icon: Images },
-    { href: "/hizmet-bolgeleri", label: "Hizmet Bölgeleri", icon: MapPin },
     { href: "/iletisim", label: "İletişim", icon: Mail },
   ]
 }
@@ -82,7 +80,7 @@ export function Navigation({ services }: { services: ServiceLink[] }) {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <Link href="/" className="flex items-center shrink-0" aria-label={`${siteConfig.name} - Anasayfa`}>
-            <Image src="/logo.svg" alt="" width={194} height={56} priority className="h-12 sm:h-14 w-auto" />
+            <Logo priority className="h-11 sm:h-12 xl:h-14 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}

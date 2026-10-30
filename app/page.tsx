@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
+import { gallery } from "@/lib/gallery"
 import { serviceIcons } from "@/lib/service-icons"
 import { services } from "@/lib/services"
 import { stats } from "@/lib/site"
@@ -24,8 +25,10 @@ const reasons = [
   { title: "Müşteri Odaklı", text: "Tüm projelere özel dikkat" },
 ]
 
-const patternBackground =
-  'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="1"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")'
+// Son işlerimiz: her kategoriden bir fotoğraf (galeriden)
+const recentWork = gallery.categories
+  .map((category) => gallery.items.find((item) => item.category === category.id)!)
+  .slice(0, 8)
 
 export default function Home() {
   return (
@@ -34,18 +37,26 @@ export default function Home() {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
-          <Image src="/derzli-tas-duvar.jpg" alt="" fill className="object-cover" priority sizes="100vw" quality={75} />
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-900/80 via-slate-900/70 to-slate-800/80"></div>
-          {/* Pattern Overlay */}
-          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: patternBackground }}></div>
+          {/* Kendi saha fotoğrafımız: küp taşı spiral desenli avlu */}
+          <Image
+            src="/kup-tasi-saha-spiral-desen.jpg"
+            alt=""
+            fill
+            className="object-cover"
+            style={{ objectPosition: "center 65%" }}
+            priority
+            sizes="100vw"
+            quality={75}
+          />
+          {/* Yazıların okunması için sıcak tonlu koyu kaplama */}
+          <div className="absolute inset-0 bg-gradient-to-b from-stone-950/80 via-stone-900/70 to-stone-950/85"></div>
         </div>
 
         {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
           <div className="text-center">
             {/* Badge */}
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-600/90 backdrop-blur-sm text-white text-sm font-semibold mb-8 shadow-lg">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-brand/90 backdrop-blur-sm text-white text-sm font-semibold mb-8 shadow-lg">
               <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse" aria-hidden="true"></span>
               1998&apos;den Beri Güvenilir Hizmet
             </div>
@@ -53,7 +64,7 @@ export default function Home() {
             {/* Main Heading */}
             <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 leading-tight text-white">
               <span className="block">Taşın Estetiğini</span>
-              <span className="block text-blue-400">Ayağınıza Getiriyoruz</span>
+              <span className="block text-brand-light">Ayağınıza Getiriyoruz</span>
             </h1>
 
             {/* Description */}
@@ -66,7 +77,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link
                 href="/hizmetler"
-                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-all shadow-xl hover:shadow-2xl hover:scale-105"
+                className="inline-flex items-center gap-2 bg-brand hover:bg-brand-hover text-white px-8 py-4 rounded-lg font-semibold transition-all shadow-xl hover:shadow-2xl hover:scale-105"
               >
                 Hizmetlerimizi Keşfedin
                 <ArrowRight size={20} aria-hidden="true" />
@@ -84,7 +95,7 @@ export default function Home() {
               {heroStats.map((stat) => (
                 <div key={stat.label} className="text-center flex flex-col-reverse">
                   <dt className="text-sm text-gray-300">{stat.label}</dt>
-                  <dd className="text-4xl font-bold text-blue-400 mb-2">{stat.value}</dd>
+                  <dd className="text-4xl font-bold text-brand-light mb-2">{stat.value}</dd>
                 </div>
               ))}
             </dl>
@@ -130,7 +141,7 @@ export default function Home() {
               <ul className="space-y-4">
                 {reasons.map((reason) => (
                   <li key={reason.title} className="flex gap-3 items-start">
-                    <span className="text-blue-600 font-bold text-xl" aria-hidden="true">
+                    <span className="text-brand font-bold text-xl" aria-hidden="true">
                       ✓
                     </span>
                     <span className="text-slate-700">
@@ -167,7 +178,7 @@ export default function Home() {
                 <Link
                   href={`/hizmetler/${service.slug}`}
                   key={service.slug}
-                  className="bg-white rounded-lg border border-slate-200 overflow-hidden hover:shadow-xl hover:border-blue-300 transition-all group cursor-pointer"
+                  className="bg-white rounded-lg border border-slate-200 overflow-hidden hover:shadow-xl hover:border-brand/40 transition-all group cursor-pointer"
                 >
                   <div className="relative overflow-hidden h-56 bg-slate-200">
                     <Image
@@ -185,12 +196,12 @@ export default function Home() {
                   </div>
 
                   <div className="p-6">
-                    <div className="inline-block p-3 bg-blue-600 rounded mb-4">
+                    <div className="inline-block p-3 bg-brand rounded mb-4">
                       <Icon size={24} className="text-white" aria-hidden="true" />
                     </div>
                     <h3 className="text-xl font-bold text-slate-900 mb-2">{service.title}</h3>
                     <p className="text-slate-600 mb-4">{service.description}</p>
-                    <div className="inline-flex items-center gap-2 text-blue-600 font-semibold group-hover:gap-3 transition-all">
+                    <div className="inline-flex items-center gap-2 text-brand font-semibold group-hover:gap-3 transition-all">
                       Detayları Gör
                       <ArrowRight size={16} aria-hidden="true" />
                     </div>
@@ -199,6 +210,48 @@ export default function Home() {
               )
             })}
           </div>
+        </div>
+      </section>
+
+      {/* Son İşlerimiz */}
+      <section className="py-24 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
+            <div>
+              <h2 className="text-4xl font-bold text-slate-900 mb-3">Son İşlerimiz</h2>
+              <p className="text-lg text-slate-600">Sahadan gerçek uygulamalarımızdan seçmeler</p>
+            </div>
+            <Link
+              href="/galeri"
+              className="inline-flex items-center gap-2 text-brand font-semibold hover:gap-3 transition-all"
+            >
+              Tüm galeriyi gör
+              <ArrowRight size={18} aria-hidden="true" />
+            </Link>
+          </div>
+          <ul className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            {recentWork.map((item) => (
+              <li key={item.src}>
+                <Link
+                  href="/galeri"
+                  className="group relative block overflow-hidden rounded-lg aspect-[4/3] bg-slate-100"
+                >
+                  <Image
+                    src={item.src}
+                    alt={item.alt}
+                    fill
+                    sizes="(min-width: 1152px) 276px, (min-width: 1024px) 25vw, 50vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    style={{ objectPosition: item.position }}
+                  />
+                  <span className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" aria-hidden="true" />
+                  <span className="absolute bottom-0 left-0 p-3 text-xs sm:text-sm font-semibold text-white">
+                    {item.caption}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -211,7 +264,7 @@ export default function Home() {
           </p>
           <Link
             href="/iletisim"
-            className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded font-semibold hover:bg-blue-700 transition-colors"
+            className="inline-flex items-center gap-2 bg-brand text-white px-8 py-4 rounded font-semibold hover:bg-brand-hover transition-colors"
           >
             İletişime Geç
             <ArrowRight size={20} aria-hidden="true" />

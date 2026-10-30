@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next"
 import { Geist } from "next/font/google"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
+import { WhatsAppButton } from "@/components/whatsapp-button"
 import { JsonLd } from "@/components/json-ld"
 import { siteConfig } from "@/lib/site"
 import { serviceLinks, services } from "@/lib/services"
@@ -166,6 +167,7 @@ export default function RootLayout({
         <Navigation services={serviceLinks} />
         <main id="main">{children}</main>
         <Footer />
+        <WhatsAppButton />
       </body>
     </html>
   )

@@ -1,7 +1,6 @@
-import Image from "next/image"
 import Link from "next/link"
-import { Phone } from "lucide-react"
-import { FacebookIcon, InstagramIcon } from "@/components/social-icons"
+import { Logo } from "@/components/logo"
+import { FacebookIcon, InstagramIcon, WhatsAppIcon } from "@/components/social-icons"
 import { siteConfig, whatsappUrl } from "@/lib/site"
 
 const quickLinks = [
@@ -18,16 +17,16 @@ export function Footer() {
   const socialLinks = [
     { href: siteConfig.social.facebook, label: "Facebook", icon: <FacebookIcon size={20} /> },
     { href: siteConfig.social.instagram, label: "Instagram", icon: <InstagramIcon size={20} /> },
-    { href: whatsappUrl, label: "WhatsApp", icon: <Phone size={20} className="fill-current" /> },
+    { href: whatsappUrl, label: "WhatsApp", icon: <WhatsAppIcon size={20} /> },
   ].filter((link) => link.href)
 
   return (
-    <footer className="bg-primary text-primary-foreground mt-20">
+    <footer className="bg-primary text-primary-foreground">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           <div>
             <h2 className="mb-4">
-              <Image src="/logo-light.svg" alt={siteConfig.name} width={194} height={56} className="h-14 w-auto" />
+              <Logo variant="light" className="h-12 w-auto" />
             </h2>
             <p className="text-sm opacity-90">{siteConfig.foundedYear}&apos;den beri doğal taş çözümleri</p>
           </div>

@@ -46,3 +46,16 @@ public/                 Görseller
 ## Sosyal medya
 
 `lib/site.ts` içindeki `social.facebook` ve `social.instagram` alanlarına gerçek hesap adresleri girildiğinde ikonlar sitede otomatik görünür ve yapılandırılmış veriye (`sameAs`) eklenir.
+
+## Logo ve marka dosyaları
+
+`public/brand/` klasöründe tamamen vektör (yazılar çizgiye çevrilmiş) logo dosyaları bulunur; her birinin yüksek çözünürlüklü PNG kopyası da vardır:
+
+| Dosya | Kullanım |
+| --- | --- |
+| `hmf-logo-yatay.svg` / `-beyaz.svg` | Açık / koyu zeminde yatay logo (menü, alt bilgi, antetli kağıt) |
+| `hmf-logo-dikey.svg` / `-beyaz.svg` | Dikey logo (kartvizit, tabela, sosyal medya kapakları) |
+| `hmf-sembol.svg` / `-beyaz.svg` | Yalnızca kemer sembolü |
+| `hmf-ikon.svg` | Koyu zeminli kare uygulama/profil ikonu |
+
+Marka renkleri: koyu taş `#1C1917` / `#292524`, bronz `#8A4B26`, açık bronz `#D9A273`, krem `#F6EDE5`. Logo yazı tipi: Cinzel Bold.

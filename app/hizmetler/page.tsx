@@ -50,7 +50,7 @@ export default function Services() {
                 <Link
                   href={`/hizmetler/${service.slug}`}
                   key={service.slug}
-                  className="bg-white rounded-lg border border-slate-200 overflow-hidden hover:shadow-xl hover:border-blue-300 transition-all group"
+                  className="bg-white rounded-lg border border-slate-200 overflow-hidden hover:shadow-xl hover:border-brand/40 transition-all group"
                 >
                   <div className="relative overflow-hidden h-48 bg-slate-200">
                     <Image
@@ -64,7 +64,7 @@ export default function Services() {
                   </div>
 
                   <div className="p-8">
-                    <div className="inline-block p-3 bg-blue-600 rounded mb-4">
+                    <div className="inline-block p-3 bg-brand rounded mb-4">
                       <Icon size={24} className="text-white" aria-hidden="true" />
                     </div>
                     <h2 className="text-2xl font-bold text-slate-900 mb-2">{service.title}</h2>
@@ -80,7 +80,7 @@ export default function Services() {
                       ))}
                     </ul>
 
-                    <div className="inline-flex items-center gap-2 text-blue-600 font-semibold group-hover:gap-3 transition-all text-sm">
+                    <div className="inline-flex items-center gap-2 text-brand font-semibold group-hover:gap-3 transition-all text-sm">
                       Detaylarını Gör
                       <ArrowRight size={16} aria-hidden="true" />
                     </div>
@@ -100,7 +100,7 @@ export default function Services() {
           <div className="grid md:grid-cols-4 gap-6">
             {steps.map((process) => (
               <div key={process.step} className="bg-white p-6 rounded-lg border border-slate-200 text-center">
-                <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
+                <div className="w-12 h-12 bg-brand text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
                   {process.step}
                 </div>
                 <h3 className="text-lg font-bold text-slate-900 mb-2">{process.title}</h3>
@@ -120,7 +120,7 @@ export default function Services() {
           </p>
           <Link
             href="/iletisim"
-            className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded font-semibold hover:bg-blue-700 transition-colors"
+            className="inline-flex items-center gap-2 bg-brand text-white px-8 py-4 rounded font-semibold hover:bg-brand-hover transition-colors"
           >
             İletişim Formu
             <ArrowRight size={20} aria-hidden="true" />
