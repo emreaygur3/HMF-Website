@@ -4,12 +4,17 @@ import { Mail, Phone, MapPin, Clock, Facebook, Instagram, MessageCircle } from "
 import { ContactForm } from "@/components/contact-form"
 import { JsonLd } from "@/components/json-ld"
 import { mapQuery, siteConfig, whatsappUrl } from "@/lib/site"
+import { pageOpenGraph } from "@/lib/seo"
+
+const title = "İletişim"
+const description =
+  "HMF Desen Yapı ile iletişime geçin. Doğal taş, kaplama ve peyzaj projeleriniz için teklif alın. Menemen merkezli; Aliağa, Foça, Bergama ve tüm İzmir'e hizmet."
 
 export const metadata: Metadata = {
-  title: "İletişim",
-  description:
-    "HMF Desen Yapı ile iletişime geçin. Doğal taş, kaplama ve peyzaj projeleriniz için teklif alın. Menemen merkezli; Aliağa, Foça, Bergama ve tüm İzmir'e hizmet.",
+  title,
+  description,
   alternates: { canonical: "/iletisim" },
+  openGraph: pageOpenGraph({ title: `${title} | ${siteConfig.name}`, description, url: "/iletisim" }),
 }
 
 const faqs = [
@@ -161,7 +166,18 @@ export default function Contact() {
           {/* Contact Form */}
           <div>
             <h2 className="text-3xl font-bold text-primary mb-8">Mesaj Gönderin</h2>
-            <Suspense>
+            {/* Form tarayıcıda yüklenene kadar (veya JavaScript kapalıysa) telefonla ulaşma seçeneği görünür */}
+            <Suspense
+              fallback={
+                <p className="text-slate-600">
+                  Form yükleniyor… Dilerseniz bizi{" "}
+                  <a href={`tel:${siteConfig.phones[0].tel}`} className="font-semibold text-primary underline">
+                    {siteConfig.phones[0].display}
+                  </a>{" "}
+                  numarasından arayabilirsiniz.
+                </p>
+              }
+            >
               <ContactForm />
             </Suspense>
           </div>

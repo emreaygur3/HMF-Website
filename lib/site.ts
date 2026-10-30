@@ -7,7 +7,7 @@ export const siteConfig = {
   shortName: "HMF",
   foundedYear: 1998,
   description:
-    "1998'den beri Aliağa, Menemen ve tüm İzmir'de, Ege'de ve Türkiye genelinde doğal taş uygulamaları. Derzli taş duvar, şev taşı, kayrak taş kaplama, granürlü taş, parke ve bordür. Keşif ve teklif için hemen ulaşın.",
+    "1998'den beri Aliağa, Menemen ve tüm İzmir'de taş duvar, şev taşı, kayrak, küp taşı, karo, parke, bordür ve asfalt uygulamaları. Keşif ve teklif için ulaşın.",
   // Kendi alan adınız bağlandığında NEXT_PUBLIC_SITE_URL ortam değişkenini ayarlayın.
   url:
     process.env.NEXT_PUBLIC_SITE_URL ??

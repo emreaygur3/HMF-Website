@@ -1,4 +1,4 @@
-import { Building2, Layers, Leaf, Mountain, Palette, Route, Sparkles, type LucideIcon } from "lucide-react"
+import { Boxes, Building2, Grid3x3, Layers, Leaf, Mountain, Palette, Route, Sparkles, type LucideIcon } from "lucide-react"
 
 export type Service = {
   slug: string
@@ -293,6 +293,76 @@ export const services: Service[] = [
       "Bordür ve kaldırım hatlarının oluşturulması",
       "Asfalt serimi ve silindirle sıkıştırma",
       "Çevre düzenlemesi, son kontroller ve teslim",
+    ],
+  },
+  {
+    slug: "kup-tasi-ve-begonit",
+    title: "Küp Taşı ve Begonit",
+    description: "Küp taşı döşeme ve begonit plak uygulamaları",
+    fullDescription:
+      "Granit ve bazalt küp taşı ile begonit plaklar; meydan, kaldırım, avlu, site içi yol ve bahçe yürüyüş yollarında yıllarca formunu koruyan zeminler oluşturur. Kum veya harçlı yatak üzerine düz, yelpaze ve kemer desenlerinde döşeme yapıyoruz.",
+    icon: Boxes,
+    // GEÇİCİ görseller: hizmete ait saha fotoğrafları gelince değiştirilecek
+    image: "/granurlu-tas-saha-kaldirim.jpg",
+    images: ["/granurlu-tas-saha-kaldirim.jpg", "/granurlu-tas-saha-desenli-kaldirim.jpg"],
+    imagePositions: {
+      "/granurlu-tas-saha-kaldirim.jpg": "center 60%",
+    },
+    details: [
+      "Granit ve bazalt küp taşı döşeme",
+      "Yıkanmış agrega yüzeyli begonit plak uygulaması",
+      "Düz, yelpaze ve kemer döşeme desenleri",
+      "Meydan, kaldırım, avlu ve otopark alanları",
+      "Kum veya harçlı yatak üzerine sağlam oturtma",
+      "Bordür ve kenar bitişleriyle birlikte uygulama",
+    ],
+    benefits: [
+      { title: "Yüksek Dayanım", description: "Araç ve yaya trafiğine yıllarca dayanan zemin" },
+      { title: "Kaymaz Yüzey", description: "Pürüzlü doku yağmurda bile güvenli yürüyüş sağlar" },
+      { title: "Kolay Onarım", description: "Tek tek sökülüp yeniden döşenebilir, yama izi kalmaz" },
+      { title: "Doğal Görünüm", description: "Tarihi dokuya ve modern peyzaja aynı ölçüde uyum sağlar" },
+    ],
+    process: [
+      "Keşif, ölçüm ve desen seçimi",
+      "Kazı, stabilize dolgu ve sıkıştırma",
+      "Bordür ve kenar hatlarının oluşturulması",
+      "Küp taşı veya begonit plakların döşenmesi",
+      "Derz dolgusu, son sıkıştırma ve teslim",
+    ],
+  },
+  {
+    slug: "karo-uygulamasi",
+    title: "Karo Uygulaması",
+    description: "Kaldırım, teras ve bahçe için karo döşeme",
+    fullDescription:
+      "Beton ve doğal taş karolarla kaldırım, teras, bahçe, havuz çevresi ve site içi yürüyüş alanlarında düzgün ve bakımı kolay zeminler oluşturuyoruz. Farklı ebat, renk ve yüzey seçenekleriyle mekanınıza uygun döşeme planını birlikte belirliyoruz.",
+    icon: Grid3x3,
+    // GEÇİCİ görseller: hizmete ait saha fotoğrafları gelince değiştirilecek
+    image: "/granurlu-tas-saha-desenli-kaldirim.jpg",
+    images: ["/granurlu-tas-saha-desenli-kaldirim.jpg", "/granurlu-tas-saha-meydan.jpg"],
+    imagePositions: {
+      "/granurlu-tas-saha-meydan.jpg": "center 30%",
+    },
+    details: [
+      "Beton ve doğal taş karo döşeme",
+      "Kaldırım, teras, balkon ve bahçe uygulamaları",
+      "Havuz çevresi için kaymaz yüzeyli karolar",
+      "Farklı ebat, renk ve desen seçenekleri",
+      "Eğim ve drenaja uygun zemin hazırlığı",
+      "Harçlı veya yapıştırıcılı döşeme",
+    ],
+    benefits: [
+      { title: "Düzgün Yüzey", description: "Ölçülü ebatlarla düz ve derli toplu bir zemin" },
+      { title: "Kolay Temizlik", description: "Yıkanabilir, bakımı zahmetsiz yüzey" },
+      { title: "Uygun Maliyet", description: "Geniş alanlarda ekonomik ve hızlı uygulama" },
+      { title: "Tasarım Seçenekleri", description: "Renk ve desen kombinasyonlarıyla kişiye özel zemin" },
+    ],
+    process: [
+      "Ölçüm, karo seçimi ve döşeme planı",
+      "Zeminin tesviyesi ve eğim ayarı",
+      "Şap veya harç yatağının hazırlanması",
+      "Karoların hizalı şekilde döşenmesi",
+      "Derz dolgusu, temizlik ve teslim",
     ],
   },
 ]

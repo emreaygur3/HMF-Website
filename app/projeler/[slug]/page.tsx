@@ -5,7 +5,7 @@ import { ArrowLeft, ArrowRight, Calendar, Clock, MapPin, Users } from "lucide-re
 import { formatProjectDate, getProject, projects } from "@/lib/projects"
 import { FittedImage } from "@/components/fitted-image"
 import { JsonLd } from "@/components/json-ld"
-import { breadcrumbJsonLd } from "@/lib/seo"
+import { breadcrumbJsonLd, pageOpenGraph } from "@/lib/seo"
 import { siteConfig } from "@/lib/site"
 
 type Props = { params: Promise<{ slug: string }> }
@@ -21,16 +21,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = getProject(slug)
   if (!project) return {}
 
+  // Arama sonuçlarında kesilmemesi için kısa tutulur (~160 karakter)
+  const description = `${project.summary} (${project.location}). HMF Desen Yapı proje detayları ve fotoğrafları.`
+
   return {
     title: project.title,
-    description: project.description,
+    description,
     alternates: { canonical: `/projeler/${project.slug}` },
-    openGraph: {
+    openGraph: pageOpenGraph({
       title: `${project.title} | ${siteConfig.name}`,
-      description: project.description,
+      description,
       url: `/projeler/${project.slug}`,
-      images: [{ url: project.images[0] }],
-    },
+      image: project.images[0],
+    }),
   }
 }
 
@@ -89,7 +92,7 @@ export default async function ProjectDetail({ params }: Props) {
               </span>
               <span
                 className={`px-4 py-2 rounded-full font-semibold text-center ${
-                  project.status === "Tamamlandı" ? "bg-green-500 text-white" : "bg-yellow-500 text-white"
+                  project.status === "Tamamlandı" ? "bg-green-700 text-white" : "bg-amber-400 text-slate-900"
                 }`}
               >
                 {project.status}

@@ -3,12 +3,18 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { services } from "@/lib/services"
+import { pageOpenGraph } from "@/lib/seo"
+import { siteConfig } from "@/lib/site"
+
+const title = "Doğal Taş ve Peyzaj Hizmetleri İzmir & Aliağa"
+const description =
+  "Taş duvar, şev taşı, kayrak, granürlü taş, küp taşı ve begonit, karo, parke ve bordür, asfalt ve yol yapımı. Aliağa, İzmir, Ege ve Türkiye genelinde."
 
 export const metadata: Metadata = {
-  title: "Doğal Taş ve Peyzaj Hizmetleri İzmir & Aliağa",
-  description:
-    "Derzli ve derzsiz taş duvar, şev taşı, kayrak taş kaplama, granürlü taş, parke ve bordür, renkli ve desenli taş, asfalt ve yol yapımı. Aliağa, Menemen ve tüm İzmir'de, Ege'de ve Türkiye genelinde hizmet.",
+  title,
+  description,
   alternates: { canonical: "/hizmetler" },
+  openGraph: pageOpenGraph({ title: `${title} | ${siteConfig.name}`, description, url: "/hizmetler" }),
 }
 
 const steps = [
@@ -60,7 +66,7 @@ export default function Services() {
                     <div className="inline-block p-3 bg-blue-600 rounded mb-4">
                       <Icon size={24} className="text-white" aria-hidden="true" />
                     </div>
-                    <h3 className="text-2xl font-bold text-slate-900 mb-2">{service.title}</h3>
+                    <h2 className="text-2xl font-bold text-slate-900 mb-2">{service.title}</h2>
                     <p className="text-slate-600 mb-6">{service.description}</p>
 
                     {/* Service Details */}

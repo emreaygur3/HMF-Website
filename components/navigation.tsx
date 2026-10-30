@@ -62,7 +62,7 @@ export function Navigation() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <Link href="/" className="flex items-center shrink-0" aria-label={`${siteConfig.name} - Anasayfa`}>
-            <Image src="/logo.svg" alt="" width={194} height={56} priority className="h-12 sm:h-14 w-auto" />
+            <Image src="/logo.svg" alt="" width={194} height={56} priority className="h-12 sm:h-14 md:h-11 lg:h-14 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}

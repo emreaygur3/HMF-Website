@@ -2,12 +2,17 @@ import type { Metadata } from "next"
 import Image from "next/image"
 import { Check } from "lucide-react"
 import { siteConfig, stats } from "@/lib/site"
+import { pageOpenGraph } from "@/lib/seo"
+
+const title = "Hakkımızda"
+const description =
+  "1998'den beri Menemen merkezli olarak Aliağa, İzmir ve Ege'de doğal taş uygulamaları ve dekoratif kaplamalar yapan HMF Desen Yapı'yı tanıyın."
 
 export const metadata: Metadata = {
-  title: "Hakkımızda",
-  description:
-    "1998'den beri Menemen merkezli olarak Aliağa, İzmir ve Ege'de doğal taş uygulamaları ve dekoratif kaplamalar yapan HMF Desen Yapı'yı tanıyın.",
+  title,
+  description,
   alternates: { canonical: "/hakkimizda" },
+  openGraph: pageOpenGraph({ title: `${title} | ${siteConfig.name}`, description, url: "/hakkimizda" }),
 }
 
 const milestones = [
@@ -29,7 +34,7 @@ const milestones = [
   {
     year: "current",
     title: "Günümüz",
-    description: "Yüzlerce başarılı proje ve müşteri memnuniyetiyle sektörün güvenilir isimleri arasındayız.",
+    description: "Binlerce başarılı proje ve müşteri memnuniyetiyle sektörün güvenilir isimleri arasındayız.",
   },
 ]
 
@@ -53,7 +58,7 @@ const values = [
 ]
 
 const highlights = [
-  { value: stats.projects, label: "Tamamlanan Proje", text: "Yüzlerce konut ve ticari alanda başarılı projeler." },
+  { value: stats.projects, label: "Tamamlanan Proje", text: "Binlerce konut ve ticari alanda başarılı projeler." },
   { value: stats.years, label: "Yıl Deneyim", text: "Çeyrek asırlık uzman ekip ve bilgi birikimiyle." },
   { value: stats.satisfaction, label: "Müşteri Memnuniyeti", text: "Tüm projelerimizde kalite ve güvenilirlik." },
 ]

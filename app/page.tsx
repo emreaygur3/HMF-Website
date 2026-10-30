@@ -115,7 +115,7 @@ export default function Home() {
                 peyzaj çözümleriyle Türkiye&apos;nin en güvenilir isimlerinden biri haline gelmiştir.
               </p>
               <p className="text-lg text-slate-700 leading-relaxed mb-6">
-                Menemen&apos;deki merkezimizden Aliağa, Foça, Bergama ve tüm İzmir&apos;e, Ege Bölgesi&apos;ne ve Türkiye geneline uzanan hizmet ağımızla yüzlerce konut, ticari mekan
+                Menemen&apos;deki merkezimizden Aliağa, Foça, Bergama ve tüm İzmir&apos;e, Ege Bölgesi&apos;ne ve Türkiye geneline uzanan hizmet ağımızla binlerce konut, ticari mekan
                 ve peyzaj projesini başarıyla tamamladık. Her bir projede kalite, güvenilirlik ve müşteri memnuniyeti
                 ilkelerimizle hareket ediyoruz.
               </p>

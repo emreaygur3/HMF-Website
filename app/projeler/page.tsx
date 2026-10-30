@@ -2,13 +2,18 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { ProjectExplorer } from "@/components/project-explorer"
-import { stats } from "@/lib/site"
+import { siteConfig, stats } from "@/lib/site"
+import { pageOpenGraph } from "@/lib/seo"
+
+const title = "Projeler"
+const description =
+  "HMF Desen Yapı'nın İzmir ve çevresinde tamamladığı ve devam eden doğal taş, cephe kaplama ve peyzaj projeleri."
 
 export const metadata: Metadata = {
-  title: "Projeler",
-  description:
-    "HMF Desen Yapı'nın İzmir ve çevresinde tamamladığı ve devam eden doğal taş, cephe kaplama ve peyzaj projeleri.",
+  title,
+  description,
   alternates: { canonical: "/projeler" },
+  openGraph: pageOpenGraph({ title: `${title} | ${siteConfig.name}`, description, url: "/projeler" }),
 }
 
 const projectStats = [

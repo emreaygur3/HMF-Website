@@ -6,7 +6,7 @@ import { Footer } from "@/components/footer"
 import { JsonLd } from "@/components/json-ld"
 import { siteConfig } from "@/lib/site"
 import { services } from "@/lib/services"
-import { areaServed } from "@/lib/seo"
+import { areaServed, pageOpenGraph } from "@/lib/seo"
 import "./globals.css"
 
 const geist = Geist({ subsets: ["latin", "latin-ext"], variable: "--font-geist-sans", display: "swap" })
@@ -29,6 +29,9 @@ export const metadata: Metadata = {
     "kayrak taş kaplama",
     "granürlü taş",
     "parke bordür",
+    "küp taşı",
+    "begonit",
+    "karo döşeme",
     "asfalt yol yapımı",
     "asfalt serimi",
     "Aliağa asfalt",
@@ -53,16 +56,13 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  openGraph: {
+  // Ana sayfanın paylaşım bilgisi; diğer sayfalar pageOpenGraph ile kendi bilgilerini verir
+  openGraph: pageOpenGraph({
     title: "HMF Desen Yapı | İzmir Aliağa Doğal Taş, Taş Duvar ve Kaplama",
     description:
       "1998'den beri Aliağa, Menemen ve tüm İzmir'de; Ege'de ve Türkiye genelinde doğal taş uygulamaları, dekoratif kaplamalar ve peyzaj çözümleri.",
     url: "/",
-    siteName: siteConfig.name,
-    locale: "tr_TR",
-    type: "website",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: siteConfig.name }],
-  },
+  }),
   twitter: {
     card: "summary_large_image",
     images: ["/og-image.jpg"],
@@ -96,7 +96,7 @@ const businessJsonLd = {
   "@id": `${siteConfig.url}/#business`,
   name: siteConfig.name,
   description:
-    "İzmir Menemen merkezli; Aliağa, Foça, Bergama ve tüm İzmir'de, Ege Bölgesi'nde ve Türkiye genelinde doğal taş duvar, şev taşı, kayrak taş kaplama, granürlü taş, parke ve bordür uygulamaları.",
+    "İzmir Menemen merkezli; Aliağa, Foça, Bergama ve tüm İzmir'de, Ege Bölgesi'nde ve Türkiye genelinde doğal taş duvar, şev taşı, kayrak taş kaplama, granürlü taş, parke ve bordür, küp taşı ve begonit, karo, asfalt ve yol yapımı uygulamaları.",
   url: siteConfig.url,
   image: `${siteConfig.url}/og-image.jpg`,
   logo: `${siteConfig.url}/logo-512.png`,

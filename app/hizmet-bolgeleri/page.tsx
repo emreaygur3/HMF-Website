@@ -3,13 +3,18 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { JsonLd } from "@/components/json-ld"
 import { serviceAreas } from "@/lib/regions"
-import { breadcrumbJsonLd } from "@/lib/seo"
+import { breadcrumbJsonLd, pageOpenGraph } from "@/lib/seo"
+import { siteConfig } from "@/lib/site"
+
+const title = "Hizmet Bölgeleri: Aliağa, İzmir, Ege ve Türkiye"
+const description =
+  "HMF Desen Yapı; Menemen merkezli olarak Aliağa, Foça, Bergama ve İzmir'in tüm ilçelerinde, Ege Bölgesi'nde ve Türkiye genelinde doğal taş uygulamaları yapar."
 
 export const metadata: Metadata = {
-  title: "Hizmet Bölgeleri: Aliağa, İzmir, Ege ve Türkiye",
-  description:
-    "HMF Desen Yapı; Menemen merkezli olarak Aliağa, Foça, Bergama ve İzmir'in tüm ilçelerinde, Ege Bölgesi'nde ve Türkiye genelinde doğal taş uygulamaları yapar.",
+  title,
+  description,
   alternates: { canonical: "/hizmet-bolgeleri" },
+  openGraph: pageOpenGraph({ title: `${title} | ${siteConfig.name}`, description, url: "/hizmet-bolgeleri" }),
 }
 
 const areaGroups = [

@@ -98,7 +98,7 @@ export function ProjectExplorer() {
                       </span>
                       <span
                         className={`px-3 py-1 rounded-full text-xs font-semibold text-center ${
-                          project.status === "Tamamlandı" ? "bg-green-500 text-white" : "bg-yellow-500 text-white"
+                          project.status === "Tamamlandı" ? "bg-green-700 text-white" : "bg-amber-400 text-slate-900"
                         }`}
                       >
                         {project.status}

@@ -5,7 +5,7 @@ import { notFound } from "next/navigation"
 import { ArrowLeft } from "lucide-react"
 import { JsonLd } from "@/components/json-ld"
 import { getService, services } from "@/lib/services"
-import { areaServed, breadcrumbJsonLd, businessRef } from "@/lib/seo"
+import { areaServed, breadcrumbJsonLd, businessRef, pageOpenGraph } from "@/lib/seo"
 import { siteConfig } from "@/lib/site"
 
 type Props = { params: Promise<{ slug: string }> }
@@ -21,16 +21,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const service = getService(slug)
   if (!service) return {}
 
+  // Arama sonuçlarında kesilmemesi için kısa tutulur (~160 karakter)
+  const description = `${service.title} İzmir, Aliağa ve Ege'de: ${service.description.toLocaleLowerCase("tr-TR")}. 1998'den beri HMF Desen Yapı. Keşif ve teklif için ulaşın.`
+
   return {
     title: `${service.title} İzmir & Aliağa`,
-    description: `${service.fullDescription} Aliağa, Menemen ve tüm İzmir'de, Ege'de ve Türkiye genelinde hizmet.`,
+    description,
     alternates: { canonical: `/hizmetler/${service.slug}` },
-    openGraph: {
+    openGraph: pageOpenGraph({
       title: `${service.title} | ${siteConfig.name}`,
-      description: service.fullDescription,
+      description,
       url: `/hizmetler/${service.slug}`,
-      images: [{ url: service.image }],
-    },
+      image: service.image,
+    }),
   }
 }
 
@@ -97,7 +100,7 @@ export default async function ServiceDetail({ params }: Props) {
           </div>
 
           {/* Description */}
-          <div className="prose prose-lg max-w-none mb-16">
+          <div className="mb-16">
             <h2 className="text-3xl font-bold text-slate-900 mb-6">Hakkında</h2>
             <p className="text-lg text-slate-700 leading-relaxed mb-8">{service.fullDescription}</p>
 

@@ -22,13 +22,13 @@ const submissions = new Map<string, number[]>()
 function isRateLimited(ip: string) {
   const now = Date.now()
   const recent = (submissions.get(ip) ?? []).filter((t) => now - t < RATE_WINDOW_MS)
-  if (recent.length >= RATE_MAX) {
-    submissions.set(ip, recent)
-    return true
-  }
-  recent.push(now)
   submissions.set(ip, recent)
-  return false
+  return recent.length >= RATE_MAX
+}
+
+// Yalnızca başarılı gönderimler sayılır; hata sonrası tekrar deneyen kullanıcı kilitlenmez.
+function recordSubmission(ip: string) {
+  submissions.set(ip, [...(submissions.get(ip) ?? []), Date.now()])
 }
 
 const escapeHtml = (value: string) =>
@@ -47,11 +47,13 @@ export async function sendContactMessage(_prev: ContactState, formData: FormData
   const message = field(formData, "message")
 
   const fieldErrors: ContactState["fieldErrors"] = {}
-  if (!name || name.length > LIMITS.name) fieldErrors.name = "Lütfen adınızı girin."
+  if (!name) fieldErrors.name = "Lütfen adınızı girin."
+  else if (name.length > LIMITS.name) fieldErrors.name = `Adınız en fazla ${LIMITS.name} karakter olabilir.`
   if (!EMAIL_RE.test(email) || email.length > LIMITS.email) fieldErrors.email = "Geçerli bir e-posta adresi girin."
   if (phone && !PHONE_RE.test(phone)) fieldErrors.phone = "Geçerli bir telefon numarası girin."
-  if (message.length < 10 || message.length > LIMITS.message)
-    fieldErrors.message = "Mesajınız en az 10 karakter olmalıdır."
+  if (message.length < 10) fieldErrors.message = "Mesajınız en az 10 karakter olmalıdır."
+  else if (message.length > LIMITS.message)
+    fieldErrors.message = `Mesajınız en fazla ${LIMITS.message} karakter olabilir.`
   if (Object.keys(fieldErrors).length > 0) {
     return { status: "error", message: "Lütfen işaretli alanları kontrol edin.", fieldErrors }
   }
@@ -114,5 +116,6 @@ export async function sendContactMessage(_prev: ContactState, formData: FormData
     }
   }
 
+  recordSubmission(ip)
   return { status: "success", message: "Mesajınız başarıyla gönderildi! En kısa sürede sizinle iletişime geçeceğiz." }
 }
