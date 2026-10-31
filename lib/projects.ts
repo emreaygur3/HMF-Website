@@ -1,14 +1,12 @@
 export type ProjectStatus = "Tamamlandı" | "Devam Ediyor"
 
 type ProjectBase = {
-  id: number
   slug: string
   title: string
   category: "Konut" | "Ticari" | "Peyzaj"
   /** YYYY-MM biçiminde; bilinmiyorsa boş bırakılır ve sayfada gösterilmez */
   date?: string
   location: string
-  client: string
   /** Bilinmiyorsa boş bırakılır ve sayfada gösterilmez */
   duration?: string
   team?: string
@@ -26,7 +24,6 @@ export type Project =
 
 export const projects: Project[] = [
   {
-    id: 11,
     slug: "karavan-park-zemin-ve-peyzaj-duzenlemesi",
     title: "Karavan Park Zemin ve Peyzaj Düzenlemesi",
     category: "Ticari",
@@ -36,7 +33,6 @@ export const projects: Project[] = [
     location: "İzmir, Aliağa",
     duration: "2,5 ay",
     team: "8 kişi",
-    client: "Karavan Park İşletmesi",
     summary: "Deniz kenarındaki karavan parkı için parsel, parke ve bordür uygulaması",
     description:
       "Deniz kenarında konumlanan karavan parkının tüm zemin altyapısı oluşturuldu. Alan bordürlerle parsellere ayrıldı; karavanların duracağı bölümler ve aradaki yürüyüş yolları kilitli parke taşıyla kaplandı, parsel aralarında peyzaj için toprak alanlar bırakıldı.",
@@ -44,14 +40,13 @@ export const projects: Project[] = [
       "Karavanların rahatça yerleşip manevra yapabileceği düzenli parseller oluşturmak; yağmur sonrası çamurlaşmayan, dayanıklı ve kolay bakım yapılabilen bir zemin elde etmek.",
     results:
       "Geniş alan düzenli parsellere ayrılarak her karavan için hazır bir park yeri oluşturuldu. Kilitli parke zemin ve bordür hatları, yeşil alanlarla birlikte parka derli toplu bir görünüm kazandırdı.",
-    images: ["/proje-karavan-park-deniz.jpg", "/proje-karavan-park-insaat.jpg"],
+    images: ["/images/projeler/karavan-park-zemin-ve-peyzaj-duzenlemesi/deniz.jpg", "/images/projeler/karavan-park-zemin-ve-peyzaj-duzenlemesi/insaat.jpg"],
     imagePositions: {
       // Kartta deniz ufku ve parseller birlikte görünsün
-      "/proje-karavan-park-deniz.jpg": "center 45%",
+      "/images/projeler/karavan-park-zemin-ve-peyzaj-duzenlemesi/deniz.jpg": "center 45%",
     },
   },
   {
-    id: 10,
     slug: "tripleks-restorasyon-ve-cephe-yenileme",
     title: "Tripleks Restorasyon ve Cephe Yenileme",
     category: "Konut",
@@ -61,7 +56,6 @@ export const projects: Project[] = [
     location: "İzmir, Menemen",
     duration: "3 ay",
     team: "5 kişi",
-    client: "Özel Müşteri",
     summary: "Tripleks konutun dış cephesinin baştan sona yenilenmesi",
     description:
       "Düz sıva cepheli bir tripleks konut, kapsamlı bir restorasyon ve düzenleme ile modern bir görünüme kavuşturuldu. Cephede ahşap görünümlü, antrasit ve açık gri paneller bir arada kullanıldı; geniş camlı yüzeyler ve bahçe duvarı düzenlemesiyle yapı yeniden tasarlandı.",
@@ -69,15 +63,14 @@ export const projects: Project[] = [
       "Sade ve eskimiş görünen cepheyi çağdaş bir mimari dile taşımak, yapının karakterini güçlendirirken dış etkenlere dayanıklı ve bakımı kolay bir cephe elde etmek.",
     results:
       "Tripleks, farklı malzeme ve renklerin dengeli kullanımıyla modern ve bütünlüklü bir cepheye kavuştu. Önceki ve sonraki hali, restorasyonun yapıya kattığı değeri açıkça gösteriyor.",
-    images: ["/proje-tripleks-sonrasi.jpg", "/proje-tripleks-oncesi.jpg"],
+    images: ["/images/projeler/tripleks-restorasyon-ve-cephe-yenileme/sonrasi.jpg", "/images/projeler/tripleks-restorasyon-ve-cephe-yenileme/oncesi.jpg"],
     imagePositions: {
       // Çatı ve üst kattaki ahşap kaplama kadrajda kalsın
-      "/proje-tripleks-sonrasi.jpg": "center 20%",
-      "/proje-tripleks-oncesi.jpg": "center 35%",
+      "/images/projeler/tripleks-restorasyon-ve-cephe-yenileme/sonrasi.jpg": "center 20%",
+      "/images/projeler/tripleks-restorasyon-ve-cephe-yenileme/oncesi.jpg": "center 35%",
     },
   },
   {
-    id: 9,
     slug: "kafe-bahce-duzenlemesi",
     title: "Kafe Bahçe Düzenlemesi",
     category: "Ticari",
@@ -87,7 +80,6 @@ export const projects: Project[] = [
     location: "İzmir, Aliağa",
     duration: "2 ay",
     team: "6 kişi",
-    client: "Kafe İşletmesi",
     summary: "Açık oturma alanı için zemin, bordür ve peyzaj uygulaması",
     description:
       "Bir kafenin açık oturma alanı baştan sona yeniden düzenlendi. Duvar örme ve zemin hazırlığından başlayarak tüm alan desenli parke taşıyla kaplandı; ağaç çevreleri tuğla bordür ve beyaz dekoratif çakılla çerçevelendi.",
@@ -95,7 +87,7 @@ export const projects: Project[] = [
       "Mevcut ağaçları koruyarak geniş, düzgün ve kolay temizlenen bir oturma alanı oluşturmak; gündüz ve akşam saatlerinde misafirleri ağırlayacak sıcak bir bahçe atmosferi yaratmak.",
     results:
       "Kafe bahçesi bütünlüklü bir zemin ve peyzaj düzenine kavuştu. Desenli parke zemin, tuğla bordürlü ağaç adaları ve aydınlatmayla birlikte alan, özellikle akşam saatlerinde dikkat çeken bir mekan haline geldi.",
-    images: ["/proje-kafe-bahce-gece.jpg", "/proje-kafe-bahce-insaat.jpg", "/proje-kafe-bahce-oturma-alani.jpg"],
+    images: ["/images/projeler/kafe-bahce-duzenlemesi/gece.jpg", "/images/projeler/kafe-bahce-duzenlemesi/insaat.jpg", "/images/projeler/kafe-bahce-duzenlemesi/oturma-alani.jpg"],
   },
 ]
 

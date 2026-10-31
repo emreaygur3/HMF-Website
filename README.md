@@ -14,21 +14,39 @@ npm run build      # Production build (tip kontrolü dahil)
 ## Klasör yapısı
 
 ```
-app/                    Sayfalar (App Router)
-  hizmetler/[slug]      Hizmet detay sayfaları (statik üretilir)
-  hizmet-bolgeleri/     Yerel SEO bölge sayfaları (Aliağa, Menemen, Foça, Bergama, İzmir)
-  projeler/[slug]       Proje detay sayfaları
-  iletisim/actions.ts   İletişim formu sunucu aksiyonu (Gmail SMTP)
-  sitemap.ts, robots.ts SEO dosyaları
-components/             Paylaşılan bileşenler (menü, footer, form, proje filtresi)
+app/                        Sayfalar (App Router)
+  hizmetler/[slug]          Hizmet detay sayfaları (statik üretilir)
+  projeler/[slug]           Proje detay sayfaları
+  galeri/                   Filtreli galeri (tüm hizmet ve proje fotoğrafları)
+  hizmet-bolgeleri/         Hizmet verilen bölgeler (yerel SEO)
+  iletisim/actions.ts       İletişim formu sunucu aksiyonu (Gmail SMTP)
+  sitemap.ts, robots.ts     SEO dosyaları
+components/
+  ui/                       Temel yapı taşları: Section, Container, SectionHeading, PageHero,
+                            CtaSection, ButtonLink/ArrowLink, StatGrid, FittedImage
+  layout/                   Menü, alt bilgi, sabit WhatsApp butonu
+  brand/                    Logo ve sosyal medya simgeleri
+  services/ projects/       Hizmet kartı; proje kartı, rozetleri ve filtreli liste
+  gallery/ contact/         Galeri görüntüleyici; iletişim formu
+  seo/                      JSON-LD (yapılandırılmış veri)
 lib/
-  site.ts               İletişim bilgileri, adres, sosyal medya, istatistikler
-  services.ts           Hizmet içerikleri (tek kaynak)
-  projects.ts           Proje içerikleri (tek kaynak)
-  regions.ts            Hizmet bölgeleri
-  seo.ts                Yapılandırılmış veri (Schema.org) yardımcıları
-public/                 Görseller
+  site.ts                   İletişim bilgileri, adres, sosyal medya, istatistikler
+  services.ts               Hizmet içerikleri (tek kaynak)
+  projects.ts               Proje içerikleri (tek kaynak)
+  gallery.ts                Galeri listesi (hizmet ve proje fotoğraflarından otomatik)
+  regions.ts                Hizmet bölgeleri
+  seo.ts                    Open Graph ve Schema.org yardımcıları
+public/
+  images/hizmetler/<slug>/  Hizmet fotoğrafları (klasör adı hizmetin adresiyle aynı)
+  images/projeler/<slug>/   Proje fotoğrafları
+  brand/                    Logo dosyaları (SVG + PNG)
 ```
+
+## Tasarım kuralları
+
+- Nötr renkler Tailwind `stone` ailesinden (başlık `stone-900`, metin `stone-600`, açık zemin `stone-50`, koyu zemin `stone-900`); vurgu rengi `brand` (bronz).
+- Sayfa bölümleri `Section`, başlıklar `SectionHeading`, butonlar `ButtonLink` ile yazılır; tek tek sınıf yazmak yerine bu bileşenler kullanılır.
+- Yeni fotoğraf eklerken ilgili `public/images/...` klasörüne koyup `lib/services.ts` veya `lib/projects.ts` içine yolunu eklemek yeterlidir; galeri ve kartlar otomatik güncellenir.
 
 İçerik değişiklikleri için ilgili `lib/*.ts` dosyasını düzenlemek yeterlidir; menü, kartlar, form seçenekleri ve sitemap otomatik güncellenir.
 

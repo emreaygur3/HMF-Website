@@ -25,12 +25,12 @@ export const services: Service[] = [
     fullDescription:
       "Doğal taşı kullanarak yapılan duvarlar, binaların yapısını güçlendirirken aynı zamanda estetik bir görünüm sağlar. Derzli (harçlı) ve derzsiz (kuru örgü) uygulamalar, projenizin ihtiyacına göre seçilebilir.",
     icon: "Building2",
-    image: "/derzli-tas-duvar-saha-yuksek-duvar.jpg",
+    image: "/images/hizmetler/derzli-ve-derzsiz-tas-duvar/yuksek-duvar.jpg",
     images: [
-      "/stone-wall-with-joints-residential.jpg",
-      "/derzli-tas-duvar-saha-yuksek-duvar.jpg",
-      "/natural-stone-wall-texture-detail.jpg",
-      "/derzli-tas-duvar-saha-teras-duvarlari.jpg",
+      "/images/hizmetler/derzli-ve-derzsiz-tas-duvar/konut-duvari.jpg",
+      "/images/hizmetler/derzli-ve-derzsiz-tas-duvar/yuksek-duvar.jpg",
+      "/images/hizmetler/derzli-ve-derzsiz-tas-duvar/doku-detay.jpg",
+      "/images/hizmetler/derzli-ve-derzsiz-tas-duvar/teras-duvarlari.jpg",
     ],
     details: [
       "Doğal taş kullanarak dayanıklı duvar yapıları",
@@ -61,12 +61,12 @@ export const services: Service[] = [
     fullDescription:
       "Yamaçlar ve eğimli arazilerde yapılan taş işçiliği, erozyonu önlerken aynı zamanda doğal bir görünüm sağlar. Stabilite ve estetik birlikte sunulur.",
     icon: "Mountain",
-    image: "/sev-tasi-saha-orman-yamaci.jpg",
+    image: "/images/hizmetler/sev-tasi-yapimi/orman-yamaci.jpg",
     images: [
-      "/slope-stone-construction-hillside.jpg",
-      "/sev-tasi-saha-blok-yerlesimi.jpg",
-      "/sev-tasi-saha-orman-yamaci.jpg",
-      "/sev-tasi-saha-yol-kenari.jpg",
+      "/images/hizmetler/sev-tasi-yapimi/yamac-teraslari.jpg",
+      "/images/hizmetler/sev-tasi-yapimi/blok-yerlesimi.jpg",
+      "/images/hizmetler/sev-tasi-yapimi/orman-yamaci.jpg",
+      "/images/hizmetler/sev-tasi-yapimi/yol-kenari.jpg",
     ],
     details: [
       "Eğimli arazi ve yamaçlara uygun çözümler",
@@ -97,17 +97,17 @@ export const services: Service[] = [
     fullDescription:
       "Kayrak taş, doğasından gelen şık renk ve dokusunun yanı sıra dayanıklılığı ile ön plandadır. İç ve dış mekanlar için kusursuz kaplamalar sunar.",
     icon: "Layers",
-    image: "/kayrak-tas-saha-duvar-kaplama.jpg",
+    image: "/images/hizmetler/kayrak-tas-kaplama/duvar-kaplama.jpg",
     images: [
-      "/kayrak-tas-saha-duvar-kaplama.jpg",
-      "/kayrak-tas-saha-zemin-uygulama.jpg",
-      "/kayrak-tas-saha-merdiven.jpg",
-      "/kayrak-tas-saha-kulube-kaplama.jpg",
+      "/images/hizmetler/kayrak-tas-kaplama/duvar-kaplama.jpg",
+      "/images/hizmetler/kayrak-tas-kaplama/zemin-uygulama.jpg",
+      "/images/hizmetler/kayrak-tas-kaplama/merdiven.jpg",
+      "/images/hizmetler/kayrak-tas-kaplama/kulube-kaplama.jpg",
     ],
     imagePositions: {
       // Çalışan usta kadrajda tam görünsün
-      "/kayrak-tas-saha-kulube-kaplama.jpg": "center 40%",
-      "/kayrak-tas-saha-duvar-kaplama.jpg": "center 55%",
+      "/images/hizmetler/kayrak-tas-kaplama/kulube-kaplama.jpg": "center 40%",
+      "/images/hizmetler/kayrak-tas-kaplama/duvar-kaplama.jpg": "center 55%",
     },
     details: [
       "Doğal kayrak taşının estetik görünümü",
@@ -138,17 +138,17 @@ export const services: Service[] = [
     fullDescription:
       "Granürlü taşlar, çeşitli renk ve dokularıyla iç ve dış mekanları güzelleştiren dekoratif çözümler sunar. Modern ve klasik tasarımlara uyum sağlar.",
     icon: "Sparkles",
-    image: "/granurlu-tas-saha-meydan.jpg",
+    image: "/images/hizmetler/granurlu-taslar/meydan.jpg",
     images: [
-      "/granurlu-tas-saha-ekip.jpg",
-      "/granurlu-tas-saha-desenli-kaldirim.jpg",
-      "/granurlu-tas-saha-kaldirim.jpg",
-      "/granurlu-tas-saha-meydan.jpg",
+      "/images/hizmetler/granurlu-taslar/ekip.jpg",
+      "/images/hizmetler/granurlu-taslar/desenli-kaldirim.jpg",
+      "/images/hizmetler/granurlu-taslar/kaldirim.jpg",
+      "/images/hizmetler/granurlu-taslar/meydan.jpg",
     ],
     imagePositions: {
       // Ekip ve arkadaki bina kadrajda kalsın
-      "/granurlu-tas-saha-ekip.jpg": "center 25%",
-      "/granurlu-tas-saha-meydan.jpg": "center 30%",
+      "/images/hizmetler/granurlu-taslar/ekip.jpg": "center 25%",
+      "/images/hizmetler/granurlu-taslar/meydan.jpg": "center 30%",
     },
     details: [
       "Çeşitli renk ve dokuda granürlü taşlar",
@@ -179,16 +179,16 @@ export const services: Service[] = [
     fullDescription:
       "Bahçe ve dış alanlar için tasarlanan parke ve bordür uygulamaları, mekanı işlevsel ve güzel hale getirir. Peyzaj tasarımında tamamen kişiye özel çözümler sunulur.",
     icon: "Leaf",
-    image: "/parke-bordur-saha-villa-yolu.jpg",
+    image: "/images/hizmetler/parke-ve-bordur/villa-yolu.jpg",
     images: [
-      "/parke-bordur-saha-bordur-adasi.jpg",
-      "/parke-bordur-saha-kilitli-parke-yol.jpg",
-      "/parke-bordur-saha-ekip-forklift.jpg",
-      "/parke-bordur-saha-villa-yolu.jpg",
+      "/images/hizmetler/parke-ve-bordur/bordur-adasi.jpg",
+      "/images/hizmetler/parke-ve-bordur/kilitli-parke-yol.jpg",
+      "/images/hizmetler/parke-ve-bordur/ekip-forklift.jpg",
+      "/images/hizmetler/parke-ve-bordur/villa-yolu.jpg",
     ],
     imagePositions: {
       // Arkadaki çalışanlar kadrajda kalsın
-      "/parke-bordur-saha-bordur-adasi.jpg": "center 45%",
+      "/images/hizmetler/parke-ve-bordur/bordur-adasi.jpg": "center 45%",
     },
     details: [
       "Bahçe ve dış alanlar için tasarımlar",
@@ -219,16 +219,16 @@ export const services: Service[] = [
     fullDescription:
       "Yaratıcı tasarımlar ve renkli taş kombinasyonları kullanılarak tamamen özel ve benzersiz mekanlar yaratılır. Sanat ve işlevsellik bir araya gelir.",
     icon: "Palette",
-    image: "/renkli-desenli-tas-saha-mozaik-avlu.jpg",
+    image: "/images/hizmetler/renkli-ve-desenli-tas/mozaik-avlu.jpg",
     images: [
-      "/renkli-desenli-tas-saha-kusbakisi.jpg",
-      "/renkli-desenli-tas-saha-tugla-bordur.jpg",
-      "/renkli-desenli-tas-saha-mozaik-avlu.jpg",
-      "/renkli-desenli-tas-saha-desenli-yol.jpg",
+      "/images/hizmetler/renkli-ve-desenli-tas/kusbakisi.jpg",
+      "/images/hizmetler/renkli-ve-desenli-tas/tugla-bordur.jpg",
+      "/images/hizmetler/renkli-ve-desenli-tas/mozaik-avlu.jpg",
+      "/images/hizmetler/renkli-ve-desenli-tas/desenli-yol.jpg",
     ],
     imagePositions: {
       // Çit yerine zemin deseni öne çıksın
-      "/renkli-desenli-tas-saha-mozaik-avlu.jpg": "center 65%",
+      "/images/hizmetler/renkli-ve-desenli-tas/mozaik-avlu.jpg": "center 65%",
     },
     details: [
       "Özel tasarım ve desen uygulamaları",
@@ -259,19 +259,19 @@ export const services: Service[] = [
     fullDescription:
       "Site içi yollardan cadde ve bulvarlara kadar asfalt serimi, yol altyapısı ve çevre düzenlemesini tek elden yürütüyoruz. Asfalt, kaldırım, bordür ve peyzaj işlerini birlikte planlayarak bütünlüklü ve uzun ömürlü yollar teslim ediyoruz.",
     icon: "Route",
-    image: "/asfalt-yol-saha-agacli-bulvar.jpg",
+    image: "/images/hizmetler/asfalt-ve-yol-yapimi/agacli-bulvar.jpg",
     images: [
-      "/asfalt-yol-saha-gun-batimi.jpg",
-      "/asfalt-yol-saha-agacli-bulvar.jpg",
-      "/asfalt-yol-saha-kavsak.jpg",
-      "/asfalt-yol-saha-cadde-kaldirim.jpg",
+      "/images/hizmetler/asfalt-ve-yol-yapimi/gun-batimi.jpg",
+      "/images/hizmetler/asfalt-ve-yol-yapimi/agacli-bulvar.jpg",
+      "/images/hizmetler/asfalt-ve-yol-yapimi/kavsak.jpg",
+      "/images/hizmetler/asfalt-ve-yol-yapimi/cadde-kaldirim.jpg",
     ],
     imagePositions: {
       // Gökyüzü yerine yol ve kaldırım öne çıksın
-      "/asfalt-yol-saha-gun-batimi.jpg": "center 70%",
-      "/asfalt-yol-saha-agacli-bulvar.jpg": "center 75%",
-      "/asfalt-yol-saha-kavsak.jpg": "center 75%",
-      "/asfalt-yol-saha-cadde-kaldirim.jpg": "center 70%",
+      "/images/hizmetler/asfalt-ve-yol-yapimi/gun-batimi.jpg": "center 70%",
+      "/images/hizmetler/asfalt-ve-yol-yapimi/agacli-bulvar.jpg": "center 75%",
+      "/images/hizmetler/asfalt-ve-yol-yapimi/kavsak.jpg": "center 75%",
+      "/images/hizmetler/asfalt-ve-yol-yapimi/cadde-kaldirim.jpg": "center 70%",
     },
     details: [
       "Sıcak asfalt serimi ve silindirle sıkıştırma",
@@ -302,12 +302,12 @@ export const services: Service[] = [
     fullDescription:
       "Granit ve bazalt küp taşı ile begonit plaklar; meydan, kaldırım, avlu, site içi yol ve bahçe yürüyüş yollarında yıllarca formunu koruyan zeminler oluşturur. Kum veya harçlı yatak üzerine düz, yelpaze ve kemer desenlerinde döşeme yapıyoruz.",
     icon: "Boxes",
-    image: "/kup-tasi-saha-spiral-desen.jpg",
-    images: ["/kup-tasi-saha-spiral-desen.jpg", "/kup-tasi-saha-yelpaze-desen.jpg"],
+    image: "/images/hizmetler/kup-tasi-ve-begonit/spiral-desen.jpg",
+    images: ["/images/hizmetler/kup-tasi-ve-begonit/spiral-desen.jpg", "/images/hizmetler/kup-tasi-ve-begonit/yelpaze-desen.jpg"],
     imagePositions: {
       // Spiral ve yelpaze desenleri kadrajda kalsın
-      "/kup-tasi-saha-spiral-desen.jpg": "center 65%",
-      "/kup-tasi-saha-yelpaze-desen.jpg": "center 55%",
+      "/images/hizmetler/kup-tasi-ve-begonit/spiral-desen.jpg": "center 65%",
+      "/images/hizmetler/kup-tasi-ve-begonit/yelpaze-desen.jpg": "center 55%",
     },
     details: [
       "Granit ve bazalt küp taşı döşeme",
@@ -339,10 +339,10 @@ export const services: Service[] = [
       "Beton ve doğal taş karolarla kaldırım, teras, bahçe, havuz çevresi ve site içi yürüyüş alanlarında düzgün ve bakımı kolay zeminler oluşturuyoruz. Farklı ebat, renk ve yüzey seçenekleriyle mekanınıza uygun döşeme planını birlikte belirliyoruz.",
     icon: "Grid3x3",
     // GEÇİCİ görseller: hizmete ait saha fotoğrafları gelince değiştirilecek
-    image: "/granurlu-tas-saha-desenli-kaldirim.jpg",
-    images: ["/granurlu-tas-saha-desenli-kaldirim.jpg", "/granurlu-tas-saha-meydan.jpg"],
+    image: "/images/hizmetler/granurlu-taslar/desenli-kaldirim.jpg",
+    images: ["/images/hizmetler/granurlu-taslar/desenli-kaldirim.jpg", "/images/hizmetler/granurlu-taslar/meydan.jpg"],
     imagePositions: {
-      "/granurlu-tas-saha-meydan.jpg": "center 30%",
+      "/images/hizmetler/granurlu-taslar/meydan.jpg": "center 30%",
     },
     details: [
       "Beton ve doğal taş karo döşeme",

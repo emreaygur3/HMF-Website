@@ -1,10 +1,15 @@
 import type { Metadata } from "next"
-import Link from "next/link"
 import { notFound } from "next/navigation"
-import { ArrowLeft, ArrowRight, Calendar, Clock, MapPin, Users } from "lucide-react"
+import { Calendar, Clock, MapPin, Users } from "lucide-react"
+import { FittedImage } from "@/components/ui/fitted-image"
+import { JsonLd } from "@/components/seo/json-ld"
+import { ProjectBadges } from "@/components/projects/project-badges"
+import { ProjectCard } from "@/components/projects/project-card"
+import { ArrowLink } from "@/components/ui/button"
+import { CtaSection } from "@/components/ui/cta-section"
+import { PageHero } from "@/components/ui/page-hero"
+import { Section, SectionHeading } from "@/components/ui/section"
 import { formatProjectDate, getProject, projects } from "@/lib/projects"
-import { FittedImage } from "@/components/fitted-image"
-import { JsonLd } from "@/components/json-ld"
 import { breadcrumbJsonLd, pageOpenGraph } from "@/lib/seo"
 import { siteConfig } from "@/lib/site"
 
@@ -37,6 +42,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
+// Tailwind sınıfları derleme anında tarandığı için tam sınıf adları sabit tutulur
+const infoCols = ["", "sm:grid-cols-1", "sm:grid-cols-2", "sm:grid-cols-3", "sm:grid-cols-2 lg:grid-cols-4"]
+
 export default async function ProjectDetail({ params }: Props) {
   const { slug } = await params
   const project = getProject(slug)
@@ -49,9 +57,6 @@ export default async function ProjectDetail({ params }: Props) {
     { icon: Clock, label: "Süre", value: project.duration },
   ].filter((item) => item.value)
 
-  // Tailwind sınıfları derleme anında tarandığı için tam sınıf adları sabit tutulur
-  const infoCols = ["", "md:grid-cols-1", "md:grid-cols-2", "md:grid-cols-3", "md:grid-cols-4"][info.length]
-
   const otherProjects = projects.filter((p) => p.slug !== project.slug).slice(0, 3)
 
   return (
@@ -63,160 +68,104 @@ export default async function ProjectDetail({ params }: Props) {
         ])}
       />
 
-      {/* Back Button */}
-      <section className="pt-32 pb-8 px-4 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <Link
-            href="/projeler"
-            className="inline-flex items-center gap-2 text-primary hover:gap-3 transition-all font-semibold mb-6"
-          >
-            <ArrowLeft size={20} aria-hidden="true" />
-            Tüm Projelere Dön
-          </Link>
-        </div>
-      </section>
+      <PageHero
+        title={project.title}
+        subtitle={project.summary}
+        back={{ href: "/projeler", label: "Tüm Projelere Dön" }}
+        size="4xl"
+      />
 
-      {/* Hero Image */}
-      <section className="px-4 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <div className="relative overflow-hidden rounded-lg mb-8 h-[26rem] md:h-[34rem] bg-slate-200">
-            <FittedImage
-              src={project.images[0]}
-              alt={project.title}
-              priority
-              sizes="(min-width: 896px) 864px, 100vw"
-            />
-            <div className="absolute top-4 right-4 flex flex-col gap-2">
-              <span className="bg-primary text-primary-foreground px-4 py-2 rounded-full font-semibold">
-                {project.category}
-              </span>
-              <span
-                className={`px-4 py-2 rounded-full font-semibold text-center ${
-                  project.status === "Tamamlandı" ? "bg-green-700 text-white" : "bg-amber-400 text-slate-900"
-                }`}
-              >
-                {project.status}
-              </span>
+      <Section size="4xl" className="pt-4 sm:pt-6">
+        {/* Kapak görseli: fotoğraf kırpılmadan sığdırılır */}
+        <div className="relative h-72 overflow-hidden rounded-xl bg-stone-200 sm:h-[26rem] md:h-[34rem]">
+          <FittedImage src={project.images[0]} alt={project.title} priority sizes="(min-width: 896px) 864px, 100vw" />
+          <ProjectBadges project={project} size="md" />
+        </div>
+
+        {/* Proje bilgileri */}
+        <dl className={`mt-8 grid grid-cols-2 gap-4 ${infoCols[info.length]}`}>
+          {info.map(({ icon: Icon, label, value }) => (
+            <div key={label} className="rounded-xl border border-stone-200 bg-stone-50 p-4 sm:p-5">
+              <dt className="mb-1 flex items-center gap-2 text-sm font-semibold text-stone-900">
+                <Icon size={18} aria-hidden="true" className="text-brand" />
+                {label}
+              </dt>
+              <dd className="text-stone-600">{value}</dd>
             </div>
+          ))}
+        </dl>
+
+        {/* Açıklama */}
+        <div className="mt-10 space-y-8">
+          <div>
+            <h2 className="mb-3 text-2xl font-bold text-stone-900">Proje Hakkında</h2>
+            <p className="leading-relaxed text-stone-600">{project.description}</p>
           </div>
-        </div>
-      </section>
-
-      {/* Project Details */}
-      <section className="py-12 px-4 bg-slate-50">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-8 text-balance">{project.title}</h1>
-
-          {/* Project Info Grid */}
-          <dl className={`grid ${infoCols} gap-6 mb-12`}>
-            {info.map(({ icon: Icon, label, value }) => (
-              <div key={label} className="bg-white p-6 rounded-lg border border-border">
-                <dt className="flex items-center gap-2 text-primary mb-2">
-                  <Icon size={20} aria-hidden="true" />
-                  <span className="font-semibold">{label}</span>
-                </dt>
-                <dd className="text-foreground/70">{value}</dd>
-              </div>
-            ))}
-          </dl>
-
-          {/* Description */}
-          <div className="bg-white p-8 rounded-lg border border-border mb-8">
-            <h2 className="text-2xl font-bold text-primary mb-4">Proje Hakkında</h2>
-            <p className="text-foreground/80 leading-relaxed mb-6">{project.description}</p>
-
-            <h3 className="text-xl font-bold text-primary mb-3">Proje Amacı</h3>
-            <p className="text-foreground/80 leading-relaxed mb-8">{project.objective}</p>
-
-            {project.status === "Tamamlandı" ? (
-              <>
-                <h3 className="text-xl font-bold text-primary mb-3">Sonuçlar</h3>
-                <p className="text-foreground/80 leading-relaxed">{project.results}</p>
-              </>
-            ) : (
-              <>
-                <h3 className="text-xl font-bold text-primary mb-3">Beklenen Sonuçlar</h3>
-                <p className="text-foreground/80 leading-relaxed mb-6">{project.expectedResults}</p>
-                <h3 className="text-xl font-bold text-primary mb-3">İlerleme</h3>
-                <div className="mb-2">
-                  <div
-                    className="w-full bg-slate-200 rounded-full h-2"
-                    role="progressbar"
-                    aria-valuenow={project.progress}
-                    aria-valuemin={0}
-                    aria-valuemax={100}
-                    aria-label="Proje ilerlemesi"
-                  >
-                    <div className="bg-primary h-2 rounded-full" style={{ width: `${project.progress}%` }}></div>
-                  </div>
-                </div>
-                <p className="text-foreground/80">
-                  %{project.progress} tamamlandı. {project.progressNote}
-                </p>
-              </>
-            )}
+          <div>
+            <h2 className="mb-3 text-2xl font-bold text-stone-900">Proje Amacı</h2>
+            <p className="leading-relaxed text-stone-600">{project.objective}</p>
           </div>
-
-          {/* Gallery */}
-          {project.images.length > 1 && (
-            <div className="mb-12">
-              <h2 className="text-2xl font-bold text-primary mb-6">Proje Görselleri</h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                {project.images.slice(1).map((image, index) => (
-                  <div key={image} className="relative rounded-lg overflow-hidden bg-slate-200 h-80">
-                    <FittedImage
-                      src={image}
-                      alt={`${project.title} - Görsel ${index + 2}`}
-                      sizes="(min-width: 896px) 420px, (min-width: 768px) 50vw, 100vw"
-                    />
-                  </div>
-                ))}
+          {project.status === "Tamamlandı" ? (
+            <div>
+              <h2 className="mb-3 text-2xl font-bold text-stone-900">Sonuçlar</h2>
+              <p className="leading-relaxed text-stone-600">{project.results}</p>
+            </div>
+          ) : (
+            <div>
+              <h2 className="mb-3 text-2xl font-bold text-stone-900">Beklenen Sonuçlar</h2>
+              <p className="leading-relaxed text-stone-600">{project.expectedResults}</p>
+              <h3 className="mb-3 mt-6 text-xl font-bold text-stone-900">İlerleme</h3>
+              <div
+                className="h-2 w-full rounded-full bg-stone-200"
+                role="progressbar"
+                aria-valuenow={project.progress}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-label="Proje ilerlemesi"
+              >
+                <div className="h-2 rounded-full bg-brand" style={{ width: `${project.progress}%` }} />
               </div>
+              <p className="mt-2 text-stone-600">
+                %{project.progress} tamamlandı. {project.progressNote}
+              </p>
             </div>
           )}
-
-          {/* CTA */}
-          <div className="bg-primary text-primary-foreground p-8 rounded-lg text-center">
-            <h2 className="text-2xl font-bold mb-4">Benzer Bir Proje Yapmak İster Misiniz?</h2>
-            <p className="mb-6 opacity-90">Uzman ekibimize projeniz hakkında bilgi verin.</p>
-            <Link
-              href="/iletisim"
-              className="inline-flex items-center gap-2 bg-primary-foreground text-primary px-8 py-3 rounded font-semibold hover:opacity-90 transition-opacity"
-            >
-              İletişime Geç
-              <ArrowRight size={20} aria-hidden="true" />
-            </Link>
-          </div>
         </div>
-      </section>
 
-      {/* Related Projects */}
-      <section className="py-20 px-4 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold text-primary mb-12 text-center">Diğer Projelerimiz</h2>
-          <ul className="grid sm:grid-cols-3 gap-4 mb-10">
+        {/* Diğer görseller */}
+        {project.images.length > 1 && (
+          <div className="mt-12">
+            <h2 className="mb-6 text-2xl font-bold text-stone-900">Proje Görselleri</h2>
+            <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
+              {project.images.slice(1).map((image, index) => (
+                <div key={image} className="relative h-72 overflow-hidden rounded-xl bg-stone-200 sm:h-80">
+                  <FittedImage
+                    src={image}
+                    alt={`${project.title} - Görsel ${index + 2}`}
+                    sizes="(min-width: 896px) 420px, (min-width: 640px) 50vw, 100vw"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </Section>
+
+      {otherProjects.length > 0 && (
+        <Section tone="muted">
+          <SectionHeading title="Diğer Projelerimiz" />
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
             {otherProjects.map((other) => (
-              <li key={other.slug}>
-                <Link
-                  href={`/projeler/${other.slug}`}
-                  className="block bg-slate-50 rounded-lg border border-border p-4 font-semibold text-primary hover:shadow-md transition-shadow"
-                >
-                  {other.title}
-                </Link>
-              </li>
+              <ProjectCard key={other.slug} project={other} headingLevel="h3" />
             ))}
-          </ul>
-          <div className="text-center">
-            <Link
-              href="/projeler"
-              className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all"
-            >
-              Tüm Projeleri Gör
-              <ArrowRight size={20} aria-hidden="true" />
-            </Link>
           </div>
-        </div>
-      </section>
+          <div className="mt-10 text-center">
+            <ArrowLink href="/projeler">Tüm Projeleri Gör</ArrowLink>
+          </div>
+        </Section>
+      )}
+
+      <CtaSection title="Benzer Bir Proje Yapmak İster Misiniz?" text="Uzman ekibimize projeniz hakkında bilgi verin." />
     </>
   )
 }

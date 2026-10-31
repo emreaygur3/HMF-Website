@@ -1,10 +1,10 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Geist } from "next/font/google"
-import { Navigation } from "@/components/navigation"
-import { Footer } from "@/components/footer"
-import { WhatsAppButton } from "@/components/whatsapp-button"
-import { JsonLd } from "@/components/json-ld"
+import { Navigation } from "@/components/layout/navigation"
+import { Footer } from "@/components/layout/footer"
+import { WhatsAppButton } from "@/components/layout/whatsapp-button"
+import { JsonLd } from "@/components/seo/json-ld"
 import { siteConfig } from "@/lib/site"
 import { serviceLinks, services } from "@/lib/services"
 import { areaServed, pageOpenGraph } from "@/lib/seo"
@@ -88,7 +88,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: "#0f172a",
+  themeColor: "#1c1917",
 }
 
 const businessJsonLd = {

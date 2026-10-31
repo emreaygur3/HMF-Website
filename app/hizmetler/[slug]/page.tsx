@@ -1,11 +1,13 @@
 import type { Metadata } from "next"
 import Image from "next/image"
-import Link from "next/link"
 import { notFound } from "next/navigation"
-import { ArrowLeft } from "lucide-react"
-import { JsonLd } from "@/components/json-ld"
-import { getService, services } from "@/lib/services"
+import { Check } from "lucide-react"
+import { JsonLd } from "@/components/seo/json-ld"
+import { CtaSection } from "@/components/ui/cta-section"
+import { PageHero } from "@/components/ui/page-hero"
+import { Section, SectionHeading } from "@/components/ui/section"
 import { areaServed, breadcrumbJsonLd, businessRef, pageOpenGraph } from "@/lib/seo"
+import { getService, services } from "@/lib/services"
 import { siteConfig } from "@/lib/site"
 
 type Props = { params: Promise<{ slug: string }> }
@@ -64,110 +66,77 @@ export default async function ServiceDetail({ params }: Props) {
         ])}
       />
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-12 px-4 bg-slate-900 text-white">
-        <div className="max-w-6xl mx-auto">
-          <Link
-            href="/hizmetler"
-            className="inline-flex items-center gap-2 text-gray-300 hover:text-white mb-6 transition-colors"
-          >
-            <ArrowLeft size={20} aria-hidden="true" />
-            Hizmetlere Dön
-          </Link>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 text-balance">{service.title}</h1>
-          <p className="text-xl text-gray-200">{service.description}</p>
+      <PageHero title={service.title} subtitle={service.description} back={{ href: "/hizmetler", label: "Hizmetlere Dön" }} />
+
+      <Section className="pt-4 sm:pt-6">
+        {/* Galeri */}
+        <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
+          {service.images.slice(0, 4).map((image, index) => (
+            <div key={image} className="relative aspect-[4/3] overflow-hidden rounded-xl bg-stone-100 md:aspect-video">
+              <Image
+                src={image}
+                alt={`${service.title} - Görsel ${index + 1}`}
+                fill
+                priority={index < 2}
+                sizes="(min-width: 1152px) 552px, (min-width: 640px) 50vw, 100vw"
+                className="object-cover transition-transform duration-500 hover:scale-105"
+                style={{ objectPosition: service.imagePositions?.[image] }}
+              />
+            </div>
+          ))}
         </div>
-      </section>
 
-      {/* Main Content */}
-      <section className="py-20 px-4 bg-white">
-        <div className="max-w-6xl mx-auto">
-          {/* Image Gallery */}
-          <div className="grid md:grid-cols-2 gap-6 mb-16">
-            {service.images.slice(0, 4).map((image, index) => (
-              <div key={image} className="relative overflow-hidden rounded-lg aspect-square md:aspect-video">
-                <Image
-                  src={image}
-                  alt={`${service.title} - Görsel ${index + 1}`}
-                  fill
-                  priority={index < 2}
-                  sizes="(min-width: 1152px) 552px, (min-width: 768px) 50vw, 100vw"
-                  className="object-cover hover:scale-105 transition-transform duration-300"
-                  style={{ objectPosition: service.imagePositions?.[image] }}
-                />
-              </div>
-            ))}
+        {/* Açıklama ve özellikler */}
+        <div className="mt-14 grid gap-10 lg:grid-cols-2 lg:gap-14">
+          <div>
+            <h2 className="mb-4 text-2xl font-bold text-stone-900 sm:text-3xl">Hakkında</h2>
+            <p className="text-lg leading-relaxed text-stone-600">{service.fullDescription}</p>
           </div>
-
-          {/* Description */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-6">Hakkında</h2>
-            <p className="text-lg text-slate-700 leading-relaxed mb-8">{service.fullDescription}</p>
-
-            {/* Details List */}
-            <h3 className="text-2xl font-bold text-slate-900 mb-6">Özellikler</h3>
-            <ul className="grid md:grid-cols-2 gap-4 mb-12">
+          <div>
+            <h2 className="mb-4 text-2xl font-bold text-stone-900 sm:text-3xl">Özellikler</h2>
+            <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
               {service.details.map((detail) => (
-                <li key={detail} className="flex gap-3 items-start">
-                  <span className="text-slate-900 font-bold mt-1 flex-shrink-0" aria-hidden="true">
-                    ▸
-                  </span>
-                  <span className="text-slate-700">{detail}</span>
+                <li key={detail} className="flex items-start gap-3 text-stone-600">
+                  <Check size={20} aria-hidden="true" className="mt-0.5 shrink-0 text-brand" />
+                  {detail}
                 </li>
               ))}
             </ul>
           </div>
+        </div>
+      </Section>
 
-          {/* Benefits */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-12">Avantajları</h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              {service.benefits.map((benefit) => (
-                <div
-                  key={benefit.title}
-                  className="bg-slate-50 p-8 rounded-lg border border-slate-200 hover:shadow-lg transition-shadow"
-                >
-                  <h3 className="text-xl font-bold text-slate-900 mb-3">{benefit.title}</h3>
-                  <p className="text-slate-700">{benefit.description}</p>
-                </div>
-              ))}
+      <Section tone="muted">
+        <SectionHeading title="Avantajları" />
+        <div className="grid gap-4 sm:grid-cols-2 lg:gap-6">
+          {service.benefits.map((benefit) => (
+            <div key={benefit.title} className="rounded-xl border border-stone-200 bg-white p-6 sm:p-8">
+              <h3 className="mb-2 text-xl font-bold text-stone-900">{benefit.title}</h3>
+              <p className="text-stone-600">{benefit.description}</p>
             </div>
-          </div>
-
-          {/* Process */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-12">Uygulama Süreci</h2>
-            <ol className="space-y-4">
-              {service.process.map((step, index) => (
-                <li key={step} className="flex gap-6 items-start">
-                  <div className="w-10 h-10 bg-slate-900 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">
-                    {index + 1}
-                  </div>
-                  <div className="pt-2">
-                    <p className="text-lg text-slate-700">{step}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
+          ))}
         </div>
-      </section>
+      </Section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-4 bg-slate-900 text-white">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-6">{service.title} İçin Teklif Alın</h2>
-          <p className="text-lg mb-8 text-gray-300">
-            Projeleriniz için uzman ekibimizle iletişime geçin ve en uygun çözümü birlikte bulun.
-          </p>
-          <Link
-            href={`/iletisim?hizmet=${service.slug}`}
-            className="inline-flex items-center gap-2 bg-white text-slate-900 px-8 py-4 rounded font-semibold hover:bg-gray-100 transition-colors"
-          >
-            İletişime Geç
-          </Link>
-        </div>
-      </section>
+      <Section size="4xl">
+        <SectionHeading title="Uygulama Süreci" />
+        <ol className="space-y-4">
+          {service.process.map((step, index) => (
+            <li key={step} className="flex items-center gap-4 rounded-xl border border-stone-200 p-4 sm:gap-6 sm:p-5">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand font-bold text-white">
+                {index + 1}
+              </span>
+              <p className="text-base text-stone-700 sm:text-lg">{step}</p>
+            </li>
+          ))}
+        </ol>
+      </Section>
+
+      <CtaSection
+        title={`${service.title} İçin Teklif Alın`}
+        text="Projeniz için uzman ekibimizle iletişime geçin ve en uygun çözümü birlikte bulalım."
+        href={`/iletisim?hizmet=${service.slug}`}
+      />
     </>
   )
 }

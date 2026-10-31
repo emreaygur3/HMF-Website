@@ -4,7 +4,6 @@ const productionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL
 
 export const siteConfig = {
   name: "HMF Desen Yapı",
-  shortName: "HMF",
   foundedYear: 1998,
   description:
     "1998'den beri Aliağa, Menemen ve tüm İzmir'de taş duvar, şev taşı, kayrak, küp taşı, karo, parke, bordür ve asfalt uygulamaları. Keşif ve teklif için ulaşın.",
@@ -48,3 +47,11 @@ export const stats = {
   cities: "50+",
   satisfaction: "%98",
 }
+
+/** İstatistiklerin etiketli hali (ana sayfa ve projeler sayfasında aynı sırayla gösterilir) */
+export const statItems = [
+  { value: stats.projects, label: "Tamamlanan Proje" },
+  { value: stats.years, label: "Yıl Deneyim" },
+  { value: stats.cities, label: "Şehirde Hizmet" },
+  { value: stats.satisfaction, label: "Müşteri Memnuniyeti" },
+]

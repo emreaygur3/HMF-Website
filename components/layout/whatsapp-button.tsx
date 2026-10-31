@@ -1,4 +1,4 @@
-import { WhatsAppIcon } from "@/components/social-icons"
+import { WhatsAppIcon } from "@/components/brand/social-icons"
 import { whatsappUrl } from "@/lib/site"
 
 const message = "Merhaba, web sitenizden ulaşıyorum. Bilgi almak istiyorum."

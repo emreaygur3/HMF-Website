@@ -1,8 +1,11 @@
 import type { Metadata } from "next"
-import { Logo } from "@/components/logo"
 import { Check } from "lucide-react"
-import { siteConfig, stats } from "@/lib/site"
+import { Logo } from "@/components/brand/logo"
+import { CtaSection } from "@/components/ui/cta-section"
+import { PageHero } from "@/components/ui/page-hero"
+import { Section, SectionHeading } from "@/components/ui/section"
 import { pageOpenGraph } from "@/lib/seo"
+import { siteConfig, stats } from "@/lib/site"
 
 const title = "Hakkımızda"
 const description =
@@ -63,107 +66,84 @@ const highlights = [
   { value: stats.satisfaction, label: "Müşteri Memnuniyeti", text: "Tüm projelerimizde kalite ve güvenilirlik." },
 ]
 
-export default function About() {
+export default function AboutPage() {
   const currentYear = new Date().getFullYear()
   const yearsActive = currentYear - siteConfig.foundedYear
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="pt-32 pb-16 px-4 bg-gradient-to-b from-slate-50 to-white">
-        <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary mb-6">Hakkımızda</h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            {yearsActive} yılı aşkın süredir doğal taş ve dekoratif kaplama konusunda güvenilen bir isim
-          </p>
-        </div>
-      </section>
+      <PageHero
+        title="Hakkımızda"
+        subtitle={`${yearsActive} yılı aşkın süredir doğal taş ve dekoratif kaplama konusunda güvenilen bir isim`}
+      />
 
-      {/* Main Story Section */}
-      <section className="py-20 px-4 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl font-bold text-primary mb-6">Bizim Hikayemiz</h2>
-              <p className="text-lg text-foreground/80 leading-relaxed mb-4">
+      <Section className="pt-4 sm:pt-6">
+        <div className="grid items-center gap-10 md:grid-cols-2 md:gap-12">
+          <div>
+            <h2 className="mb-6 text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl">Bizim Hikayemiz</h2>
+            <div className="space-y-4 text-lg leading-relaxed text-stone-600">
+              <p>
                 HMF Desen Yapı, 1998 yılında İzmir&apos;de kurulmuş, doğal taş uygulamaları ve dekoratif kaplamalar
                 konusunda uzmanlaşmış bir şirkettir. Yıllar boyunca kalite ve müşteri memnuniyetini ön planda tutarak,
                 İzmir&apos;den başlayan hizmetlerimizi Türkiye geneline yaymış durumdayız.
               </p>
-              <p className="text-lg text-foreground/80 leading-relaxed">
+              <p>
                 Profesyonel ekibimiz, her projede en iyi malzemeleri kullanarak ve en yüksek standartlarda işçilik
                 sağlayarak binlerce müşterinin güvenini kazanmıştır.
               </p>
             </div>
-            <div className="flex h-96 items-center justify-center rounded-lg border border-border bg-brand-soft">
-              <Logo layout="stacked" className="h-56 sm:h-64 w-auto" />
+          </div>
+          <div className="flex aspect-[4/3] items-center justify-center rounded-xl border border-stone-200 bg-brand-soft p-8">
+            <Logo layout="stacked" className="h-auto w-3/5 max-w-64" />
+          </div>
+        </div>
+      </Section>
+
+      <Section tone="muted" size="4xl">
+        <SectionHeading title="Tarihimiz" />
+        {/* Zaman çizelgesi: soldaki dikey çizgi tüm maddeleri birleştirir */}
+        <ol className="relative ml-7 space-y-10 border-l-2 border-stone-200">
+          {milestones.map((milestone) => (
+            <li key={milestone.year} className="relative pl-12 sm:pl-14">
+              <span className="absolute -left-[29px] top-0 flex h-14 w-14 items-center justify-center rounded-full bg-stone-900 text-sm font-bold text-white ring-4 ring-stone-50">
+                {milestone.year === "current" ? currentYear : milestone.year}
+              </span>
+              <h3 className="pt-3 text-xl font-bold text-stone-900 sm:text-2xl">{milestone.title}</h3>
+              <p className="mt-1 text-stone-600">{milestone.description}</p>
+            </li>
+          ))}
+        </ol>
+      </Section>
+
+      <Section>
+        <SectionHeading title="Değerlerimiz" />
+        <div className="grid gap-4 sm:grid-cols-2 lg:gap-6">
+          {values.map((value) => (
+            <div key={value.title} className="flex items-start gap-4 rounded-xl border border-stone-200 bg-stone-50 p-6 sm:p-8">
+              <Check size={24} aria-hidden="true" className="mt-0.5 shrink-0 text-brand" />
+              <div>
+                <h3 className="mb-2 text-xl font-bold text-stone-900">{value.title}</h3>
+                <p className="text-stone-600">{value.description}</p>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
-      </section>
+      </Section>
 
-      {/* Timeline Section */}
-      <section className="py-20 px-4 bg-slate-50">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-primary mb-16 text-center">Tarihimiz</h2>
-          <ol className="max-w-2xl mx-auto space-y-12">
-            {milestones.map((milestone, index) => (
-              <li key={milestone.year} className="flex gap-8">
-                <div className="flex flex-col items-center">
-                  <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-lg">
-                    {milestone.year === "current" ? currentYear : milestone.year}
-                  </div>
-                  {index < milestones.length - 1 && (
-                    <div aria-hidden="true" className="w-1 h-24 bg-primary/30 mt-4"></div>
-                  )}
-                </div>
-                <div className="pb-12">
-                  <h3 className="text-2xl font-bold text-primary mb-2">{milestone.title}</h3>
-                  <p className="text-foreground/70">{milestone.description}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
+      <Section tone="muted">
+        <SectionHeading title="Neden Bizi Seçin?" />
+        <div className="grid gap-4 md:grid-cols-3 lg:gap-6">
+          {highlights.map((item) => (
+            <div key={item.label} className="rounded-xl border border-stone-200 bg-white p-6 text-center sm:p-8">
+              <p className="text-4xl font-bold text-brand sm:text-5xl">{item.value}</p>
+              <p className="mt-3 text-lg font-semibold text-stone-900">{item.label}</p>
+              <p className="mt-1 text-stone-600">{item.text}</p>
+            </div>
+          ))}
         </div>
-      </section>
+      </Section>
 
-      {/* Values Section */}
-      <section className="py-20 px-4 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-primary mb-12 text-center">Değerlerimiz</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            {values.map((value) => (
-              <div key={value.title} className="bg-slate-50 p-8 rounded-lg border border-border">
-                <div className="flex items-start gap-4">
-                  <div className="mt-1">
-                    <Check className="text-primary" size={24} aria-hidden="true" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-primary mb-2">{value.title}</h3>
-                    <p className="text-foreground/70">{value.description}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why Us Section */}
-      <section className="py-20 px-4 bg-slate-50">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-primary mb-12 text-center">Neden Bizi Seçin?</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {highlights.map((item) => (
-              <div key={item.label} className="bg-white p-8 rounded-lg border border-border text-center">
-                <div className="text-5xl font-bold text-primary mb-4">{item.value}</div>
-                <p className="text-lg font-semibold text-foreground mb-2">{item.label}</p>
-                <p className="text-foreground/70">{item.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <CtaSection />
     </>
   )
 }

@@ -3,7 +3,8 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useRef, useState } from "react"
-import { ArrowRight, ChevronLeft, ChevronRight, Expand, X } from "lucide-react"
+import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Expand, X } from "lucide-react"
+import { Container } from "@/components/ui/section"
 import type { GalleryCategory, GalleryItem } from "@/lib/gallery"
 
 const ALL = "tumu"
@@ -13,6 +14,16 @@ export function GalleryExplorer({ items, categories }: { items: GalleryItem[]; c
   const [active, setActive] = useState<number | null>(null)
   const dialogRef = useRef<HTMLDialogElement>(null)
   const touchStartX = useRef<number | null>(null)
+  const sectionRef = useRef<HTMLElement>(null)
+
+  // Kategori değişince, sayfa galerinin aşağısındaysa galerinin başına dön
+  const selectFilter = (id: string) => {
+    setFilter(id)
+    // 80px: sabit üst menünün yüksekliği (scroll-mt-20)
+    if ((sectionRef.current?.getBoundingClientRect().top ?? 0) < 80) {
+      sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
+    }
+  }
 
   const visible = filter === ALL ? items : items.filter((item) => item.category === filter)
   const current = active === null ? null : visible[active]
@@ -29,28 +40,50 @@ export function GalleryExplorer({ items, categories }: { items: GalleryItem[]; c
   const filters = [{ id: ALL, label: "Tümü", total: items.length }, ...categories.map((c) => ({ ...c, total: count(c.id) }))]
 
   return (
-    <section className="pb-20 px-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Filtreler: mobilde yana kaydırılan tek satır, geniş ekranda ortalanmış */}
-        <div
-          role="group"
-          aria-label="Galeri filtreleri"
-          className="-mx-4 mb-8 flex gap-2 overflow-x-auto px-4 pb-2 [scrollbar-width:none] sm:mx-0 sm:mb-10 sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0"
-        >
+    <section ref={sectionRef} className="scroll-mt-20 pb-16 sm:pb-20">
+      <Container>
+        {/* Telefonda: menünün altında sabit duran açılır kategori seçimi */}
+        <div className="sticky top-20 z-30 -mx-4 mb-4 sm:mx-0 border-b border-stone-200 bg-white/95 px-4 py-3 backdrop-blur sm:hidden">
+          <label htmlFor="gallery-filter" className="sr-only">
+            Kategori
+          </label>
+          <div className="relative">
+            <select
+              id="gallery-filter"
+              value={filter}
+              onChange={(e) => selectFilter(e.target.value)}
+              className="w-full appearance-none rounded-lg border border-stone-300 bg-white py-3 pl-4 pr-10 text-base font-medium text-stone-900 focus:outline-none focus:ring-2 focus:ring-brand"
+            >
+              {filters.map((f) => (
+                <option key={f.id} value={f.id}>
+                  {f.label} ({f.total})
+                </option>
+              ))}
+            </select>
+            <ChevronDown
+              size={20}
+              aria-hidden="true"
+              className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-stone-500"
+            />
+          </div>
+        </div>
+
+        {/* Tablet ve masaüstünde: ortalanmış filtre butonları */}
+        <div role="group" aria-label="Galeri filtreleri" className="mb-10 hidden flex-wrap justify-center gap-2 sm:flex">
           {filters.map((f) => (
             <button
               key={f.id}
               type="button"
               aria-pressed={filter === f.id}
-              onClick={() => setFilter(f.id)}
-              className={`inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
+              onClick={() => selectFilter(f.id)}
+              className={`inline-flex items-center gap-2 whitespace-nowrap rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
                 filter === f.id
-                  ? "border-slate-900 bg-slate-900 text-white"
-                  : "border-slate-200 bg-white text-slate-700 hover:border-slate-400"
+                  ? "border-brand bg-brand text-white"
+                  : "border-stone-200 bg-white text-stone-700 hover:border-brand/50"
               }`}
             >
               {f.label}
-              <span className={`text-xs ${filter === f.id ? "text-slate-300" : "text-slate-400"}`}>{f.total}</span>
+              <span className={`text-xs ${filter === f.id ? "text-white/70" : "text-stone-400"}`}>{f.total}</span>
             </button>
           ))}
         </div>
@@ -63,7 +96,7 @@ export function GalleryExplorer({ items, categories }: { items: GalleryItem[]; c
                 type="button"
                 onClick={() => open(index)}
                 aria-label={`${item.alt} - büyüt`}
-                className="group relative block w-full overflow-hidden rounded-lg bg-slate-100 aspect-[4/3] focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2"
+                className="group relative block w-full overflow-hidden rounded-lg bg-stone-100 aspect-[4/3] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
               >
                 <Image
                   src={item.src}
@@ -73,16 +106,17 @@ export function GalleryExplorer({ items, categories }: { items: GalleryItem[]; c
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                   style={{ objectPosition: item.position }}
                 />
-                <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0 opacity-80 sm:opacity-0 transition-opacity group-hover:opacity-100" />
-                <span className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-3 text-left text-white sm:translate-y-2 sm:opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
-                  <span className="text-xs sm:text-sm font-semibold leading-tight">{item.caption}</span>
-                  <Expand size={16} aria-hidden="true" className="hidden sm:block shrink-0" />
+                {/* Başlık yalnızca masaüstünde üzerine gelince; telefonda fotoğraf temiz kalır (başlık görüntüleyicide) */}
+                <span className="absolute inset-0 hidden bg-gradient-to-t from-black/70 via-black/0 to-black/0 opacity-0 transition-opacity group-hover:opacity-100 sm:block" />
+                <span className="absolute inset-x-0 bottom-0 hidden translate-y-2 items-end justify-between gap-2 p-3 text-left text-white opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100 sm:flex">
+                  <span className="text-sm font-semibold leading-tight">{item.caption}</span>
+                  <Expand size={16} aria-hidden="true" className="shrink-0" />
                 </span>
               </button>
             </li>
           ))}
         </ul>
-      </div>
+      </Container>
 
       {/* Büyük görüntüleme */}
       <dialog
@@ -113,7 +147,7 @@ export function GalleryExplorer({ items, categories }: { items: GalleryItem[]; c
                 type="button"
                 onClick={close}
                 aria-label="Kapat"
-                className="rounded-full p-2 hover:bg-white/10"
+                className="rounded-full p-3 hover:bg-white/10"
               >
                 <X size={24} aria-hidden="true" />
               </button>

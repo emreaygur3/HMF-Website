@@ -16,9 +16,10 @@ import {
   X,
   type LucideIcon,
 } from "lucide-react"
-import { Logo } from "@/components/logo"
+import { Logo } from "@/components/brand/logo"
+import { Container } from "@/components/ui/section"
 import { serviceIcons, type ServiceLink } from "@/lib/service-icons"
-import { siteConfig, whatsappUrl } from "@/lib/site"
+import { siteConfig } from "@/lib/site"
 
 type NavLink = { href: string; label: string; icon: LucideIcon }
 type NavItem = NavLink & { submenu?: NavLink[] }
@@ -70,14 +71,14 @@ export function Navigation({ services }: { services: ServiceLink[] }) {
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href))
 
   return (
-    <nav aria-label="Ana menü" className="fixed w-full bg-white border-b border-border z-50 shadow-sm">
+    <nav aria-label="Ana menü" className="fixed z-50 w-full border-b border-stone-200 bg-white/95 shadow-sm backdrop-blur">
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-white focus:px-4 focus:py-2 focus:rounded focus:shadow"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:shadow"
       >
         İçeriğe geç
       </a>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Container>
         <div className="flex justify-between items-center h-20">
           <Link href="/" className="flex items-center shrink-0" aria-label={`${siteConfig.name} - Anasayfa`}>
             <Logo priority className="h-11 sm:h-12 xl:h-14 w-auto" />
@@ -91,26 +92,26 @@ export function Navigation({ services }: { services: ServiceLink[] }) {
                   href={item.href}
                   aria-current={isActive(item.href) ? "page" : undefined}
                   aria-haspopup={item.submenu ? "true" : undefined}
-                  className={`inline-flex items-center gap-1.5 text-sm font-medium py-2 whitespace-nowrap transition-colors hover:text-primary ${
-                    isActive(item.href) ? "text-primary" : "text-foreground"
+                  className={`inline-flex items-center gap-1.5 text-sm font-medium py-2 whitespace-nowrap transition-colors hover:text-brand ${
+                    isActive(item.href) ? "text-brand" : "text-stone-900"
                   }`}
                 >
                   {/* Dar ekranda menünün sığması için simgeler xl'den itibaren görünür */}
-                  <item.icon size={16} aria-hidden="true" className="hidden xl:block text-slate-500 group-hover:text-primary" />
+                  <item.icon size={16} aria-hidden="true" className="hidden xl:block text-stone-500 group-hover:text-brand" />
                   {item.label}
-                  {item.submenu && <ChevronDown size={14} aria-hidden="true" className="text-slate-400" />}
+                  {item.submenu && <ChevronDown size={14} aria-hidden="true" className="text-stone-400" />}
                 </Link>
                 {/* Desktop Dropdown */}
                 {item.submenu && (
-                  <div className="absolute left-0 mt-0 w-64 bg-white border border-border rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 z-50">
+                  <div className="absolute left-0 mt-0 w-64 overflow-hidden rounded-xl border border-stone-200 bg-white py-2 shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 z-50">
                     {item.submenu.map((sub) => (
                       <Link
                         key={sub.href}
                         href={sub.href}
                         aria-current={pathname === sub.href ? "page" : undefined}
-                        className="flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-slate-50 hover:text-primary first:rounded-t-md last:rounded-b-md transition-colors"
+                        className="flex items-center gap-3 px-4 py-3 text-sm text-stone-700 hover:bg-stone-50 hover:text-brand transition-colors"
                       >
-                        <sub.icon size={16} aria-hidden="true" className="shrink-0 text-slate-500" />
+                        <sub.icon size={16} aria-hidden="true" className="shrink-0 text-stone-500" />
                         {sub.label}
                       </Link>
                     ))}
@@ -120,22 +121,19 @@ export function Navigation({ services }: { services: ServiceLink[] }) {
             ))}
           </div>
 
-          {/* WhatsApp/Phone Button - Desktop & Mobile */}
-          <div className="flex items-center gap-2">
+          {/* Hızlı arama (WhatsApp butonu sağ altta sabit) ve mobil menü butonu */}
+          <div className="-mr-2.5 flex items-center gap-1">
             <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:text-primary/80 transition-colors"
-              aria-label="WhatsApp ile iletişime geç"
+              href={`tel:${siteConfig.phones[0].tel}`}
+              className="rounded-full p-2.5 text-stone-900 transition-colors hover:bg-stone-100 hover:text-brand"
+              aria-label={`Bizi arayın: ${siteConfig.phones[0].display}`}
             >
-              <Phone size={24} className="fill-current" />
+              <Phone size={22} className="fill-current" />
             </a>
 
-            {/* Mobile Menu Button */}
             <button
               type="button"
-              className="lg:hidden ml-2"
+              className="rounded-full p-2.5 text-stone-900 transition-colors hover:bg-stone-100 lg:hidden"
               onClick={() => setIsOpen(!isOpen)}
               aria-label={isOpen ? "Menüyü kapat" : "Menüyü aç"}
               aria-expanded={isOpen}
@@ -148,7 +146,7 @@ export function Navigation({ services }: { services: ServiceLink[] }) {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div id="mobile-menu" className="lg:hidden pb-4 space-y-2 max-h-[calc(100vh-5rem)] overflow-y-auto">
+          <div id="mobile-menu" className="max-h-[calc(100dvh-5rem)] space-y-1 overflow-y-auto border-t border-stone-200 py-3 lg:hidden">
             {navItems.map((item) => (
               <div key={item.href}>
                 {item.submenu ? (
@@ -157,10 +155,10 @@ export function Navigation({ services }: { services: ServiceLink[] }) {
                       type="button"
                       onClick={() => setDropdownOpen(dropdownOpen === item.href ? null : item.href)}
                       aria-expanded={dropdownOpen === item.href}
-                      className="w-full text-left px-4 py-2 text-foreground hover:bg-muted rounded flex justify-between items-center"
+                      className="flex w-full items-center justify-between rounded-lg px-4 py-3 text-left font-medium text-stone-900 hover:bg-stone-100"
                     >
                       <span className="flex items-center gap-3">
-                        <item.icon size={18} aria-hidden="true" className="text-slate-500" />
+                        <item.icon size={18} aria-hidden="true" className="text-stone-500" />
                         {item.label}
                       </span>
                       <ChevronDown
@@ -172,10 +170,10 @@ export function Navigation({ services }: { services: ServiceLink[] }) {
 
                     {/* Mobile Dropdown */}
                     {dropdownOpen === item.href && (
-                      <div className="bg-slate-50 space-y-1 ml-2">
+                      <div className="ml-4 border-l-2 border-stone-200 pl-2">
                         <Link
                           href={item.href}
-                          className="block px-4 py-2 text-sm font-semibold text-foreground hover:text-primary rounded"
+                          className="block rounded-lg px-4 py-3 text-sm font-semibold text-stone-900 hover:bg-stone-100 hover:text-brand"
                           onClick={() => setIsOpen(false)}
                         >
                           Tüm {item.label}
@@ -184,10 +182,10 @@ export function Navigation({ services }: { services: ServiceLink[] }) {
                           <Link
                             key={sub.href}
                             href={sub.href}
-                            className="flex items-center gap-3 px-4 py-2 text-sm text-foreground hover:text-primary rounded"
+                            className="flex items-center gap-3 rounded-lg px-4 py-3 text-sm text-stone-700 hover:bg-stone-100 hover:text-brand"
                             onClick={() => setIsOpen(false)}
                           >
-                            <sub.icon size={16} aria-hidden="true" className="shrink-0 text-slate-500" />
+                            <sub.icon size={16} aria-hidden="true" className="shrink-0 text-stone-500" />
                             {sub.label}
                           </Link>
                         ))}
@@ -198,10 +196,12 @@ export function Navigation({ services }: { services: ServiceLink[] }) {
                   <Link
                     href={item.href}
                     aria-current={isActive(item.href) ? "page" : undefined}
-                    className="flex items-center gap-3 w-full text-left px-4 py-2 text-foreground hover:bg-muted rounded"
+                    className={`flex w-full items-center gap-3 rounded-lg px-4 py-3 text-left font-medium hover:bg-stone-100 ${
+                      isActive(item.href) ? "bg-brand-soft text-brand" : "text-stone-900"
+                    }`}
                     onClick={() => setIsOpen(false)}
                   >
-                    <item.icon size={18} aria-hidden="true" className="text-slate-500" />
+                    <item.icon size={18} aria-hidden="true" className="text-stone-500" />
                     {item.label}
                   </Link>
                 )}
@@ -209,7 +209,7 @@ export function Navigation({ services }: { services: ServiceLink[] }) {
             ))}
           </div>
         )}
-      </div>
+      </Container>
     </nav>
   )
 }

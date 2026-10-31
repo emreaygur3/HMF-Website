@@ -6,10 +6,12 @@ import { useSearchParams } from "next/navigation"
 import { MessageCircle, Send } from "lucide-react"
 import { sendContactMessage, type ContactState } from "@/app/iletisim/actions"
 import type { ServiceLink } from "@/lib/service-icons"
+import { buttonVariants } from "@/components/ui/button"
 import { siteConfig } from "@/lib/site"
 
 const inputClass =
-  "w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-white text-sm aria-[invalid=true]:border-red-500"
+  // text-base: iPhone 16px altındaki alanlarda otomatik yakınlaştırma yapar
+  "w-full rounded-lg border border-stone-300 bg-white px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-brand aria-[invalid=true]:border-red-500"
 
 type FieldName = keyof NonNullable<ContactState["fieldErrors"]>
 
@@ -195,7 +197,7 @@ export function ContactForm({ services }: { services: ServiceLink[] }) {
           <button
             type="submit"
             disabled={isPending}
-            className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors text-sm sm:text-base disabled:opacity-60 disabled:cursor-not-allowed"
+            className={`${buttonVariants.primary} disabled:cursor-not-allowed disabled:opacity-60`}
           >
             <Send size={18} aria-hidden="true" />
             {isPending ? "Gönderiliyor..." : "E-posta ile Gönder"}
@@ -203,13 +205,13 @@ export function ContactForm({ services }: { services: ServiceLink[] }) {
           <button
             type="button"
             onClick={() => formRef.current && openWhatsApp(formRef.current)}
-            className="inline-flex items-center justify-center gap-2 bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors text-sm sm:text-base"
+            className={buttonVariants.whatsapp}
           >
             <MessageCircle size={18} aria-hidden="true" />
             WhatsApp ile Gönder
           </button>
         </div>
-        <p className="text-xs text-slate-500 text-center">
+        <p className="text-xs text-stone-500 text-center">
           WhatsApp seçeneği, yazdıklarınızı hazır mesaj olarak WhatsApp&apos;ta açar.
         </p>
       </form>

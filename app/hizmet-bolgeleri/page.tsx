@@ -1,7 +1,9 @@
 import type { Metadata } from "next"
-import Link from "next/link"
-import { ArrowRight } from "lucide-react"
-import { JsonLd } from "@/components/json-ld"
+import { MapPin } from "lucide-react"
+import { JsonLd } from "@/components/seo/json-ld"
+import { CtaSection } from "@/components/ui/cta-section"
+import { PageHero } from "@/components/ui/page-hero"
+import { Section } from "@/components/ui/section"
 import { serviceAreas } from "@/lib/regions"
 import { breadcrumbJsonLd, pageOpenGraph } from "@/lib/seo"
 import { siteConfig } from "@/lib/site"
@@ -35,47 +37,43 @@ const areaGroups = [
   },
 ]
 
-export default function ServiceAreas() {
+export default function ServiceAreasPage() {
   return (
     <>
       <JsonLd data={breadcrumbJsonLd([{ name: "Hizmet Bölgeleri", path: "/hizmet-bolgeleri" }])} />
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-16 px-4 bg-gradient-to-b from-slate-50 to-white">
-        <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary mb-6">Hizmet Bölgelerimiz</h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Menemen merkezli olarak Aliağa ve tüm İzmir&apos;de, Ege&apos;de ve Türkiye genelinde hizmet veriyoruz
-          </p>
-        </div>
-      </section>
+      <PageHero
+        title="Hizmet Bölgelerimiz"
+        subtitle="Menemen merkezli olarak Aliağa ve tüm İzmir'de, Ege'de ve Türkiye genelinde hizmet veriyoruz"
+      />
 
-      {/* Areas */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-4xl mx-auto space-y-10">
+      <Section size="4xl" className="pt-4 sm:pt-6">
+        <div className="space-y-4 sm:space-y-6">
           {areaGroups.map((group) => (
-            <div key={group.title} className="border-l-4 border-primary pl-6">
-              <h2 className="text-2xl font-bold text-primary mb-2">{group.title}</h2>
-              <p className="text-foreground/70 mb-3">{group.text}</p>
-              {group.items.length > 0 && <p className="text-foreground font-medium">{group.items.join(" · ")}</p>}
+            <div key={group.title} className="rounded-xl border border-stone-200 p-6 sm:p-8">
+              <h2 className="flex items-center gap-2 text-2xl font-bold text-stone-900">
+                <MapPin size={22} aria-hidden="true" className="text-brand" />
+                {group.title}
+              </h2>
+              <p className="mt-2 text-stone-600">{group.text}</p>
+              {group.items.length > 0 && (
+                <ul className="mt-4 flex flex-wrap gap-2">
+                  {group.items.map((item) => (
+                    <li key={item} className="rounded-full bg-stone-100 px-3 py-1 text-sm font-medium text-stone-700">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           ))}
         </div>
-      </section>
+      </Section>
 
-      {/* CTA Section */}
-      <section className="py-16 px-4 bg-slate-50">
-        <div className="max-w-2xl mx-auto text-center">
-          <p className="text-lg text-foreground/80 mb-6">Bölgenizde bir projeniz mi var? Konumunuzu paylaşın, size dönüş yapalım.</p>
-          <Link
-            href="/iletisim"
-            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded font-semibold hover:bg-primary/90 transition-colors"
-          >
-            İletişime Geç
-            <ArrowRight size={20} aria-hidden="true" />
-          </Link>
-        </div>
-      </section>
+      <CtaSection
+        title="Bölgenizde Bir Projeniz mi Var?"
+        text="Konumunuzu ve projenizi paylaşın, keşif için size dönüş yapalım."
+      />
     </>
   )
 }
