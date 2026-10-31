@@ -11,7 +11,6 @@ import {
   House,
   Mail,
   Menu,
-  Phone,
   Users,
   X,
   type LucideIcon,
@@ -121,19 +120,11 @@ export function Navigation({ services }: { services: ServiceLink[] }) {
             ))}
           </div>
 
-          {/* Hızlı arama (WhatsApp butonu sağ altta sabit) ve mobil menü butonu */}
-          <div className="-mr-2.5 flex items-center gap-1">
-            <a
-              href={`tel:${siteConfig.phones[0].tel}`}
-              className="rounded-full p-2.5 text-stone-900 transition-colors hover:bg-stone-100 hover:text-brand"
-              aria-label={`Bizi arayın: ${siteConfig.phones[0].display}`}
-            >
-              <Phone size={22} className="fill-current" />
-            </a>
-
+          {/* Mobil menü butonu (iletişim için WhatsApp butonu sağ altta sabit) */}
+          <div className="-mr-2.5 flex items-center lg:hidden">
             <button
               type="button"
-              className="rounded-full p-2.5 text-stone-900 transition-colors hover:bg-stone-100 lg:hidden"
+              className="rounded-full p-2.5 text-stone-900 transition-colors hover:bg-stone-100"
               onClick={() => setIsOpen(!isOpen)}
               aria-label={isOpen ? "Menüyü kapat" : "Menüyü aç"}
               aria-expanded={isOpen}
