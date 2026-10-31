@@ -88,10 +88,12 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col items-center gap-2 border-t border-white/15 pt-5 text-xs text-white/60 sm:flex-row sm:justify-between">
+        {/* Telif ve tasarımcı bilgisi ortada; dar ekranda alt alta */}
+        <div className="mt-8 flex flex-col items-center justify-center gap-x-3 gap-y-1 border-t border-white/15 pt-5 text-center text-xs text-white/60 sm:flex-row">
           <p>
             &copy; {new Date().getFullYear()} {siteConfig.name}. Tüm hakları saklıdır.
           </p>
+          <span aria-hidden="true" className="hidden sm:inline">·</span>
           <a
             href={DESIGNER.url}
             target="_blank"
