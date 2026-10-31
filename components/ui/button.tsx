@@ -5,32 +5,52 @@ import { ArrowLeft, ArrowRight } from "lucide-react"
 // Sitedeki tüm butonlar ve ok işaretli metin bağlantıları buradan gelir.
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3.5 font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
+  "inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
 
-export const buttonVariants = {
+const sizes = {
+  md: "px-6 py-3.5",
+  /** Menü gibi dar alanlar için */
+  sm: "px-4 py-2.5 text-sm",
+} as const
+
+const colors = {
   /** Ana eylem (bronz) */
-  primary: `${base} bg-brand text-white hover:bg-brand-hover`,
+  primary: "bg-brand text-white hover:bg-brand-hover",
   /** WhatsApp eylemi (yeşil; beyaz yazıyla kontrast 5:1) */
-  whatsapp: `${base} bg-green-700 text-white hover:bg-green-800`,
+  whatsapp: "bg-green-700 text-white hover:bg-green-800",
   /** Koyu zeminde / fotoğraf üzerinde ikincil eylem */
-  ghost: `${base} border border-white/30 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20`,
+  ghost: "border border-white/30 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20",
+} as const
+
+type Variant = keyof typeof colors
+
+export const buttonClass = (variant: Variant = "primary", size: keyof typeof sizes = "md") =>
+  `${base} ${sizes[size]} ${colors[variant]}`
+
+/** Normal boy buton sınıfları (form butonları gibi <button> öğeleri için) */
+export const buttonVariants = {
+  primary: buttonClass("primary"),
+  whatsapp: buttonClass("whatsapp"),
+  ghost: buttonClass("ghost"),
 } as const
 
 export function ButtonLink({
   href,
   variant = "primary",
+  size = "md",
   arrow = false,
   className = "",
   children,
 }: {
   href: string
-  variant?: keyof typeof buttonVariants
+  variant?: Variant
+  size?: keyof typeof sizes
   arrow?: boolean
   className?: string
   children: ReactNode
 }) {
   return (
-    <Link href={href} className={`${buttonVariants[variant]} ${className}`}>
+    <Link href={href} className={`${buttonClass(variant, size)} ${className}`}>
       {children}
       {arrow && <ArrowRight size={18} aria-hidden="true" />}
     </Link>

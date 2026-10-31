@@ -16,6 +16,7 @@ import {
   type LucideIcon,
 } from "lucide-react"
 import { Logo } from "@/components/brand/logo"
+import { ButtonLink } from "@/components/ui/button"
 import { Container } from "@/components/ui/section"
 import { serviceIcons, type ServiceLink } from "@/lib/service-icons"
 import { siteConfig } from "@/lib/site"
@@ -78,31 +79,36 @@ export function Navigation({ services }: { services: ServiceLink[] }) {
         İçeriğe geç
       </a>
       <Container>
-        <div className="flex justify-between items-center h-20">
-          <Link href="/" className="flex items-center shrink-0" aria-label={`${siteConfig.name} - Anasayfa`}>
-            <Logo priority className="h-11 sm:h-12 xl:h-14 w-auto" />
-          </Link>
+        {/* Masaüstü: logo solda, menü tam ortada, "Teklif Alın" sağda (yan sütunlar eşit genişlikte) */}
+        <div className="flex h-20 items-center justify-between">
+          <div className="flex lg:flex-1">
+            <Link href="/" className="flex shrink-0 items-center" aria-label={`${siteConfig.name} - Anasayfa`}>
+              <Logo priority className="h-11 w-auto sm:h-12" />
+            </Link>
+          </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex gap-4 xl:gap-6 items-center">
-            {navItems.map((item) => (
+          {/* Masaüstü menü (İletişim, sağdaki butonda) */}
+          <div className="hidden items-center gap-1 lg:flex">
+            {navItems.filter((item) => item.href !== "/iletisim").map((item) => (
               <div key={item.href} className="relative group">
                 <Link
                   href={item.href}
                   aria-current={isActive(item.href) ? "page" : undefined}
                   aria-haspopup={item.submenu ? "true" : undefined}
-                  className={`inline-flex items-center gap-1.5 text-sm font-medium py-2 whitespace-nowrap transition-colors hover:text-brand ${
-                    isActive(item.href) ? "text-brand" : "text-stone-900"
+                  className={`relative inline-flex items-center gap-1 whitespace-nowrap rounded-lg px-3 py-2 text-[15px] font-medium transition-colors hover:bg-stone-100 hover:text-stone-900 ${
+                    isActive(item.href)
+                      ? "text-stone-900 after:absolute after:inset-x-3 after:-bottom-0.5 after:h-0.5 after:rounded-full after:bg-brand"
+                      : "text-stone-600"
                   }`}
                 >
-                  {/* Dar ekranda menünün sığması için simgeler xl'den itibaren görünür */}
-                  <item.icon size={16} aria-hidden="true" className="hidden xl:block text-stone-500 group-hover:text-brand" />
                   {item.label}
-                  {item.submenu && <ChevronDown size={14} aria-hidden="true" className="text-stone-400" />}
+                  {item.submenu && (
+                    <ChevronDown size={15} aria-hidden="true" className="text-stone-400 transition-transform group-hover:rotate-180" />
+                  )}
                 </Link>
                 {/* Desktop Dropdown */}
                 {item.submenu && (
-                  <div className="absolute left-0 mt-0 w-64 overflow-hidden rounded-xl border border-stone-200 bg-white py-2 shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 z-50">
+                  <div className="absolute left-1/2 top-full mt-2 w-72 -translate-x-1/2 overflow-hidden rounded-xl border border-stone-200 bg-white py-2 shadow-xl opacity-0 before:absolute before:-top-2 before:h-2 before:w-full invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 z-50">
                     {item.submenu.map((sub) => (
                       <Link
                         key={sub.href}
@@ -120,7 +126,13 @@ export function Navigation({ services }: { services: ServiceLink[] }) {
             ))}
           </div>
 
-          {/* Mobil menü butonu (iletişim için WhatsApp butonu sağ altta sabit) */}
+          {/* Sağ: masaüstünde teklif butonu, mobilde menü butonu */}
+          {/* Gizleme sarmalayıcıda: butonun kendi inline-flex sınıfı "hidden"ı ezmesin */}
+          <div className="hidden justify-end lg:flex lg:flex-1">
+            <ButtonLink href="/iletisim" size="sm">
+              Teklif Alın
+            </ButtonLink>
+          </div>
           <div className="-mr-2.5 flex items-center lg:hidden">
             <button
               type="button"
@@ -198,6 +210,11 @@ export function Navigation({ services }: { services: ServiceLink[] }) {
                 )}
               </div>
             ))}
+            <div className="px-1 pt-3">
+              <ButtonLink href="/iletisim" className="w-full">
+                Teklif Alın
+              </ButtonLink>
+            </div>
           </div>
         )}
       </Container>
