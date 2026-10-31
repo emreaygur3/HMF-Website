@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import { Calendar, Clock, MapPin, Users } from "lucide-react"
 import { FittedImage } from "@/components/ui/fitted-image"
 import { JsonLd } from "@/components/seo/json-ld"
+import { BeforeAfterSlider } from "@/components/projects/before-after-slider"
 import { ProjectBadges } from "@/components/projects/project-badges"
 import { ProjectCard } from "@/components/projects/project-card"
 import { ArrowLink } from "@/components/ui/button"
@@ -81,6 +82,15 @@ export default async function ProjectDetail({ params }: Props) {
           <FittedImage src={project.images[0]} alt={project.title} priority sizes="(min-width: 896px) 864px, 100vw" />
           <ProjectBadges project={project} size="md" />
         </div>
+
+        {/* Önce / sonra karşılaştırması */}
+        {project.comparison && (
+          <div className="mt-12 rounded-xl border border-stone-200 bg-stone-50 p-4 sm:p-8">
+            <h2 className="text-center text-2xl font-bold text-stone-900">Önce / Sonra</h2>
+            <p className="mb-6 mt-2 text-center text-stone-600">Farkı görmek için çizgiyi sağa sola sürükleyin</p>
+            <BeforeAfterSlider before={project.comparison.before} after={project.comparison.after} alt={project.title} />
+          </div>
+        )}
 
         {/* Proje bilgileri */}
         <dl className={`mt-8 grid grid-cols-2 gap-4 ${infoCols[info.length]}`}>

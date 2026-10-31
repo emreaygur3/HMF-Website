@@ -3,6 +3,7 @@ import type { ReactNode } from "react"
 import { Suspense } from "react"
 import { Clock, Mail, MapPin, Phone, type LucideIcon } from "lucide-react"
 import { ContactForm } from "@/components/contact/contact-form"
+import { MapEmbed } from "@/components/contact/map-embed"
 import { JsonLd } from "@/components/seo/json-ld"
 import { FacebookIcon, InstagramIcon, WhatsAppIcon } from "@/components/brand/social-icons"
 import { PageHero } from "@/components/ui/page-hero"
@@ -162,16 +163,7 @@ export default function ContactPage() {
       <Section tone="muted">
         <SectionHeading title="Konumumuz" />
         <div className="h-80 overflow-hidden rounded-xl border border-stone-200 sm:h-96">
-          <iframe
-            title={`${siteConfig.name} konumu - Google Haritalar`}
-            src={`https://maps.google.com/maps?q=${encodeURIComponent(mapQuery)}&z=15&hl=tr&output=embed`}
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="strict-origin-when-cross-origin"
-          />
+          <MapEmbed query={mapQuery} title={`${siteConfig.name} konumu - Google Haritalar`} />
         </div>
       </Section>
 

@@ -3,12 +3,13 @@
 import { headers } from "next/headers"
 import nodemailer, { type Transporter } from "nodemailer"
 import { services } from "@/lib/services"
+import { KVKK_VERSION } from "@/lib/legal"
 import { siteConfig } from "@/lib/site"
 
 export type ContactState = {
   status: "idle" | "success" | "error"
   message?: string
-  fieldErrors?: Partial<Record<"name" | "email" | "phone" | "message", string>>
+  fieldErrors?: Partial<Record<"name" | "email" | "phone" | "message" | "kvkk" | "consent", string>>
 }
 
 const LIMITS = { name: 100, email: 200, phone: 30, message: 5000 }
@@ -71,6 +72,9 @@ export async function sendContactMessage(_prev: ContactState, formData: FormData
   if (message.length < 10) fieldErrors.message = "Mesajınız en az 10 karakter olmalıdır."
   else if (message.length > LIMITS.message)
     fieldErrors.message = `Mesajınız en fazla ${LIMITS.message} karakter olabilir.`
+  // KVKK: aydınlatma metninin okunduğu ve yurt dışı aktarım açık rızası zorunludur
+  if (formData.get("kvkk") !== "on") fieldErrors.kvkk = "Devam etmek için Aydınlatma Metni'ni onaylayın."
+  if (formData.get("consent") !== "on") fieldErrors.consent = "Mesajınızın iletilebilmesi için açık rıza gereklidir."
   if (Object.keys(fieldErrors).length > 0) {
     return { status: "error", message: "Lütfen işaretli alanları kontrol edin.", fieldErrors }
   }
@@ -96,6 +100,10 @@ export async function sendContactMessage(_prev: ContactState, formData: FormData
     ["E-posta", email],
     ["Telefon", phone || "-"],
     ["Hizmet", safeSubject],
+    // Onayın kanıtı olarak e-postada saklanır
+    ["KVKK", `Aydınlatma Metni okundu, yurt dışı aktarım açık rızası verildi (metin sürümü ${KVKK_VERSION})`],
+    ["Onay zamanı", new Date().toLocaleString("tr-TR", { timeZone: "Europe/Istanbul" })],
+    ["IP", ip],
   ]
 
   const html = `

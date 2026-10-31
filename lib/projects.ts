@@ -16,6 +16,8 @@ type ProjectBase = {
   images: string[]
   /** Kırpılınca önemli kısmın görünmesi için görsel bazında CSS object-position (ör. "center 25%") */
   imagePositions?: Record<string, string>
+  /** Önce/sonra karşılaştırması için aynı kadraja kırpılmış fotoğraf çifti */
+  comparison?: { before: string; after: string }
 }
 
 export type Project =
@@ -41,6 +43,10 @@ export const projects: Project[] = [
     results:
       "Geniş alan düzenli parsellere ayrılarak her karavan için hazır bir park yeri oluşturuldu. Kilitli parke zemin ve bordür hatları, yeşil alanlarla birlikte parka derli toplu bir görünüm kazandırdı.",
     images: ["/images/projeler/karavan-park-zemin-ve-peyzaj-duzenlemesi/deniz.jpg", "/images/projeler/karavan-park-zemin-ve-peyzaj-duzenlemesi/insaat.jpg"],
+    comparison: {
+      before: "/images/projeler/karavan-park-zemin-ve-peyzaj-duzenlemesi/karsilastirma-once.jpg",
+      after: "/images/projeler/karavan-park-zemin-ve-peyzaj-duzenlemesi/karsilastirma-sonra.jpg",
+    },
     imagePositions: {
       // Kartta deniz ufku ve parseller birlikte görünsün
       "/images/projeler/karavan-park-zemin-ve-peyzaj-duzenlemesi/deniz.jpg": "center 45%",
@@ -69,6 +75,10 @@ export const projects: Project[] = [
       "/images/projeler/tripleks-restorasyon-ve-cephe-yenileme/sonrasi.jpg": "center 20%",
       "/images/projeler/tripleks-restorasyon-ve-cephe-yenileme/oncesi.jpg": "center 35%",
     },
+    comparison: {
+      before: "/images/projeler/tripleks-restorasyon-ve-cephe-yenileme/karsilastirma-once.jpg",
+      after: "/images/projeler/tripleks-restorasyon-ve-cephe-yenileme/karsilastirma-sonra.jpg",
+    },
   },
   {
     slug: "kafe-bahce-duzenlemesi",
@@ -88,6 +98,10 @@ export const projects: Project[] = [
     results:
       "Kafe bahçesi bütünlüklü bir zemin ve peyzaj düzenine kavuştu. Desenli parke zemin, tuğla bordürlü ağaç adaları ve aydınlatmayla birlikte alan, özellikle akşam saatlerinde dikkat çeken bir mekan haline geldi.",
     images: ["/images/projeler/kafe-bahce-duzenlemesi/gece.jpg", "/images/projeler/kafe-bahce-duzenlemesi/insaat.jpg", "/images/projeler/kafe-bahce-duzenlemesi/oturma-alani.jpg"],
+    comparison: {
+      before: "/images/projeler/kafe-bahce-duzenlemesi/karsilastirma-once.jpg",
+      after: "/images/projeler/kafe-bahce-duzenlemesi/karsilastirma-sonra.jpg",
+    },
   },
 ]
 

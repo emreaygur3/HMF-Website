@@ -103,6 +103,10 @@ export function Footer() {
             <GitHubIcon size={14} />
             Designed by {DESIGNER.name}
           </a>
+          <span aria-hidden="true" className="hidden sm:inline">·</span>
+          <Link href="/kvkk" className="py-1 transition-colors hover:text-white">
+            KVKK Aydınlatma Metni
+          </Link>
         </div>
       </Container>
     </footer>

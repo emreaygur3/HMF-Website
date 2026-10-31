@@ -4,6 +4,9 @@ const productionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL
 
 export const siteConfig = {
   name: "HMF Desen Yapı",
+  // KVKK metinlerinde veri sorumlusu olarak geçer: vergi levhasındaki tam unvan yazılmalı
+  // (ör. "HMF Desen Yapı İnşaat Taahhüt Ltd. Şti." veya şahıs firması ise "Ad Soyad - HMF Desen Yapı")
+  legalName: "HMF Desen Yapı",
   foundedYear: 1998,
   description:
     "1998'den beri Aliağa, Menemen ve tüm İzmir'de taş duvar, şev taşı, kayrak, küp taşı, karo, parke, bordür ve asfalt uygulamaları. Keşif ve teklif için ulaşın.",
